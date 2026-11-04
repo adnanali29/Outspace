@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { navLinks } from "@/content";
+import { Logo } from "./Logo";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -27,11 +28,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/15 bg-black">
       <div className="wrap-wide flex h-16 items-center justify-between gap-6">
-        <a
-          href="#top"
-          className="shrink-0 font-display text-xl font-semibold tracking-tight text-white"
-        >
-          Outpace Academy
+        <a href="#top" className="shrink-0">
+          <Logo className="h-9" priority />
         </a>
 
         <nav aria-label="Main" className="hidden lg:block">
@@ -41,7 +39,7 @@ export function Header() {
                 <a
                   href={link.href}
                   aria-current={active === link.href ? "true" : undefined}
-                  className="rounded-md px-3 py-2 text-sm font-medium text-mist transition-colors hover:text-white aria-[current]:text-flame"
+                  className="rounded-md px-1.5 py-2 text-sm font-medium whitespace-nowrap text-mist transition-colors hover:text-white aria-[current]:text-flame xl:px-3"
                 >
                   {link.label}
                 </a>

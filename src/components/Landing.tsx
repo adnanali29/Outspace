@@ -5,11 +5,13 @@ import {
   coaches,
   faqs,
   footer,
+  founder,
   heart,
   hero,
   includes,
   levels,
   mission,
+  moreServices,
   navLinks,
   outcomes,
   preview,
@@ -25,6 +27,7 @@ import { BookingForm, type Lead } from "./BookingForm";
 import { Header } from "./Header";
 import { HeroSlideshow } from "./HeroSlideshow";
 import { KnightBoard } from "./KnightBoard";
+import { Logo } from "./Logo";
 import { MobileBar } from "./MobileBar";
 
 function Heading({
@@ -97,7 +100,7 @@ function HeroQuote({ className }: { className: string }) {
     <figure
       className={`rounded-xl border border-white/15 bg-black/60 px-4 py-3 backdrop-blur-sm ${className}`}
     >
-      <blockquote className="ph text-sm">{hero.quote}</blockquote>
+      <blockquote className="text-sm leading-snug">{hero.quote}</blockquote>
       <figcaption className="mt-1 text-xs whitespace-pre-wrap text-mist">
         {hero.quoteBy}
       </figcaption>
@@ -118,7 +121,7 @@ function Hero({
       className="relative flex flex-col overflow-hidden bg-ink text-white lg:min-h-[calc(100svh-65px)]"
     >
       <HeroSlideshow />
-      <div className="wrap-wide relative grid flex-1 items-center gap-x-20 gap-y-7 py-6 lg:grid-cols-[minmax(0,1fr)_28rem] lg:grid-rows-[1fr_auto] lg:gap-y-6 lg:pt-5 lg:pb-0 short:pt-3 short:gap-y-3">
+      <div className="wrap-wide relative grid flex-1 items-center gap-x-10 gap-y-7 xl:gap-x-20 py-6 lg:grid-cols-[minmax(0,1fr)_28rem] lg:grid-rows-[1fr_auto] lg:gap-y-6 lg:pt-5 lg:pb-0 short:pt-3 short:gap-y-3">
         <div className="text-center lg:text-left">
           <p className="mb-3 text-xs font-bold tracking-[0.1em] text-flame uppercase md:text-sm short:mb-2">
             {hero.eyebrow}
@@ -503,23 +506,30 @@ function MissionVision() {
             {mission.closing}
           </p>
         </div>
-        <aside className="relative self-start overflow-hidden rounded-2xl bg-ink p-8 text-white lg:sticky lg:top-24">
-          <div
-            aria-hidden
-            className="board absolute inset-0 opacity-40 [mask-image:linear-gradient(to_bottom,transparent_55%,black)]"
-          />
-          <div className="relative">
-            <Kicker light>{vision.kicker}</Kicker>
-            <p className="font-display text-2xl leading-snug font-semibold text-balance">
-              {vision.lede}
-            </p>
-            <div className="mt-5 space-y-4 leading-relaxed text-mist">
-              {vision.body.map((text) => (
-                <p key={text}>{text}</p>
-              ))}
+        <div className="space-y-5 self-start lg:sticky lg:top-24">
+          <aside className="relative overflow-hidden rounded-2xl bg-ink p-8 text-white">
+            <div
+              aria-hidden
+              className="board absolute inset-0 opacity-40 [mask-image:linear-gradient(to_bottom,transparent_55%,black)]"
+            />
+            <div className="relative">
+              <Kicker light>{vision.kicker}</Kicker>
+              <p className="font-display text-2xl leading-snug font-semibold text-balance">
+                {vision.lede}
+              </p>
+              <div className="mt-5 space-y-4 leading-relaxed text-mist">
+                {vision.body.map((text) => (
+                  <p key={text}>{text}</p>
+                ))}
+              </div>
             </div>
-          </div>
-        </aside>
+          </aside>
+          <aside className="rounded-2xl border border-line bg-white p-6">
+            <Kicker>{founder.kicker}</Kicker>
+            <p className="font-display text-xl font-semibold">{founder.name}</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted">{founder.text}</p>
+          </aside>
+        </div>
       </div>
     </section>
   );
@@ -573,10 +583,10 @@ function Testimonials() {
               >
                 &ldquo;
               </span>
-              <blockquote className="ph leading-relaxed text-mist">
+              <blockquote className="leading-relaxed text-mist">
                 {item.quote}
               </blockquote>
-              <figcaption className="ph mt-3 text-sm font-semibold text-white">
+              <figcaption className="mt-3 text-sm font-semibold text-white">
                 {item.by}
               </figcaption>
             </figure>
@@ -687,17 +697,44 @@ function Faqs() {
             <p className="mt-2 text-sm leading-relaxed opacity-80">{item.a}</p>
           </div>
         ))}
-        <div className="p-6 lg:p-7">
-          <h3 className="font-display text-lg leading-snug font-semibold">
-            {faqs.more.q}
-          </h3>
-          <p className="mt-2 text-sm leading-relaxed opacity-80">{faqs.more.a}</p>
-          <a
-            href="#book"
-            className="mt-4 inline-block rounded-lg bg-flame px-4 py-2.5 text-sm font-bold text-ink transition-colors hover:bg-flame-deep"
-          >
-            {faqs.more.cta}
-          </a>
+      </div>
+    </section>
+  );
+}
+
+function MoreServices() {
+  return (
+    <section id="more-programs" className="dark-fade py-16 md:py-24">
+      <div className="wrap">
+        <Kicker light>{moreServices.kicker}</Kicker>
+        <Heading light>{moreServices.title}</Heading>
+        <p className="reveal mt-3 max-w-2xl text-mist">{moreServices.intro}</p>
+        <div className="chess-alt reveal mt-8 grid overflow-hidden rounded-2xl border border-white/20 lg:grid-cols-2">
+          {moreServices.items.map((service) => (
+            <article key={service.name} className="flex flex-col p-6 md:p-8">
+              <h3 className="font-display text-2xl font-semibold">{service.name}</h3>
+              <p className="mt-3 leading-relaxed opacity-80">{service.text}</p>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {service.tags.map((tag) => (
+                  <li
+                    key={tag}
+                    className="rounded-full border border-current/25 px-3 py-1 text-xs font-medium"
+                  >
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-sm opacity-80">{service.note}</p>
+              <a
+                href={service.href}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-6 w-fit rounded-lg bg-flame px-5 py-3 text-sm font-bold text-ink transition-colors hover:bg-flame-deep lg:mt-auto"
+              >
+                {service.cta} <span aria-hidden>&rarr;</span>
+              </a>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -750,10 +787,8 @@ function Footer() {
       <div aria-hidden className="chess-strip h-8" />
       <div className="wrap grid gap-10 pt-12 pb-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1.4fr_1fr]">
         <div>
-          <p className="font-display text-2xl font-semibold tracking-tight text-white">
-            Outpace Academy
-          </p>
-          <p className="mt-2 font-semibold text-flame">{footer.tagline}</p>
+          <Logo className="h-11" />
+          <p className="mt-3 font-semibold text-flame">{footer.tagline}</p>
           <p className="mt-3 max-w-xs leading-relaxed">{footer.blurb}</p>
           <a
             href="#book"
@@ -787,10 +822,25 @@ function Footer() {
         <div>
           <FooterTitle>Get in touch</FooterTitle>
           <ul className="space-y-2.5">
-            <li>{footer.location}</li>
+            <li className="leading-snug">{footer.address}</li>
+            <li>
+              <a href={footer.phoneHref} className="transition-colors hover:text-white">
+                {footer.phone}
+              </a>
+            </li>
+            <li>
+              <a
+                href={`mailto:${footer.email}`}
+                className="break-all transition-colors hover:text-white"
+              >
+                {footer.email}
+              </a>
+            </li>
             <li>
               <a
                 href={`https://${footer.website}`}
+                target="_blank"
+                rel="noreferrer"
                 className="transition-colors hover:text-white"
               >
                 {footer.website}
@@ -807,12 +857,39 @@ function Footer() {
               </a>
             </li>
           </ul>
+          <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs font-semibold text-white">
+            {footer.socials.map((social) => (
+              <li key={social.label}>
+                <a
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition-colors hover:text-flame"
+                >
+                  {social.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
       <div className="border-t border-white/10">
-        <div className="wrap flex flex-col gap-2 py-5 text-xs sm:flex-row sm:justify-between">
+        <div className="wrap flex flex-col gap-3 py-5 text-xs md:flex-row md:justify-between">
           <p>{footer.copyright}</p>
-          <p className="ph w-fit">{footer.privacy}</p>
+          <ul className="flex flex-wrap gap-x-4 gap-y-2">
+            {footer.legal.map((item) => (
+              <li key={item.label}>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition-colors hover:text-white"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </footer>
@@ -844,6 +921,7 @@ export function Landing({
         <Safety />
         <Levels />
         <Faqs />
+        <MoreServices />
         <Closing />
       </main>
       <Footer />

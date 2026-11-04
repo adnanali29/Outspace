@@ -39,6 +39,7 @@ export const navLinks = [
   { label: "Coaches", href: "#coaches" },
   { label: "Levels", href: "#levels" },
   { label: "FAQs", href: "#faqs" },
+  { label: "More Programs", href: "#more-programs" },
 ];
 
 export const heroSlideSeconds = 2;
@@ -69,12 +70,13 @@ export const hero = {
     "Batches matched to your child’s age and level",
     "Monthly growth snapshot and parent-mentor call",
   ],
-  quote: "[Parent quote: what changed in my child in 3 months]",
-  quoteBy: "[Parent name, child’s age]  |  [X.X] / 5 parent rating",
+  quote:
+    "My daughter is learning Chess from Outpace Academy for the past many months. Teachers are very knowledgeable, supportive and professional and my daughter is really enjoying it.",
+  quoteBy: "Anand Sivaram, Parent",
 };
 
 export const stats = [
-  { value: "[XXX]+", label: "students trained" },
+  { value: "9000+", label: "kids enrolled across Outpace programs" },
   { value: "[X.X] / 5", label: "parent rating" },
   { value: "[XX]", label: "tournament wins by students" },
   { value: "[Rated]", label: "expert chess coaches" },
@@ -142,6 +144,8 @@ export const includes = {
     "Monthly growth snapshot and parent-mentor call",
     "Tournament guidance based on readiness and interest",
     "2 group growth mentoring sessions each month",
+    "Course completion exam and certificate upon passing",
+    "Lifetime membership in the Outpace Academy Chess Club",
   ],
   media: "[Clip or photo: live class on screen]",
   highlights: [
@@ -256,6 +260,12 @@ export const vision = {
   ],
 };
 
+export const founder = {
+  kicker: "Our Founder",
+  name: "Omnath CP",
+  text: "The visionary behind Outpace Academy brings a wealth of industry experience and a profound passion for children’s development. Inspired by his mother, a dedicated teacher for 36 years, he has infused Outpace with a culture of nurturing and growth.",
+};
+
 const coach = {
   media: "[Coach photo or 20-second intro video]",
   name: "[Coach name]",
@@ -275,18 +285,21 @@ export const testimonials = {
   items: [
     {
       media: "[Parent video]",
-      quote: "[Short parent quote about the change they saw]",
-      by: "[Parent name, child’s age]",
+      quote:
+        "We have had a wonderful experience learning at Outpace Academy. The concerned teachers have been efficient, their teaching method effective and fruitful.",
+      by: "Adv. (Mrs.) Vasundhara Ravi, Parent",
     },
     {
       media: "[Parent video]",
-      quote: "[Short parent quote about the change they saw]",
-      by: "[Parent name, child’s age]",
+      quote:
+        "Outpace Academy focuses on the overall performance of the student in the respective subject as well as character building. Spot tests and regular assessments help to improve their potential.",
+      by: "Lakshmi Subash, Parent",
     },
     {
       media: "[Student result: rating or trophy]",
-      quote: "[Student journey: rating from X to Y in Z months]",
-      by: "[Student name, age]",
+      quote:
+        "I started learning chess from Outpace Academy. It was a very positive learning experience, and especially the coaches who patiently answered all our queries and made us learn chess with perfect rules and techniques.",
+      by: "Athira Vinod Pillai, Student",
     },
   ],
 };
@@ -377,12 +390,65 @@ export const faqs = {
       q: "Is it safe for children online?",
       a: "A Relationship Executive coordinates class access and communication between families and the team.",
     },
+    {
+      q: "Can my child join at any time of the year?",
+      a: "Yes. Students can join Outpace Academy at any time during the academic year, as we offer rolling admissions.",
+    },
   ],
-  more: {
-    q: "Still have a question?",
-    a: "Ask us during your free Introductory & Assessment Session.",
-    cta: "Book my free session",
-  },
+};
+
+const mainSite = "https://outpaceacademy.com";
+
+export const moreServices = {
+  kicker: "Beyond Chess",
+  title: "More ways Outpace helps your child grow",
+  intro:
+    "Chess is one part of Outpace Academy. Alongside it, we offer two more services for children.",
+  items: [
+    {
+      name: "Academic Tuition",
+      text: "Additional academic support and guidance, with personalised instruction that helps students improve their grades and their understanding of each subject.",
+      note: "Guided by an advisory board with experts from IISc, IIT and NIT.",
+      tags: [
+        "English",
+        "French",
+        "Hindi",
+        "Sanskrit",
+        "Kannada",
+        "Malayalam",
+        "Mathematics",
+        "Physics",
+        "Chemistry",
+        "Biology",
+        "Accountancy",
+        "Economics",
+        "History",
+        "Civics",
+      ],
+      cta: "Explore Academic Tuition",
+      href: `${mainSite}/academic-tuition/`,
+    },
+    {
+      name: "Other Programs",
+      text: "Student-centred programs in music, dance, art and personal growth that help children explore their interests and develop new skills.",
+      note: "Classical dance includes Bharatanatyam, Mohiniyattam and Kuchipudi.",
+      tags: [
+        "Carnatic Music",
+        "Carnatic Flute",
+        "Classical Dance",
+        "Guitar",
+        "Violin",
+        "Keyboard",
+        "Drawing",
+        "Yoga",
+        "Vedic Maths",
+        "Rubik’s Cube",
+        "Personal Development",
+      ],
+      cta: "Explore Other Programs",
+      href: `${mainSite}/courses-outpace-academy/`,
+    },
+  ],
 };
 
 export const closing = {
@@ -402,10 +468,23 @@ export const footer = {
     "Small groups of 4-6 students",
     "Monthly growth snapshot and parent-mentor call",
   ],
-  location: "Bengaluru",
+  address: "#1108, Gopal Reddy Complex, 1st Floor, Sarjapura Village, Bangalore 562125",
+  email: "info@outpaceacademy.com",
+  phone: "+91 94296 92587",
+  phoneHref: "tel:+919429692587",
   website: "www.outpaceacademy.com",
-  copyright: "© 2026 Outpace Academy. All rights reserved.",
-  privacy: "[Privacy policy link]",
+  socials: [
+    { label: "Instagram", href: "https://www.instagram.com/outpaceacademy/" },
+    { label: "Facebook", href: "https://www.facebook.com/outpaceacademy" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/outpace-academy/" },
+    { label: "Twitter", href: "https://twitter.com/AcademyOutpace" },
+  ],
+  copyright: "© 2026 Outpace Academy LLP. All rights reserved.",
+  legal: [
+    { label: "Privacy Policy", href: "https://outpaceacademy.com/privacy-policy/" },
+    { label: "Terms & Conditions", href: "https://outpaceacademy.com/terms-conditions/" },
+    { label: "Refunds & Cancellation", href: "https://outpaceacademy.com/refunds-cancellation-policy/" },
+  ],
 };
 
 export const thanks = {

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { sessionMinutes, sessionSlots, thanks, whatsappHref } from "@/content";
 import type { Lead } from "./BookingForm";
+import { Logo } from "./Logo";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -62,9 +63,7 @@ export function ThankYou({
     <>
       <header className="border-b border-white/10 bg-ink">
         <div className="wrap flex h-16 items-center">
-          <span className="font-display text-xl font-semibold tracking-tight text-white">
-            Outpace Academy
-          </span>
+          <Logo className="h-9" priority />
         </div>
       </header>
 
