@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { heroImages, heroSlideSeconds } from "@/content";
 
-// Full-bleed photos behind the hero, darkened so the text stays readable.
+// Real class photos filling the hero, behind a cream layer set in Landing.tsx.
+// Crossfades slowly, and not at all for reduced-motion visitors.
 export function HeroSlideshow() {
   const [current, setCurrent] = useState(0);
 
@@ -18,7 +19,7 @@ export function HeroSlideshow() {
   }, []);
 
   return (
-    <div className="absolute inset-0">
+    <div className="absolute inset-0 bg-mist">
       {heroImages.map((image, i) => (
         <Image
           key={image.src}
@@ -28,22 +29,11 @@ export function HeroSlideshow() {
           sizes="100vw"
           priority={i === 0}
           loading={i === 0 ? undefined : "eager"}
-          className={`object-cover transition-opacity duration-700 ${
+          className={`object-cover object-[center_40%] transition-opacity duration-1000 ${
             i === current ? "opacity-100" : "opacity-0"
           }`}
         />
       ))}
-      {/* An even dark wash, a vignette closing in from every side, and extra
-          weight behind the text column. */}
-      <div aria-hidden className="absolute inset-0 bg-black/65 lg:bg-black/35" />
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,rgb(0_0_0/0.8)_100%)]"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 hidden bg-gradient-to-r from-black/80 via-black/45 to-transparent lg:block"
-      />
     </div>
   );
 }

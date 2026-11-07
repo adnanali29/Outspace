@@ -1,68 +1,45 @@
 import type { ReactNode } from "react";
 import {
   approach,
+  belief,
   closing,
-  coaches,
   faqs,
   footer,
-  founder,
   heart,
   hero,
-  includes,
-  levels,
-  mission,
-  moreServices,
+  learn,
   navLinks,
-  outcomes,
-  preview,
+  program,
   safety,
-  skills,
-  stats,
-  steps,
-  testimonials,
-  vision,
-  whatsappHref,
+  services,
+  start,
+  stories,
+  talkToUs,
+  trust,
 } from "@/content";
 import { BookingForm, type Lead } from "./BookingForm";
+import { ChessGame } from "./ChessGame";
+import { FaqBoard } from "./FaqBoard";
 import { Header } from "./Header";
 import { HeroSlideshow } from "./HeroSlideshow";
-import { KnightBoard } from "./KnightBoard";
 import { Logo } from "./Logo";
 import { MobileBar } from "./MobileBar";
+import { Piece } from "./Piece";
 
-function Heading({
-  children,
-  light = false,
-  wide = false,
-}: {
-  children: ReactNode;
-  light?: boolean;
-  wide?: boolean;
-}) {
+const primaryButton =
+  "inline-block rounded-full bg-flame px-7 py-3.5 font-semibold text-ink transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-flame/30";
+
+function Heading({ children }: { children: ReactNode }) {
   return (
-    <h2
-      className={`reveal font-display text-3xl leading-[1.08] font-bold tracking-tight text-balance ${
-        wide ? "md:text-[2.4rem] short:text-3xl" : "max-w-3xl md:text-[2.75rem]"
-      } ${light ? "text-white" : "text-ink"}`}
-    >
+    <h2 className="reveal max-w-3xl font-display text-3xl leading-[1.12] font-bold tracking-tight text-balance text-ink md:text-[2.75rem]">
       {children}
     </h2>
   );
 }
 
-function Kicker({
-  children,
-  light = false,
-}: {
-  children: ReactNode;
-  light?: boolean;
-}) {
+function Kicker({ children, light = false }: { children: ReactNode; light?: boolean }) {
   return (
-    <p
-      className={`mb-3 text-xs font-bold tracking-[0.14em] uppercase ${
-        light ? "text-flame" : "text-ember"
-      }`}
-    >
+    <p className={`mb-3 text-sm font-semibold ${light ? "text-peach" : "text-ember"}`}>
       {children}
     </p>
   );
@@ -80,31 +57,10 @@ function CheckMark({ className = "" }: { className?: string }) {
   );
 }
 
-function PlayMark({ small = false }: { small?: boolean }) {
+// The ring from the "O" in the logo, used as a large background shape.
+function Ring({ className }: { className: string }) {
   return (
-    <span
-      aria-hidden
-      className={`grid place-items-center rounded-full bg-flame shadow-[0_0_0_10px_rgb(240_128_56/0.2)] transition-transform group-hover:scale-110 ${
-        small ? "size-11" : "size-[4.5rem]"
-      }`}
-    >
-      <svg viewBox="0 0 24 24" className={`ml-1 fill-ink ${small ? "size-4" : "size-7"}`}>
-        <path d="M6 4l14 8-14 8z" />
-      </svg>
-    </span>
-  );
-}
-
-function HeroQuote({ className }: { className: string }) {
-  return (
-    <figure
-      className={`rounded-xl border border-white/15 bg-black/60 px-4 py-3 backdrop-blur-sm ${className}`}
-    >
-      <blockquote className="text-sm leading-snug">{hero.quote}</blockquote>
-      <figcaption className="mt-1 text-xs whitespace-pre-wrap text-mist">
-        {hero.quoteBy}
-      </figcaption>
-    </figure>
+    <span aria-hidden className={`pointer-events-none absolute rounded-full ${className}`} />
   );
 }
 
@@ -116,106 +72,102 @@ function Hero({
   onSubmit: (lead: Lead) => void;
 }) {
   return (
-    <section
-      id="top"
-      className="relative flex flex-col overflow-hidden bg-ink text-white lg:min-h-[calc(100svh-65px)]"
-    >
-      <HeroSlideshow />
-      <div className="wrap-wide relative grid flex-1 items-center gap-x-10 gap-y-7 xl:gap-x-20 py-6 lg:grid-cols-[minmax(0,1fr)_28rem] lg:grid-rows-[1fr_auto] lg:gap-y-6 lg:pt-5 lg:pb-0 short:pt-3 short:gap-y-3">
-        <div className="text-center lg:text-left">
-          <p className="mb-3 text-xs font-bold tracking-[0.1em] text-flame uppercase md:text-sm short:mb-2">
-            {hero.eyebrow}
-          </p>
-          <h1 className="font-display text-[1.95rem] leading-[1.04] font-bold tracking-tight text-balance sm:text-[2.1rem] lg:text-[clamp(2.1rem,6.3vh,3.25rem)]">
-            {hero.title} <span className="text-flame">{hero.titleAccent}</span>
-          </h1>
-          <p className="mt-3 leading-snug font-medium sm:mt-4 sm:text-lg short:mt-3 short:text-base">
-            {hero.lede}
-          </p>
-          <p className="mt-1.5 hidden leading-snug text-mist sm:block short:text-sm">
-            {hero.body}
-          </p>
-          <ul className="mt-4 space-y-2 text-sm sm:text-base short:mt-3 short:space-y-1 short:text-sm">
-            {hero.points.map((point) => (
-              <li key={point} className="leading-snug lg:flex lg:gap-3">
-                <span className="mr-2 inline-grid size-[1.1rem] shrink-0 place-items-center rounded-[4px] bg-flame align-text-bottom text-ink lg:mt-0.5 lg:mr-0">
-                  <CheckMark className="size-3" />
-                </span>
-                {point}
-              </li>
-            ))}
-          </ul>
-          <HeroQuote className="mt-5 hidden sm:block short:mt-3 short:py-2 tiny:hidden" />
+    <section id="top" className="bg-cream">
+      <div className="relative overflow-hidden">
+        {/* Phones: the photo sits behind the words and fades out above the form,
+            since stretching it down the whole column would blur it. Laptops: it
+            fills the hero, with the cream layer strongest behind the words. */}
+        <div className="absolute inset-x-0 top-0 h-[23rem] lg:inset-y-0 lg:h-auto">
+          <HeroSlideshow />
+          <div
+            aria-hidden
+            className="absolute inset-x-0 top-0 -bottom-px bg-gradient-to-b from-cream/70 via-cream/85 to-cream to-90% lg:bg-gradient-to-r lg:from-cream/95 lg:via-cream/80 lg:to-cream/40 lg:to-100%"
+          />
         </div>
+        <div className="wrap-wide relative grid items-center gap-x-14 gap-y-8 py-8 lg:min-h-[calc(100svh-11rem)] lg:grid-cols-[minmax(0,1fr)_26.5rem] lg:py-10 short:py-5 xl:gap-x-20">
+          <div className="text-center lg:text-left">
+            <p className="inline-block rounded-full bg-mist px-4 py-1.5 text-sm font-semibold text-teal-deep">
+              {hero.eyebrow}
+            </p>
+            <h1 className="mt-4 font-display text-[2.6rem] leading-[1.06] font-bold tracking-tight text-balance sm:text-5xl xl:text-[4rem] short:mt-3 short:text-[2.9rem]">
+              {hero.title}{" "}
+              <span className="relative mx-auto block w-fit pb-2 text-flame-deep lg:mx-0">
+                {hero.titleAccent}
+                {/* The orange sweep from the logo's ring. */}
+                <svg
+                  viewBox="0 0 300 14"
+                  preserveAspectRatio="none"
+                  aria-hidden
+                  className="absolute inset-x-0 bottom-0 h-2.5 w-full fill-none stroke-flame stroke-[5]"
+                >
+                  <path d="M4 10C80 2 220 1 296 8" strokeLinecap="round" />
+                </svg>
+              </span>
+            </h1>
+            <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-ink lg:mx-0 lg:text-xl short:mt-3 short:text-lg">
+              {hero.lede}
+            </p>
+            <a
+              href="#play"
+              className="mt-4 inline-flex items-center gap-2 font-semibold text-teal-deep underline decoration-flame decoration-2 underline-offset-4 hover:text-ember"
+            >
+              <Piece type="n" className="text-2xl" />
+              {hero.playLink}
+            </a>
+          </div>
 
-        <div className="order-first lg:order-none lg:col-start-2 lg:row-start-1">
           <BookingForm savedLead={savedLead} onSubmit={onSubmit} />
         </div>
-        <HeroQuote className="order-last text-center sm:hidden" />
-
-        <section
-          aria-label="Outpace in numbers"
-          className="mx-[calc(50%-50vw)] border-y border-white/15 bg-black/60 backdrop-blur-sm lg:col-span-2 lg:border-b-0"
-        >
-          <dl className="wrap-wide grid grid-cols-2 lg:grid-cols-4">
-            {stats.map((stat, i) => (
-              <div
-                key={stat.label}
-                className={`border-white/15 px-3 py-3 text-center short:py-2 lg:pr-4 lg:pl-6 lg:text-left ${
-                  i % 2 === 1 ? "border-l" : ""
-                } ${i > 1 ? "border-t lg:border-t-0" : ""} ${
-                  i === 2 ? "lg:border-l" : ""
-                } ${i === 0 ? "lg:pl-0" : ""}`}
-              >
-                <dt className="font-display text-2xl leading-tight font-bold text-white short:text-xl">
-                  {stat.value}
-                </dt>
-                <dd className="text-xs text-mist">{stat.label}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
       </div>
+
+      <section aria-label="Outpace at a glance" className="relative border-t border-line bg-white">
+        <dl className="wrap-wide grid grid-cols-2 gap-x-4 gap-y-5 py-5 lg:grid-cols-4 short:py-3">
+          {trust.map((item) => (
+            <div key={item.label} className="flex flex-col gap-0.5 text-center lg:text-left">
+              <dt className="font-display text-2xl font-bold text-teal-deep md:text-3xl short:text-2xl">
+                {item.value}
+              </dt>
+              <dd className="text-sm leading-snug text-muted">{item.label}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
     </section>
   );
 }
 
 function Heart() {
   return (
-    <section id="about" className="section-fade py-12 md:py-16">
-      <div className="wrap">
-        <Kicker>{heart.kicker}</Kicker>
-        <Heading wide>{heart.title}</Heading>
-        <div className="mt-7 grid items-center gap-8 short:mt-5 lg:grid-cols-[1fr_19rem_1fr] lg:gap-10 short:lg:grid-cols-[1fr_16rem_1fr]">
-          <div>
-            <p className="reveal font-medium leading-relaxed short:text-sm">
-              {heart.intro}
-            </p>
-            <ol className="mt-4 space-y-2.5 short:mt-3 short:space-y-1.5">
-              {heart.moves.map((move, i) => (
-                <li key={move} className="reveal flex items-baseline gap-3">
-                  <span className="w-5 shrink-0 font-display text-sm font-bold text-ember">
-                    {i + 1}.
-                  </span>
-                  <span className="leading-snug short:text-sm">{move}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
-          <div className="mx-auto w-full max-w-sm lg:max-w-none">
-            <KnightBoard />
-          </div>
-          <div>
-            <p className="reveal rounded-xl bg-ink px-5 py-4 font-display text-xl leading-snug font-semibold text-white short:py-3 short:text-lg">
-              {heart.promise}
-            </p>
-            <div className="reveal mt-4 space-y-3 text-sm leading-relaxed text-muted short:mt-3 short:space-y-2">
-              {heart.outro.map((text) => (
-                <p key={text}>{text}</p>
-              ))}
-            </div>
-          </div>
+    <section
+      id="heart"
+      className="relative overflow-hidden bg-teal-deep py-12 text-white md:py-16"
+    >
+      <Ring className="-right-48 -bottom-48 size-[28rem] border-[3.5rem] border-white/5" />
+      <div className="wrap relative grid items-center gap-x-14 gap-y-6 lg:grid-cols-[1fr_1.1fr]">
+        <div className="lg:self-end">
+          <Kicker light>{heart.kicker}</Kicker>
+          <h2 className="reveal font-display text-3xl leading-[1.15] font-bold tracking-tight text-balance md:text-4xl">
+            {heart.title}
+          </h2>
+          <p className="reveal mt-3 text-lg leading-relaxed">{heart.intro}</p>
         </div>
+        {/* The lines read like a game's score sheet, one numbered move at a time. */}
+        <ol className="rounded-3xl bg-white/10 px-5 py-2 lg:col-start-2 lg:row-span-2 lg:row-start-1">
+          {heart.lines.map((line, i) => (
+            <li
+              key={line}
+              className="reveal flex items-baseline gap-3 border-t border-white/15 py-3 leading-snug font-medium first:border-t-0 md:text-lg"
+            >
+              <span aria-hidden className="w-4 shrink-0 font-display font-bold text-peach">
+                {i + 1}
+              </span>
+              {line}
+            </li>
+          ))}
+        </ol>
+        <p className="reveal rounded-2xl bg-flame px-5 py-3.5 font-display text-xl leading-snug font-bold text-balance text-ink md:text-2xl lg:self-start">
+          {heart.promise}
+        </p>
       </div>
     </section>
   );
@@ -235,20 +187,14 @@ function MiniBoard({ lit }: { lit: number[] }) {
   return (
     <div
       aria-hidden
-      className="grid size-10 shrink-0 grid-cols-4 overflow-hidden rounded-md transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3"
+      className="grid size-10 shrink-0 grid-cols-4 overflow-hidden rounded-lg transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3"
     >
       {Array.from({ length: 16 }, (_, i) => {
         const dark = (i + Math.floor(i / 4)) % 2 === 0;
         return (
           <span
             key={i}
-            className={
-              lit.includes(i)
-                ? "bg-flame"
-                : dark
-                  ? "bg-current opacity-35"
-                  : "bg-current opacity-15"
-            }
+            className={lit.includes(i) ? "bg-flame" : dark ? "bg-teal" : "bg-teal/25"}
           />
         );
       })}
@@ -256,102 +202,104 @@ function MiniBoard({ lit }: { lit: number[] }) {
   );
 }
 
-function Skills() {
+function Learn() {
   return (
-    <section id="program" className="section-fade py-12 md:py-16">
-      <div className="wrap">
-        <Kicker>{skills.kicker}</Kicker>
-        <Heading wide>{skills.title}</Heading>
-        <p className="reveal mt-3 text-pretty text-muted">
-          {skills.intro}
-        </p>
-        <div className="chess-skills reveal mt-7 grid grid-cols-2 overflow-hidden rounded-2xl border border-line shadow-xl shadow-ink/10 short:mt-5 lg:grid-cols-3">
-          {skills.items.map((item, i) => (
-            <div key={item.title} className="group p-4 sm:p-6 short:py-4">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <MiniBoard lit={skillPatterns[i]} />
-                <h3 className="font-display text-lg leading-tight font-semibold sm:text-xl">
-                  {item.title}
-                </h3>
-              </div>
-              <p className="mt-3 text-sm leading-relaxed opacity-80 sm:text-base short:mt-2 short:text-sm">
-                {item.text}
-              </p>
-            </div>
-          ))}
+    <section id="learn" className="py-12 md:py-20">
+      <div className="wrap grid gap-x-12 gap-y-8 lg:grid-cols-[21rem_1fr]">
+        <div>
+          <Kicker>{learn.kicker}</Kicker>
+          <Heading>{learn.title}</Heading>
+          <p className="reveal mt-4 leading-relaxed text-muted md:text-lg">{learn.intro}</p>
         </div>
-      </div>
-    </section>
-  );
-}
-
-function Includes() {
-  return (
-    <section className="band section-fade grid items-center gap-12 py-16 md:py-24 lg:grid-cols-2 lg:gap-20">
-      <div>
-        <Kicker>{includes.kicker}</Kicker>
-        <Heading>{includes.title}</Heading>
-        <ul className="mt-7 divide-y divide-line">
-          {includes.items.map((item) => (
+        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4">
+          {learn.items.map((item, i) => (
             <li
-              key={item}
-              className="reveal flex items-center gap-4 py-3.5 text-lg leading-snug"
+              key={item.title}
+              className="group reveal rounded-2xl bg-cream p-4 ring-1 ring-line transition-transform duration-300 hover:-translate-y-1"
             >
-              <span className="grid size-7 shrink-0 place-items-center rounded-full bg-flame/15 text-ember">
-                <CheckMark className="size-4" />
-              </span>
-              {item}
+              <MiniBoard lit={skillPatterns[i]} />
+              <h3 className="mt-3 font-display text-lg leading-tight font-bold">{item.title}</h3>
+              <p className="mt-1 text-sm leading-snug text-muted">{item.text}</p>
             </li>
           ))}
         </ul>
-      </div>
-      <div className="reveal relative pb-10 lg:pb-0">
-        <div className="board relative aspect-[4/3] overflow-hidden rounded-2xl">
-          <span className="ph absolute top-0 left-1/2 w-max max-w-[90%] -translate-x-1/2 rounded-b-lg bg-white px-4 py-2 text-center text-sm font-semibold">
-            {includes.media}
-          </span>
-        </div>
-        <div className="absolute inset-x-4 bottom-0 grid grid-cols-2 gap-3 lg:-bottom-6">
-          {includes.highlights.map((item) => (
-            <div
-              key={item.label}
-              className="rounded-xl bg-white p-4 shadow-xl shadow-ink/15"
-            >
-              <p className="font-display text-3xl font-bold text-ember">
-                {item.value}
-              </p>
-              <p className="mt-0.5 text-sm leading-snug text-muted">{item.label}</p>
+        <dl className="reveal grid gap-4 rounded-2xl bg-mist p-5 sm:grid-cols-3 lg:col-span-2">
+          {learn.outcomes.map((item) => (
+            <div key={item.label}>
+              <dt className="font-display font-bold text-teal-deep">{item.label}</dt>
+              <dd className="mt-0.5 text-sm leading-snug text-muted">{item.text}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       </div>
     </section>
   );
 }
 
-function Preview() {
+function Play() {
   return (
-    <section className="dark-fade relative overflow-hidden py-16 text-white md:py-24">
-      <div
-        aria-hidden
-        className="board absolute inset-y-0 left-0 w-2/3 opacity-40 [mask-image:linear-gradient(to_left,transparent,black)]"
-      />
-      <div className="wrap relative grid items-center gap-10 lg:grid-cols-[1.35fr_1fr] lg:gap-14">
-        <div className="reveal group relative flex aspect-video flex-col items-center justify-center gap-6 rounded-2xl border border-white/15 bg-ink-2 p-6 text-center shadow-2xl shadow-black/40">
-          <PlayMark />
-          <p className="ph text-sm font-semibold md:text-base">{preview.media}</p>
-          <span className="ph absolute bottom-3 left-3 rounded bg-ink-3 px-2 py-1 text-xs">
-            {preview.duration}
-          </span>
+    <section id="play" className="bg-mist py-12 md:py-20">
+      <div className="wrap">
+        <ChessGame />
+      </div>
+    </section>
+  );
+}
+
+const personStyles = [
+  { card: "bg-teal-deep text-white", icon: "bg-white text-teal-deep" },
+  { card: "bg-flame text-ink", icon: "bg-white text-ember" },
+  { card: "bg-white text-ink ring-2 ring-flame", icon: "bg-peach text-ember" },
+];
+
+function Program() {
+  return (
+    <section id="program" className="bg-cream py-12 md:py-20">
+      <div className="wrap">
+        <Kicker>{program.kicker}</Kicker>
+        <Heading>{program.title}</Heading>
+
+        <div className="mt-8 grid gap-3 md:grid-cols-3 md:gap-4">
+          {program.people.map((person, i) => (
+            <div
+              key={person.role}
+              className={`reveal flex items-center gap-4 rounded-2xl p-4 md:p-5 ${personStyles[i].card}`}
+            >
+              <span
+                className={`grid size-14 shrink-0 place-items-center rounded-full ${personStyles[i].icon}`}
+              >
+                <Piece type={person.piece} className="text-3xl" />
+              </span>
+              <div>
+                <h3 className="font-display text-lg leading-tight font-bold">{person.role}</h3>
+                <p className="mt-1 text-sm leading-snug">{person.text}</p>
+              </div>
+            </div>
+          ))}
         </div>
-        <div>
-          <Kicker light>{preview.kicker}</Kicker>
-          <Heading light>{preview.title}</Heading>
-          <ul className="mt-6 space-y-4">
-            {preview.items.map((item) => (
-              <li key={item} className="reveal flex gap-3 leading-snug text-mist">
-                <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded bg-flame text-ink">
-                  <CheckMark className="size-3.5" />
+
+        <div className="reveal mt-4 rounded-3xl bg-white p-5 ring-1 ring-line md:p-7">
+          <h3 className="font-display text-xl font-bold md:text-2xl">{program.numbersTitle}</h3>
+          <dl className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+            {program.numbers.map((item) => (
+              <div
+                key={item.label}
+                className="flex flex-col items-center justify-center rounded-2xl bg-cream px-2 py-4 text-center"
+              >
+                <dt className="font-display text-4xl leading-none font-bold text-flame-deep">
+                  {item.value}
+                </dt>
+                <dd className="mt-2 text-sm leading-tight text-muted">{item.label}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <h3 className="mt-6 font-display text-lg font-bold">{program.listTitle}</h3>
+          <ul className="mt-3 grid gap-x-6 gap-y-2 sm:grid-cols-2 lg:grid-cols-4">
+            {program.list.map((item) => (
+              <li key={item} className="flex items-start gap-2 text-sm leading-snug font-medium">
+                <span className="grid size-5 shrink-0 place-items-center rounded-full bg-teal-deep text-white">
+                  <CheckMark className="size-3" />
                 </span>
                 {item}
               </li>
@@ -363,321 +311,344 @@ function Preview() {
   );
 }
 
-function Steps() {
+function WhyOutpace() {
   return (
-    <section id="how-it-works" className="section-fade py-16 md:py-24">
+    <section className="py-16 md:py-24">
       <div className="wrap">
-        <Kicker>{steps.kicker}</Kicker>
-        <Heading>{steps.title}</Heading>
-        <ol className="relative mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <span
-            aria-hidden
-            className="absolute top-7 right-[20%] left-[5%] hidden border-t-2 border-dashed border-flame/50 lg:block"
-          />
-          {steps.items.map((step, i) => (
-            <li key={step.title} className="group reveal relative">
-              <span className="grid size-14 place-items-center rounded-xl bg-flame font-display text-2xl font-bold shadow-lg shadow-flame/30 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
-                {i + 1}
+        <Kicker>{approach.kicker}</Kicker>
+        <Heading>{approach.title}</Heading>
+        <ul className="mt-8 grid grid-cols-2 gap-3 md:gap-4">
+          {approach.rows.map((row) => (
+            <li key={row.label} className="reveal flex flex-col rounded-2xl bg-mist p-4 md:p-6">
+              <h3 className="text-sm font-semibold text-ember">{row.label}</h3>
+              <p className="mt-2 leading-snug text-muted">{row.need}</p>
+              <span aria-hidden className="my-2 font-display text-xl font-bold text-flame">
+                ↓
               </span>
-              <h3 className="mt-5 font-display text-xl leading-tight font-semibold">
-                {step.title}
-              </h3>
-              <p className="mt-2 leading-relaxed text-muted">{step.text}</p>
+              <p className="font-display text-lg leading-snug font-bold">{row.answer}</p>
             </li>
           ))}
-        </ol>
-      </div>
-    </section>
-  );
-}
+        </ul>
 
-const outcomeStyles = [
-  "bg-ink text-white [&_p:last-child]:text-mist [&_h3]:text-flame",
-  "bg-flame text-ink [&_h3]:text-ink",
-  "border border-line bg-white [&_h3]:text-ember",
-];
-
-function Outcomes() {
-  return (
-    <section className="band section-fade py-16 md:py-24">
-      <Kicker>{outcomes.kicker}</Kicker>
-      <Heading>{outcomes.title}</Heading>
-      <div className="mt-8 grid gap-5 md:grid-cols-3">
-        {outcomes.items.map((item, i) => (
-          <div
-            key={item.label}
-            className={`reveal rounded-2xl p-7 transition-transform duration-300 hover:-translate-y-1.5 md:min-h-56 ${outcomeStyles[i]}`}
-          >
-            <h3 className="text-xs font-bold tracking-[0.12em] uppercase">
-              {item.label}
-            </h3>
-            <p className="mt-4 font-display text-xl leading-snug font-medium md:text-2xl">
-              {item.text}
-            </p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function Approach() {
-  return (
-    <section className="band section-fade py-16 md:py-24">
-      <Kicker>{approach.kicker}</Kicker>
-      <Heading>{approach.title}</Heading>
-      <div className="reveal mt-8 hidden overflow-hidden rounded-2xl bg-white shadow-xl shadow-ink/5 md:block">
-        <table className="w-full text-left">
-          <thead className="text-sm">
-            <tr>
-              <td className="w-1/4 bg-ink px-6 py-4" />
-              <th scope="col" className="bg-ink px-6 py-4 font-semibold text-white">
-                {approach.columns[0]}
-              </th>
-              <th scope="col" className="bg-flame px-6 py-4 font-bold text-ink">
-                {approach.columns[1]}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {approach.rows.map((row) => (
-              <tr
-                key={row.label}
-                className="border-t border-line transition-colors first:border-0 hover:bg-paper"
-              >
-                <th scope="row" className="px-6 py-5 font-display text-lg font-semibold">
-                  {row.label}
-                </th>
-                <td className="px-6 py-5 text-muted">{row.need}</td>
-                <td className="bg-flame/10 px-6 py-5 font-semibold">
-                  <span className="flex items-center gap-3">
-                    <CheckMark className="size-4 shrink-0 text-ember" />
-                    {row.answer}
-                  </span>
-                </td>
-              </tr>
+        <div className="reveal mt-5 grid gap-6 rounded-3xl bg-teal-deep p-7 text-white md:grid-cols-[13rem_1fr] md:p-9">
+          <h3 className="font-display text-2xl leading-tight font-bold text-balance">
+            {safety.title}
+          </h3>
+          <ul className="grid gap-5 sm:grid-cols-3">
+            {safety.items.map((item) => (
+              <li key={item.title}>
+                <p className="font-semibold">{item.title}</p>
+                <p className="mt-1 text-sm leading-snug">{item.text}</p>
+              </li>
             ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="mt-8 space-y-4 md:hidden">
-        {approach.rows.map((row) => (
-          <div key={row.label} className="reveal overflow-hidden rounded-2xl bg-white">
-            <h3 className="bg-ink px-5 py-3 font-display font-semibold text-white">
-              {row.label}
-            </h3>
-            <p className="px-5 pt-4 text-muted">
-              <span className="block text-xs font-bold tracking-wide uppercase">
-                {approach.columns[0]}
-              </span>
-              {row.need}
-            </p>
-            <p className="mt-3 bg-flame/10 px-5 py-4 font-semibold">
-              <span className="block text-xs font-bold tracking-wide text-ember uppercase">
-                {approach.columns[1]}
-              </span>
-              {row.answer}
-            </p>
-          </div>
-        ))}
-      </div>
-      <p className="mt-4 text-sm text-muted">{approach.note}</p>
-    </section>
-  );
-}
-
-function MissionVision() {
-  return (
-    <section id="mission" className="section-fade py-16 md:py-24">
-      <div className="wrap grid gap-12 lg:grid-cols-[1.25fr_1fr] lg:gap-16">
-        <div>
-          <Kicker>{mission.kicker}</Kicker>
-          <p className="reveal font-display text-2xl leading-snug font-semibold text-balance md:text-[2.1rem]">
-            {mission.lede}
-          </p>
-          <div className="mt-6 space-y-4 leading-relaxed text-muted">
-            {mission.body.map((text) => (
-              <p key={text} className="reveal">
-                {text}
-              </p>
-            ))}
-          </div>
-          <p className="reveal mt-7 border-l-4 border-flame pl-5 font-display text-xl leading-snug font-semibold md:text-2xl">
-            {mission.closing}
-          </p>
-        </div>
-        <div className="space-y-5 self-start lg:sticky lg:top-24">
-          <aside className="relative overflow-hidden rounded-2xl bg-ink p-8 text-white">
-            <div
-              aria-hidden
-              className="board absolute inset-0 opacity-40 [mask-image:linear-gradient(to_bottom,transparent_55%,black)]"
-            />
-            <div className="relative">
-              <Kicker light>{vision.kicker}</Kicker>
-              <p className="font-display text-2xl leading-snug font-semibold text-balance">
-                {vision.lede}
-              </p>
-              <div className="mt-5 space-y-4 leading-relaxed text-mist">
-                {vision.body.map((text) => (
-                  <p key={text}>{text}</p>
-                ))}
-              </div>
-            </div>
-          </aside>
-          <aside className="rounded-2xl border border-line bg-white p-6">
-            <Kicker>{founder.kicker}</Kicker>
-            <p className="font-display text-xl font-semibold">{founder.name}</p>
-            <p className="mt-2 text-sm leading-relaxed text-muted">{founder.text}</p>
-          </aside>
+          </ul>
         </div>
       </div>
     </section>
   );
 }
 
-function Coaches() {
+function Stories() {
   return (
-    <section id="coaches" className="band section-fade py-16 md:py-24">
-      <Kicker>{coaches.kicker}</Kicker>
-      <Heading>{coaches.title}</Heading>
-      <div className="mt-8 grid gap-5 md:grid-cols-3">
-        {coaches.items.map((coach, i) => (
-          <article
-            key={i}
-            className="group reveal overflow-hidden rounded-2xl border border-line bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-ink/10"
-          >
-            <div className="board grid aspect-[5/3] place-items-center p-4 text-center text-sm font-semibold text-white transition-transform duration-500 group-hover:scale-[1.03]">
-              <span className="ph rounded bg-ink/70 px-2 py-1">{coach.media}</span>
-            </div>
-            <div className="p-5">
-              <h3 className="ph font-display text-lg font-semibold">{coach.name}</h3>
-              <p className="ph mt-1 text-sm text-muted">{coach.title}</p>
-              <p className="ph mt-2 text-sm leading-relaxed">{coach.bio}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function Testimonials() {
-  return (
-    <section className="dark-fade py-16 md:py-24">
+    <section id="stories" className="bg-cream py-12 md:py-20">
       <div className="wrap">
-        <Kicker light>{testimonials.kicker}</Kicker>
-        <Heading light>{testimonials.title}</Heading>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {testimonials.items.map((item, i) => (
-            <figure
-              key={i}
-              className="group reveal rounded-2xl border border-white/10 bg-ink-2 p-5 transition-all duration-300 hover:-translate-y-1.5 hover:border-flame/60"
-            >
-              <div className="flex aspect-[2/1] flex-col items-center justify-center gap-3 rounded-xl bg-ink-3 p-3 text-center text-sm font-semibold text-white">
-                <PlayMark small />
-                <span className="ph">{item.media}</span>
+        <Kicker>{stories.kicker}</Kicker>
+        <Heading>{stories.title}</Heading>
+
+        <div className="reveal mt-8 rounded-3xl bg-teal-deep p-5 text-white md:p-7">
+          <dl className="grid grid-cols-2 gap-5 lg:grid-cols-4">
+            {stories.numbers.map((item) => (
+              <div key={item.label} className="text-center">
+                <dt className="font-display text-3xl leading-none font-bold md:text-5xl">
+                  {item.value}
+                </dt>
+                <dd className="mt-2 text-sm">{item.label}</dd>
               </div>
-              <span
-                aria-hidden
-                className="mt-3 block h-8 font-display text-6xl leading-[1] text-flame"
-              >
-                &ldquo;
-              </span>
-              <blockquote className="leading-relaxed text-mist">
-                {item.quote}
+            ))}
+          </dl>
+          <p className="mt-4 text-center text-xs">{stories.numbersNote}</p>
+        </div>
+
+        {/* Swipeable on phones, so four quotes don't fill four screens. */}
+        <div
+          role="group"
+          aria-label={stories.kicker}
+          tabIndex={0}
+          className="-mx-5 mt-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0 md:pb-0"
+        >
+          {stories.quotes.map((item) => (
+            <figure
+              key={item.by}
+              className="flex w-[85%] shrink-0 snap-center flex-col rounded-2xl bg-white p-5 ring-1 ring-line md:w-auto"
+            >
+              <blockquote className="flex-1 text-sm leading-relaxed md:text-base">
+                &ldquo;{item.quote}&rdquo;
               </blockquote>
-              <figcaption className="mt-3 text-sm font-semibold text-white">
-                {item.by}
+              <figcaption className="mt-4 flex items-center gap-3 text-sm">
+                <span
+                  aria-hidden
+                  className="grid size-10 shrink-0 place-items-center rounded-full bg-peach font-display font-bold text-ember"
+                >
+                  {item.by.replace(/^Adv\. \(Mrs\.\) /, "")[0]}
+                </span>
+                <span>
+                  <span className="block font-semibold">{item.by}</span>
+                  <span className="text-muted">{item.role}</span>
+                </span>
               </figcaption>
             </figure>
           ))}
         </div>
+
+        <h3 className="reveal mt-8 font-display text-xl font-bold md:text-2xl">
+          {stories.winsTitle}
+        </h3>
+        <ul className="mt-3 grid gap-3 md:grid-cols-3 md:gap-4">
+          {stories.wins.map((win) => (
+            <li key={win.name} className="reveal flex gap-3 rounded-2xl bg-white p-4 ring-2 ring-flame/70">
+              <Piece type="k" className="text-3xl text-flame-deep" />
+              <div>
+                <p className="font-display font-bold">{win.name}</p>
+                <p className="mt-0.5 text-sm leading-snug font-semibold text-ember">{win.result}</p>
+                <p className="mt-0.5 text-xs leading-snug text-muted">{win.event}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
 }
 
-const safetyIcons = [
-  "M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7zM12 15a3 3 0 100-6 3 3 0 000 6z",
-  "M16 19v-1a4 4 0 00-4-4H6a4 4 0 00-4 4v1M9 10a3.5 3.5 0 100-7 3.5 3.5 0 000 7zM22 19v-1a4 4 0 00-3-3.9M16 3.2a3.5 3.5 0 010 6.6",
-  "M12 20s-8-5-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 9c0 6-8 11-8 11z",
-];
-
-function Safety() {
+function Mission() {
+  const { mission, vision, founder } = belief;
   return (
-    <section className="band section-fade py-16 md:py-24">
-      <Kicker>{safety.kicker}</Kicker>
-      <Heading>{safety.title}</Heading>
-      <div className="mt-8 grid gap-5 md:grid-cols-3">
-        {safety.items.map((item, i) => (
-          <div
-            key={item.title}
-            className="group reveal rounded-2xl border border-line/70 bg-white p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-ink/10"
-          >
-            <span className="grid size-12 place-items-center rounded-xl bg-ink text-flame transition-colors duration-300 group-hover:bg-flame group-hover:text-ink">
-              <svg
-                viewBox="0 0 24 24"
-                aria-hidden
-                className="size-6 fill-none stroke-current stroke-[1.8]"
-              >
-                <path d={safetyIcons[i]} />
-              </svg>
-            </span>
-            <h3 className="mt-5 font-display text-xl font-semibold">{item.title}</h3>
-            <p className="mt-2 leading-relaxed text-muted">{item.text}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-// A rising staircase: each level starts higher and darker than the last.
-const levelStyles = [
-  "lg:mt-24 bg-white",
-  "lg:mt-16 bg-white",
-  "lg:mt-8 bg-white",
-  "bg-ink text-white [&_h3]:text-white [&_p]:text-mist",
-];
-
-function Levels() {
-  return (
-    <section id="levels" className="band section-fade py-16 md:py-24">
-      <Kicker>{levels.kicker}</Kicker>
-      <Heading>{levels.title}</Heading>
-      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {levels.items.map((level, i) => (
-          <div
-            key={level.label}
-            className={`reveal flex flex-col rounded-2xl border border-line/70 p-6 transition-transform duration-300 hover:-translate-y-1.5 ${levelStyles[i]}`}
-          >
-            <div aria-hidden className="mb-5 flex gap-1">
-              {levels.items.map((_, square) => (
-                <span
-                  key={square}
-                  className={`size-3 rounded-[3px] ${
-                    square <= i ? "bg-flame" : "bg-line/50"
-                  }`}
-                />
-              ))}
-            </div>
-            <p className="text-xs font-bold tracking-[0.12em] text-ember uppercase">
-              {level.label}
-            </p>
-            <h3 className="mt-2 font-display text-xl font-semibold">{level.title}</h3>
-            <p className="mt-2 leading-relaxed text-muted">{level.text}</p>
-          </div>
-        ))}
-      </div>
-      <div className="mt-5 grid gap-3 md:grid-cols-2">
-        {levels.notes.map((note) => (
-          <p
-            key={note}
-            className="reveal rounded-xl border border-dashed border-mist bg-white px-6 py-4 text-sm leading-relaxed"
-          >
-            {note}
+    <section id="mission" className="py-16 md:py-24">
+      <div className="wrap">
+        <div className="mx-auto max-w-4xl text-center">
+          <Kicker>{belief.kicker}</Kicker>
+          <p className="reveal font-display text-3xl leading-[1.15] font-bold tracking-tight text-balance md:text-5xl">
+            {belief.quote} <span className="text-flame-deep">{belief.quoteAccent}</span>
           </p>
-        ))}
+          <p className="reveal mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+            {belief.line}
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-5 lg:grid-cols-2">
+          <article className="reveal relative flex flex-col overflow-hidden rounded-3xl bg-teal-deep p-8 text-white md:p-10">
+            <Piece
+              type="n"
+              className="absolute -right-3 -bottom-8 text-[11rem] text-white opacity-10"
+            />
+            <h2 className="relative text-sm font-semibold tracking-wide text-peach uppercase">
+              {mission.title}
+            </h2>
+            <p className="relative mt-4 font-display text-2xl leading-snug font-bold text-balance md:text-3xl">
+              {mission.lead}
+            </p>
+            <p className="relative mt-4 leading-relaxed">{mission.text}</p>
+            <div className="relative mt-auto pt-8">
+              <h3 className="text-sm font-semibold">{mission.listTitle}</h3>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {mission.list.map((item) => (
+                  <li key={item} className="rounded-full bg-white px-3.5 py-1.5 text-sm font-semibold text-teal-deep">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
+
+          <article className="reveal relative flex flex-col overflow-hidden rounded-3xl bg-peach p-8 md:p-10">
+            <Piece
+              type="k"
+              className="absolute -right-3 -bottom-8 text-[11rem] text-flame opacity-20"
+            />
+            <h2 className="relative text-sm font-semibold tracking-wide text-ember uppercase">
+              {vision.title}
+            </h2>
+            <p className="relative mt-4 font-display text-2xl leading-snug font-bold text-balance md:text-3xl">
+              {vision.lead}
+            </p>
+            <p className="relative mt-4 leading-relaxed">{vision.text}</p>
+            <div className="relative mt-auto pt-8">
+              <h3 className="text-sm font-semibold">{vision.listTitle}</h3>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {vision.list.map((item) => (
+                  <li key={item} className="rounded-full bg-white px-3.5 py-1.5 text-sm font-semibold text-ember">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <div className="reveal mt-5 flex flex-col gap-4 rounded-3xl p-7 ring-2 ring-line sm:flex-row sm:items-center sm:gap-8 md:px-10">
+          <p className="flex shrink-0 items-baseline gap-2 font-display font-bold text-flame-deep">
+            <span className="text-6xl leading-none">{founder.value}</span>
+            <span className="text-lg">{founder.label}</span>
+          </p>
+          <div>
+            <h2 className="font-display text-xl font-bold">{founder.title}</h2>
+            <p className="mt-1 leading-relaxed text-muted">{founder.text}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Start() {
+  return (
+    <section id="start" className="py-12 md:py-20">
+      <div className="wrap">
+        <Kicker>{start.kicker}</Kicker>
+        <Heading>{start.title}</Heading>
+        {/* One connected flow: arrows point down on phones and across on laptops. */}
+        <ol className="mt-8 grid gap-6 lg:grid-cols-4">
+          {start.steps.map((step, i) => (
+            <li
+              key={step.title}
+              className="reveal relative flex items-center gap-4 rounded-2xl bg-mist p-4 lg:flex-col lg:items-start lg:p-5"
+            >
+              <span className="grid size-11 shrink-0 place-items-center rounded-full bg-teal-deep font-display text-lg font-bold text-white">
+                {i + 1}
+              </span>
+              <div>
+                <h3 className="font-display text-lg leading-tight font-bold">{step.title}</h3>
+                <p className="mt-1 text-sm leading-snug text-muted">{step.text}</p>
+              </div>
+              {i < start.steps.length - 1 && (
+                <span
+                  aria-hidden
+                  className="absolute -bottom-5 left-1/2 z-10 grid size-8 -translate-x-1/2 rotate-90 place-items-center rounded-full bg-flame font-bold text-ink lg:top-1/2 lg:-right-5 lg:bottom-auto lg:left-auto lg:translate-x-0 lg:-translate-y-1/2 lg:rotate-0"
+                >
+                  →
+                </span>
+              )}
+            </li>
+          ))}
+        </ol>
+
+        <h3 className="reveal mt-12 font-display text-2xl leading-snug font-bold text-balance md:text-3xl">
+          {start.levelsTitle}
+        </h3>
+        <p className="mt-1 text-muted">{start.levelsIntro}</p>
+        <ol className="mt-5 grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-3">
+          {start.levels.map((level, i) => (
+            <li
+              key={level.name}
+              className="reveal flex flex-col rounded-2xl bg-cream p-4 ring-1 ring-line transition-transform duration-300 hover:-translate-y-1 md:flex-row md:gap-4 md:p-5"
+            >
+              <span className="grid size-12 shrink-0 place-items-center rounded-full bg-white text-ember">
+                <Piece type={level.piece} className="text-3xl" />
+              </span>
+              <div className="mt-2 flex flex-1 flex-col md:mt-0">
+                <p className="text-xs font-semibold text-ember">Level {i + 1}</p>
+                <h4 className="font-display leading-tight font-bold md:text-lg">{level.name}</h4>
+                <p className="mt-1 flex-1 text-sm leading-snug text-muted">{level.text}</p>
+                <p className="mt-2 text-xs font-semibold text-teal-deep">{level.duration}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-4 text-sm text-muted">{start.levelsNote}</p>
+      </div>
+    </section>
+  );
+}
+
+const serviceStyles = {
+  tuition: {
+    piece: "b",
+    card: "bg-teal-deep text-white",
+    title: "text-peach",
+    value: "text-white",
+    pill: "text-teal-deep",
+    watermark: "text-white opacity-10",
+    button: "bg-white text-teal-deep hover:bg-peach",
+  },
+  programs: {
+    piece: "q",
+    card: "bg-peach",
+    title: "text-ember",
+    value: "text-flame-deep",
+    pill: "text-ember",
+    watermark: "text-flame opacity-20",
+    button: "bg-flame text-ink hover:bg-white",
+  },
+} as const;
+
+function Services() {
+  return (
+    <section id="services" className="bg-mist py-12 md:py-20">
+      <div className="wrap">
+        <Kicker>{services.kicker}</Kicker>
+        <Heading>{services.title}</Heading>
+
+        <div className="mt-8 grid gap-4 lg:grid-cols-2">
+          {(["tuition", "programs"] as const).map((key) => {
+            const service = services[key];
+            const style = serviceStyles[key];
+            return (
+              <article
+                key={key}
+                className={`reveal relative flex flex-col overflow-hidden rounded-3xl p-6 md:p-7 ${style.card}`}
+              >
+                <Piece
+                  type={style.piece}
+                  className={`absolute -right-2 -bottom-6 text-[9rem] ${style.watermark}`}
+                />
+                <h3 className={`relative text-sm font-semibold tracking-wide uppercase ${style.title}`}>
+                  {service.name}
+                </h3>
+                <p className="relative mt-2 font-display text-xl leading-snug font-bold text-balance md:text-2xl">
+                  {service.lead}
+                </p>
+                <dl className="relative mt-3 flex flex-wrap gap-x-5 gap-y-1">
+                  {service.facts.map((fact) => (
+                    <div key={fact.label} className="flex items-baseline gap-1.5">
+                      <dt className={`font-display text-2xl font-bold ${style.value}`}>
+                        {fact.value}
+                      </dt>
+                      <dd className="text-sm">{fact.label}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <div className="relative mt-4 space-y-3">
+                  {service.groups.map((group) => (
+                    <div key={group.title}>
+                      <h4 className="text-sm font-semibold">{group.title}</h4>
+                      <ul className="mt-1.5 flex flex-wrap gap-1.5">
+                        {group.items.map((item) => (
+                          <li
+                            key={item}
+                            className={`rounded-full bg-white px-3 py-1 text-xs font-semibold ${style.pill}`}
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+                <p className="relative mt-4 text-sm leading-snug">{service.note}</p>
+                <div className="relative mt-auto pt-5">
+                  <a
+                    href={service.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`inline-block rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${style.button}`}
+                  >
+                    {service.cta}
+                  </a>
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
@@ -685,57 +656,12 @@ function Levels() {
 
 function Faqs() {
   return (
-    <section id="faqs" className="band section-fade py-16 md:py-24">
-      <Kicker>{faqs.kicker}</Kicker>
-      <Heading>{faqs.title}</Heading>
-      <div className="chess-alt reveal mt-8 grid overflow-hidden rounded-2xl border border-line shadow-xl shadow-ink/10 lg:grid-cols-3">
-        {faqs.items.map((item) => (
-          <div key={item.q} className="p-6 lg:p-7">
-            <h3 className="font-display text-lg leading-snug font-semibold">
-              {item.q}
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed opacity-80">{item.a}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function MoreServices() {
-  return (
-    <section id="more-programs" className="dark-fade py-16 md:py-24">
+    <section id="faqs" className="bg-cream py-12 md:py-20">
       <div className="wrap">
-        <Kicker light>{moreServices.kicker}</Kicker>
-        <Heading light>{moreServices.title}</Heading>
-        <p className="reveal mt-3 max-w-2xl text-mist">{moreServices.intro}</p>
-        <div className="chess-alt reveal mt-8 grid overflow-hidden rounded-2xl border border-white/20 lg:grid-cols-2">
-          {moreServices.items.map((service) => (
-            <article key={service.name} className="flex flex-col p-6 md:p-8">
-              <h3 className="font-display text-2xl font-semibold">{service.name}</h3>
-              <p className="mt-3 leading-relaxed opacity-80">{service.text}</p>
-              <ul className="mt-5 flex flex-wrap gap-2">
-                {service.tags.map((tag) => (
-                  <li
-                    key={tag}
-                    className="rounded-full border border-current/25 px-3 py-1 text-xs font-medium"
-                  >
-                    {tag}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-5 text-sm opacity-80">{service.note}</p>
-              <a
-                href={service.href}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-6 w-fit rounded-lg bg-flame px-5 py-3 text-sm font-bold text-ink transition-colors hover:bg-flame-deep lg:mt-auto"
-              >
-                {service.cta} <span aria-hidden>&rarr;</span>
-              </a>
-            </article>
-          ))}
-        </div>
+        <Kicker>{faqs.kicker}</Kicker>
+        <Heading>{faqs.title}</Heading>
+        <p className="mt-2 mb-6 text-muted">{faqs.hint}</p>
+        <FaqBoard />
       </div>
     </section>
   );
@@ -743,30 +669,26 @@ function MoreServices() {
 
 function Closing() {
   return (
-    <section className="band section-fade py-16 md:py-24">
-      <div className="chess-gradient reveal relative overflow-hidden rounded-3xl px-6 py-14 text-center text-white md:py-20">
-        <div className="relative">
-          <p className="mb-4 text-sm font-bold text-flame">{closing.kicker}</p>
-          <h2 className="mx-auto max-w-2xl font-display text-3xl leading-[1.08] font-bold tracking-tight text-balance md:text-5xl">
-            {closing.title}
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-mist">{closing.body}</p>
-          <div className="mt-7 flex flex-wrap justify-center gap-3">
-            <a
-              href="#book"
-              className="rounded-lg bg-flame px-6 py-3.5 font-bold text-ink transition-all hover:-translate-y-0.5 hover:bg-flame-deep"
-            >
-              Book my free session
-            </a>
-            <a
-              href={whatsappHref}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-lg border border-white/70 px-6 py-3.5 font-semibold transition-colors hover:bg-white/10"
-            >
-              Chat on WhatsApp
-            </a>
-          </div>
+    <section className="relative overflow-hidden bg-teal-deep py-16 text-center text-white md:py-24">
+      <Ring className="-top-48 -left-48 size-[30rem] border-[3.5rem] border-white/5" />
+      <Ring className="-right-40 -bottom-56 size-[30rem] border-[3.5rem] border-flame/25" />
+      <div className="wrap relative">
+        <Kicker light>{closing.kicker}</Kicker>
+        <h2 className="mx-auto max-w-2xl font-display text-4xl leading-[1.1] font-bold tracking-tight text-balance md:text-[3.25rem]">
+          {closing.title}
+        </h2>
+        <p className="mx-auto mt-4 max-w-xl text-lg">{closing.body}</p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="#book" className={primaryButton}>
+            Book my free session
+          </a>
+          <a
+            href={talkToUs.href}
+            {...(talkToUs.external && { target: "_blank", rel: "noreferrer" })}
+            className="rounded-full px-7 py-3.5 font-semibold ring-2 ring-white/80 transition-colors hover:bg-white/10"
+          >
+            {talkToUs.label}
+          </a>
         </div>
       </div>
     </section>
@@ -774,35 +696,25 @@ function Closing() {
 }
 
 function FooterTitle({ children }: { children: ReactNode }) {
-  return (
-    <p className="mb-3 text-xs font-bold tracking-[0.12em] text-white uppercase">
-      {children}
-    </p>
-  );
+  return <p className="mb-3 font-display text-base font-bold text-ink">{children}</p>;
 }
 
 function Footer() {
   return (
-    <footer className="bg-ink text-sm text-mist">
+    <footer className="bg-white text-sm text-muted">
       <div aria-hidden className="chess-strip h-8" />
-      <div className="wrap grid gap-10 pt-12 pb-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1.4fr_1fr]">
+      <div className="wrap grid gap-10 pt-12 pb-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1.6fr]">
         <div>
-          <Logo className="h-11" />
-          <p className="mt-3 font-semibold text-flame">{footer.tagline}</p>
-          <p className="mt-3 max-w-xs leading-relaxed">{footer.blurb}</p>
-          <a
-            href="#book"
-            className="mt-5 inline-block rounded-lg bg-flame px-4 py-2.5 font-bold text-ink transition-colors hover:bg-flame-deep"
-          >
-            Book free session
-          </a>
+          <Logo className="h-12" />
+          <p className="mt-4 font-semibold text-ember">{footer.tagline}</p>
+          <p className="mt-2 max-w-xs leading-relaxed">{footer.blurb}</p>
         </div>
         <nav aria-label="Footer">
           <FooterTitle>Explore</FooterTitle>
           <ul className="space-y-2.5">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <a href={link.href} className="transition-colors hover:text-white">
+                <a href={link.href} className="transition-colors hover:text-teal-deep">
                   {link.label}
                 </a>
               </li>
@@ -810,28 +722,18 @@ function Footer() {
           </ul>
         </nav>
         <div>
-          <FooterTitle>{footer.programTitle}</FooterTitle>
-          <ul className="space-y-2.5">
-            {footer.program.map((item) => (
-              <li key={item} className="leading-snug">
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <FooterTitle>Get in touch</FooterTitle>
+          <FooterTitle>Talk to us</FooterTitle>
           <ul className="space-y-2.5">
             <li className="leading-snug">{footer.address}</li>
             <li>
-              <a href={footer.phoneHref} className="transition-colors hover:text-white">
+              <a href={footer.phoneHref} className="transition-colors hover:text-teal-deep">
                 {footer.phone}
               </a>
             </li>
             <li>
               <a
                 href={`mailto:${footer.email}`}
-                className="break-all transition-colors hover:text-white"
+                className="break-all transition-colors hover:text-teal-deep"
               >
                 {footer.email}
               </a>
@@ -841,30 +743,20 @@ function Footer() {
                 href={`https://${footer.website}`}
                 target="_blank"
                 rel="noreferrer"
-                className="transition-colors hover:text-white"
+                className="transition-colors hover:text-teal-deep"
               >
                 {footer.website}
               </a>
             </li>
-            <li>
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noreferrer"
-                className="transition-colors hover:text-white"
-              >
-                Chat on WhatsApp
-              </a>
-            </li>
           </ul>
-          <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs font-semibold text-white">
+          <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs font-semibold text-ink">
             {footer.socials.map((social) => (
               <li key={social.label}>
                 <a
                   href={social.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="transition-colors hover:text-flame"
+                  className="transition-colors hover:text-teal-deep"
                 >
                   {social.label}
                 </a>
@@ -873,7 +765,7 @@ function Footer() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-white/10">
+      <div className="border-t border-line">
         <div className="wrap flex flex-col gap-3 py-5 text-xs md:flex-row md:justify-between">
           <p>{footer.copyright}</p>
           <ul className="flex flex-wrap gap-x-4 gap-y-2">
@@ -883,7 +775,7 @@ function Footer() {
                   href={item.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="transition-colors hover:text-white"
+                  className="transition-colors hover:text-teal-deep"
                 >
                   {item.label}
                 </a>
@@ -909,19 +801,15 @@ export function Landing({
       <main>
         <Hero savedLead={savedLead} onSubmit={onSubmit} />
         <Heart />
-        <Skills />
-        <Steps />
-        <Includes />
-        <Preview />
-        <Outcomes />
-        <Approach />
-        <MissionVision />
-        <Coaches />
-        <Testimonials />
-        <Safety />
-        <Levels />
+        <Learn />
+        <Play />
+        <Start />
+        <Program />
+        <WhyOutpace />
+        <Stories />
+        <Mission />
+        <Services />
         <Faqs />
-        <MoreServices />
         <Closing />
       </main>
       <Footer />

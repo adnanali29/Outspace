@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-// The official logo, shown in solid white to sit on the site's black areas.
+// The official logo in its own colours. Place it on white backgrounds.
 export function Logo({
   className,
   priority = false,
@@ -15,7 +15,7 @@ export function Logo({
       width={1024}
       height={300}
       priority={priority}
-      className={`w-auto brightness-0 invert ${className}`}
+      className={`w-auto ${className}`}
     />
   );
 }

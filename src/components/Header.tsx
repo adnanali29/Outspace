@@ -26,10 +26,10 @@ export function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/15 bg-black">
-      <div className="wrap-wide flex h-16 items-center justify-between gap-6">
+    <header className="sticky top-0 z-40 border-b border-line bg-white">
+      <div className="wrap-wide flex h-[4.5rem] items-center justify-between gap-6">
         <a href="#top" className="shrink-0">
-          <Logo className="h-9" priority />
+          <Logo className="h-11" priority />
         </a>
 
         <nav aria-label="Main" className="hidden lg:block">
@@ -39,7 +39,7 @@ export function Header() {
                 <a
                   href={link.href}
                   aria-current={active === link.href ? "true" : undefined}
-                  className="rounded-md px-1.5 py-2 text-sm font-medium whitespace-nowrap text-mist transition-colors hover:text-white aria-[current]:text-flame xl:px-3"
+                  className="rounded-md px-3 py-2 text-sm font-medium whitespace-nowrap text-muted transition-colors hover:text-teal-deep aria-[current]:text-teal-deep"
                 >
                   {link.label}
                 </a>
@@ -51,7 +51,7 @@ export function Header() {
         <div className="flex items-center gap-2">
           <a
             href="#book"
-            className="hidden rounded-lg bg-flame px-4 py-2 text-sm font-bold text-ink transition-colors hover:bg-flame-deep sm:block"
+            className="hidden rounded-full bg-flame px-5 py-2.5 text-sm font-semibold text-ink transition-shadow hover:shadow-lg hover:shadow-flame/30 sm:block"
           >
             Book free session
           </a>
@@ -61,7 +61,7 @@ export function Header() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="grid size-11 cursor-pointer place-items-center rounded-lg border border-white/25 text-white lg:hidden"
+            className="grid size-11 cursor-pointer place-items-center rounded-full border border-line text-teal-deep lg:hidden"
           >
             <svg
               viewBox="0 0 24 24"
@@ -78,7 +78,7 @@ export function Header() {
         <nav
           id="mobile-menu"
           aria-label="Mobile"
-          className="border-t border-white/10 bg-black lg:hidden"
+          className="border-t border-line bg-white lg:hidden"
         >
           <ul className="wrap-wide py-2">
             {navLinks.map((link) => (
@@ -86,7 +86,7 @@ export function Header() {
                 <a
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block py-3 text-lg font-medium text-white"
+                  className="block py-3 text-lg font-medium text-ink"
                 >
                   {link.label}
                 </a>

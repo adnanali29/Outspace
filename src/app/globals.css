@@ -1,32 +1,40 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #0a0a0a;
-  --color-ink-2: #171717;
-  --color-ink-3: #2a2a2a;
-  --color-paper: #f1f1f1;
-  --color-line: #dcdcdc;
-  --color-muted: #565656;
-  --color-mist: #c8c8c8;
-  --color-flame: #f08038;
-  --color-flame-deep: #d9651c;
-  /* Darker orange for small text, which must stay readable on white. */
-  --color-ember: #b94e0e;
+  /* Logo colours. */
+  --color-teal: #079ca8;
+  --color-flame: #f86a30;
 
-  --font-display: var(--font-bricolage);
-  --font-body: var(--font-instrument);
+  /* Deeper teal: white text stays readable on it, and it reads as the logo's. */
+  --color-teal-deep: #087c85;
+  /* Darkest teal, used in place of black for text. */
+  --color-ink: #10363b;
+  --color-muted: #4c6467;
+  --color-line: #d5e6e7;
+
+  /* Soft backgrounds drawn from the two logo colours. */
+  --color-cream: #fff8f1;
+  --color-mist: #e6f6f7;
+  --color-peach: #ffeadf;
+
+  /* Darker oranges: large headings, then small text, both readable on white. */
+  --color-flame-deep: #e4541a;
+  --color-ember: #b8440f;
+
+  --font-display: var(--font-maven);
+  --font-body: var(--font-poppins);
+  --font-chess: "Apple Symbols", "Segoe UI Symbol", "Noto Sans Symbols 2", "DejaVu Sans", sans-serif;
 }
 
 /* Laptop screens where the hero has to tighten up to stay within one screen. */
 @custom-variant short (@media (min-width: 64rem) and (max-height: 760px));
-@custom-variant tiny (@media (min-width: 64rem) and (max-height: 650px));
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background: var(--color-paper);
+  background: #fff;
   color: var(--color-ink);
   font-family: var(--font-body), system-ui, sans-serif;
 }
@@ -38,100 +46,16 @@ body {
   }
 }
 
-/* Light sections fade from white to grey; dark ones from black to charcoal. */
-@utility section-fade {
-  background: linear-gradient(180deg, #fff 0%, #fff 25%, #e4e4e4 100%);
-}
-
-@utility dark-fade {
-  background: linear-gradient(180deg, var(--color-ink) 0%, #222 100%);
-}
-
-/* Full-width section whose content lines up with the wrap utility. */
-@utility band {
-  padding-inline: 1.25rem;
-
-  @media (min-width: 48rem) {
-    padding-inline: max(2rem, calc((100% - 1056px) / 2));
-  }
-}
-
 /* Wider container shared by the nav bar and hero, so their edges line up. */
 @utility wrap-wide {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1320px;
   margin-inline: auto;
   padding-inline: 1.25rem;
 
   @media (min-width: 48rem) {
     padding-inline: 2.5rem;
   }
-}
-
-/* Black and white squares that swap colours on hover. */
-.chess-skills > *,
-.chess-alt > * {
-  --square: #fff;
-  --piece: var(--color-ink);
-  background: var(--square);
-  color: var(--piece);
-  transition:
-    background-color 0.25s,
-    color 0.25s;
-}
-
-.chess-skills > *:hover,
-.chess-alt > *:hover {
-  background: var(--piece);
-  color: var(--square);
-}
-
-.chess-alt > :nth-child(even) {
-  --square: var(--color-ink);
-  --piece: #fff;
-}
-
-/* Two columns on phones and tablets: W B / B W / W B. */
-@media (max-width: 63.99rem) {
-  .chess-skills > :nth-child(4n + 2),
-  .chess-skills > :nth-child(4n + 3) {
-    --square: var(--color-ink);
-    --piece: #fff;
-  }
-}
-
-/* Three columns on laptops: W B W / B W B. */
-@media (min-width: 64rem) {
-  .chess-skills > :nth-child(even) {
-    --square: var(--color-ink);
-    --piece: #fff;
-  }
-}
-
-@utility chess-gradient {
-  background:
-    radial-gradient(
-      ellipse at center,
-      var(--color-ink) 42%,
-      rgb(10 10 10 / 0.55) 75%,
-      rgb(10 10 10 / 0.15) 100%
-    ),
-    repeating-conic-gradient(#fff 0 25%, var(--color-ink) 0 50%) 0 0 / 5rem 5rem;
-}
-
-@utility chess-strip {
-  background: repeating-conic-gradient(#fff 0 25%, var(--color-ink) 0 50%) 0 0 /
-    2rem 2rem;
-}
-
-:focus-visible {
-  outline: 2px solid var(--color-flame);
-  outline-offset: 2px;
-}
-
-/* Headings focused from code for screen readers need no visible ring. */
-[tabindex="-1"]:focus-visible {
-  outline: none;
 }
 
 @utility wrap {
@@ -145,36 +69,19 @@ body {
   }
 }
 
-/* The checkerboard used by every media slot and the hero backdrop. */
-@utility board {
-  background-color: var(--color-ink-2);
-  background-image: repeating-conic-gradient(
-    var(--color-ink-3) 0 25%,
-    var(--color-ink-2) 0 50%
-  );
-  background-size: 4.5rem 4.5rem;
+/* A row of chessboard squares in the logo's teal. */
+@utility chess-strip {
+  background: repeating-conic-gradient(var(--color-teal) 0 25%, #fff 0 50%) 0 0 / 2rem 2rem;
 }
 
-/* Marks content still to be supplied, so nothing ships unnoticed. */
-@utility ph {
-  text-decoration: underline dashed 1px;
-  text-underline-offset: 0.2em;
+:focus-visible {
+  outline: 2px solid var(--color-flame-deep);
+  outline-offset: 2px;
 }
 
-@keyframes draw-path {
-  from {
-    stroke-dashoffset: 1;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes show-stop {
-  from {
-    opacity: 0;
-    scale: 0.4;
-  }
+/* Headings focused from code for screen readers need no visible ring. */
+[tabindex="-1"]:focus-visible {
+  outline: none;
 }
 
 @keyframes rise {
@@ -184,19 +91,6 @@ body {
   }
 }
 
-.knight-path {
-  stroke-dasharray: 1;
-}
-
-.knight-stop {
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-.knight-board {
-  view-timeline-name: --knight;
-}
-
 /* Scroll-linked motion. Browsers without it simply show everything in place. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
@@ -204,18 +98,6 @@ body {
       animation: rise linear backwards;
       animation-timeline: view();
       animation-range: entry 0% entry 8rem;
-    }
-
-    .knight-path {
-      animation: draw-path linear both;
-      animation-timeline: --knight;
-      animation-range: cover 6% cover 27%;
-    }
-
-    .knight-stop {
-      animation: show-stop linear both;
-      animation-timeline: --knight;
-      animation-range: cover calc(var(--at) * 1%) cover calc((var(--at) + 4) * 1%);
     }
   }
 }

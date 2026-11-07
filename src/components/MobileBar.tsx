@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { whatsappHref } from "@/content";
+import { talkToUs } from "@/content";
 
 // Stays out of the way while the booking form is on screen, so it never covers
 // the form's fields and never points parents at a form they can already see.
@@ -26,17 +26,16 @@ export function MobileBar() {
     >
       <a
         href="#book"
-        className="flex-1 rounded-lg bg-flame py-3 text-center font-bold text-ink"
+        className="flex-1 rounded-full bg-flame py-3 text-center font-semibold text-ink"
       >
         Book free session
       </a>
       <a
-        href={whatsappHref}
-        target="_blank"
-        rel="noreferrer"
-        className="rounded-lg bg-ink px-5 py-3 font-semibold text-white"
+        href={talkToUs.href}
+        {...(talkToUs.external && { target: "_blank", rel: "noreferrer" })}
+        className="rounded-full bg-teal-deep px-6 py-3 font-semibold text-white"
       >
-        Chat
+        {talkToUs.short}
       </a>
     </div>
   );
