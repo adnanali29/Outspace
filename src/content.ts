@@ -82,12 +82,8 @@ export const trust = [
 export const heart = {
   kicker: "The heart of Outpace",
   title: "Every child deserves to be understood.",
-  videoCaption: "A short glimpse of how our coach and Child Growth Mentor connect with each child online.",
-  lines: [
-    "Some children need a challenge.",
-    "Some need more time.",
-    "Others need someone who listens and believes in them.",
-  ],
+  subtitle: "Some children need a challenge. Some need more time. Others need someone who listens and believes in them.",
+  videoUrl: "/videos/heart-of-outpace.mp4",
   body: "At Outpace, we take time to understand your child. Through enjoyable chess learning and personalised mentoring, we help them discover their strengths, learn from setbacks and grow in confidence.",
   promise: "We want your child to feel: \u201cI can try. I can learn. I can grow.\u201d",
 };

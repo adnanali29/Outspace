@@ -140,12 +140,12 @@ function Hero({
   );
 }
 
-/* ─── 2. THE HEART OF OUTPACE (Big Prominent Video Player + Narrative) ─── */
+/* ─── 2. THE HEART OF OUTPACE (Video Player + Clean Sub-Heading + Tight Padding) ─── */
 function Heart() {
   return (
     <section
       id="heart"
-      className="relative overflow-hidden bg-teal-deep py-16 text-white md:py-24"
+      className="relative overflow-hidden bg-teal-deep py-8 text-white sm:py-10 md:py-12"
     >
       <Ring className="-right-32 -bottom-32 size-[28rem] border-[3rem] border-white/5" />
       <div className="wrap relative">
@@ -154,51 +154,43 @@ function Heart() {
           <h2 className="reveal font-display text-3xl leading-[1.15] font-bold tracking-tight text-balance md:text-4xl lg:text-[2.75rem]">
             {heart.title}
           </h2>
-          <div className="reveal mt-5 flex flex-wrap justify-center gap-2 text-sm sm:gap-3">
-            {heart.lines.map((line) => (
-              <span
-                key={line}
-                className="rounded-full bg-white/10 px-4 py-1.5 font-medium text-white/95 ring-1 ring-white/15"
-              >
-                {line}
-              </span>
-            ))}
-          </div>
+          <p className="reveal mx-auto mt-2.5 max-w-2xl font-display text-base font-medium leading-relaxed text-white/90 sm:text-lg md:text-xl">
+            {heart.subtitle}
+          </p>
         </div>
 
-        {/* BIG Video Player Card */}
-        <div className="reveal mx-auto mt-10 max-w-4xl">
-          <div className="overflow-hidden rounded-3xl bg-black/40 p-3 shadow-2xl ring-1 ring-white/20 backdrop-blur-md sm:p-4">
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-black/60 shadow-inner">
+        {/* Video Player Card */}
+        <div className="reveal mx-auto mt-6 max-w-4xl">
+          <div className="overflow-hidden rounded-3xl bg-black/40 p-2 shadow-2xl ring-1 ring-white/20 backdrop-blur-md sm:p-3">
+            <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-black shadow-inner">
               <video
                 controls
                 playsInline
                 preload="metadata"
-                poster="/hero/online-chess-coaching-warmth.jpg"
-                className="size-full object-cover"
+                className="size-full object-contain bg-black"
               >
-                <source src="/video/intro.mp4" type="video/mp4" />
+                <source src={heart.videoUrl} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
-            <div className="mt-3 flex items-center justify-between px-2 text-xs text-white/80">
+            <div className="mt-2.5 flex items-center justify-between px-2 text-xs text-white/80">
               <span className="flex items-center gap-2">
-                <span className="size-2 rounded-full bg-flame" />
-                <span className="font-semibold text-peach">Live Session Preview</span>
+                <span className="size-2 rounded-full bg-flame animate-pulse" />
+                <span className="font-semibold text-peach">Inside Outpace</span>
               </span>
-              <span>Online Chess Coaching &amp; Mentoring</span>
+              <span>Online Chess Coaching &amp; Child Growth Mentorship</span>
             </div>
           </div>
         </div>
 
         {/* Narrative & Reassurance Cards Below Video */}
-        <div className="reveal mx-auto mt-8 grid max-w-4xl gap-4 md:grid-cols-2">
-          <div className="flex flex-col justify-center rounded-3xl bg-white/10 p-6 backdrop-blur-sm ring-1 ring-white/15">
+        <div className="reveal mx-auto mt-6 grid max-w-4xl gap-4 md:grid-cols-2">
+          <div className="flex flex-col justify-center rounded-3xl bg-white/10 p-5 backdrop-blur-sm ring-1 ring-white/15 sm:p-6">
             <p className="text-base leading-relaxed text-white/90 md:text-lg">
               {heart.body}
             </p>
           </div>
-          <div className="flex flex-col justify-between gap-4 rounded-3xl bg-flame p-6 text-ink shadow-lg shadow-black/15">
+          <div className="flex flex-col justify-between gap-4 rounded-3xl bg-flame p-5 text-ink shadow-lg shadow-black/15 sm:p-6">
             <p className="font-display text-xl leading-snug font-bold md:text-2xl">
               {heart.promise}
             </p>
@@ -531,57 +523,49 @@ function MissionVision() {
   );
 }
 
-/* ─── 14. OUR FOUNDER ─── */
+/* ─── 14. OUR FOUNDER (Square Photo with Rounded Corners on Left) ─── */
 function Founder() {
   const { founder } = belief;
   return (
-    <section id="founder" className="py-16 md:py-24 bg-cream/40">
+    <section id="founder" className="py-12 md:py-20 bg-cream/40">
       <div className="wrap max-w-5xl">
-        <div className="reveal overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-line">
-          <div className="grid md:grid-cols-[20rem_minmax(0,1fr)] lg:grid-cols-[22.5rem_minmax(0,1fr)]">
-            {/* Image Card Container */}
-            <div className="relative min-h-[380px] sm:min-h-[440px] md:min-h-full w-full bg-mist">
+        <div className="reveal rounded-3xl bg-white p-6 sm:p-8 md:p-10 shadow-xl ring-1 ring-line">
+          <div className="flex flex-col md:flex-row md:items-start gap-6 sm:gap-8 lg:gap-10">
+            {/* Square Photo with Rounded Corners on the Left */}
+            <div className="relative aspect-square w-full sm:w-72 md:w-80 lg:w-96 shrink-0 overflow-hidden rounded-2xl md:rounded-3xl shadow-md ring-1 ring-line/80 bg-mist">
               <Image
                 src={founder.image}
                 alt={`${founder.name} - ${founder.role}`}
                 fill
-                sizes="(min-width: 1024px) 360px, (min-width: 768px) 320px, 100vw"
-                className="object-cover object-top"
+                sizes="(min-width: 1024px) 384px, (min-width: 768px) 320px, 100vw"
+                className="object-cover object-[center_20%]"
                 priority
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/80 via-ink/25 to-transparent p-5 text-white md:hidden">
-                <p className="text-xs font-bold tracking-wider uppercase text-peach">
-                  {founder.role}
-                </p>
-                <h3 className="font-display text-2xl font-bold">
-                  {founder.name}
-                </h3>
-              </div>
             </div>
 
-            {/* Content Beside the Image */}
-            <div className="flex flex-col justify-between p-6 sm:p-8 md:p-10 lg:p-12">
+            {/* Content Beside the Square Photo */}
+            <div className="flex flex-col justify-between flex-1">
               <div>
-                <span className="hidden md:inline-block rounded-full bg-peach/70 px-3.5 py-1 text-xs font-bold tracking-wider uppercase text-ember">
+                <span className="inline-block rounded-full bg-peach/70 px-3.5 py-1 text-xs font-bold tracking-wider uppercase text-ember">
                   {founder.role}
                 </span>
-                <h2 className="hidden md:block mt-3 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl">
+                <h2 className="mt-2 font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-ink">
                   {founder.name}
                 </h2>
-                <p className="mt-2 font-display text-lg font-bold leading-snug text-flame-deep md:text-xl">
+                <p className="mt-1.5 font-display text-base sm:text-lg lg:text-xl font-bold leading-snug text-flame-deep">
                   {founder.tagline}
                 </p>
 
-                <div className="mt-6 space-y-4 text-base leading-relaxed text-ink/85 md:text-lg">
+                <div className="mt-4 space-y-3.5 text-base leading-relaxed text-ink/85 lg:text-lg">
                   {founder.bio.map((paragraph, idx) => (
                     <p key={idx}>{paragraph}</p>
                   ))}
                 </div>
               </div>
 
-              <div className="mt-8 border-t border-line pt-5">
+              <div className="mt-6 border-t border-line pt-4">
                 <p className="font-display text-sm font-semibold italic text-teal-deep sm:text-base">
-                  &ldquo;A place where every child feels understood, valued and believed in as they grow at their own pace.&rdquo;
+                  &ldquo;A place where every child feels understood, valued and believed in as they grow at their own pace. For him, that’s where a better world begins.&rdquo;
                 </p>
               </div>
             </div>
