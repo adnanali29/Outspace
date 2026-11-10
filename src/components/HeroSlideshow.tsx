@@ -10,6 +10,7 @@ export function HeroSlideshow() {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
+    if (heroImages.length <= 1) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const timer = setInterval(
       () => setCurrent((index) => (index + 1) % heroImages.length),

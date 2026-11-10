@@ -53,14 +53,6 @@ export const heroImages = [
     src: "/hero/online-chess-coaching-warmth.jpg",
     alt: "A child and coach sharing a natural moment of encouragement during an online chess session",
   },
-  {
-    src: "/hero/chess-class-focus.webp",
-    alt: "A child smiling while learning chess online with their Outpace coach",
-  },
-  {
-    src: "/hero/chess-class-move.webp",
-    alt: "A child learning chess online with an encouraging Outpace mentor",
-  },
 ];
 
 export const hero = {
