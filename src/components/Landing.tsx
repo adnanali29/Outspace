@@ -2,16 +2,15 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import {
   approach,
+  belief,
   careAndSupport,
   closing,
   faqs,
   footer,
-  founder,
   heart,
   hero,
   insideSession,
   learn,
-  missionVision,
   navLinks,
   outcomes,
   program,
@@ -36,7 +35,7 @@ const primaryButton =
 
 function Heading({ children }: { children: ReactNode }) {
   return (
-    <h2 className="reveal max-w-3xl font-display text-3xl leading-[1.12] font-bold tracking-tight text-balance uppercase text-ink md:text-[2.65rem]">
+    <h2 className="reveal max-w-3xl font-display text-3xl leading-[1.12] font-bold tracking-tight text-balance text-ink md:text-[2.75rem]">
       {children}
     </h2>
   );
@@ -44,7 +43,7 @@ function Heading({ children }: { children: ReactNode }) {
 
 function Kicker({ children, light = false }: { children: ReactNode; light?: boolean }) {
   return (
-    <p className={`mb-3 text-xs font-bold tracking-widest uppercase ${light ? "text-peach" : "text-ember"}`}>
+    <p className={`mb-3 text-sm font-semibold uppercase tracking-wide ${light ? "text-peach" : "text-ember"}`}>
       {children}
     </p>
   );
@@ -97,11 +96,11 @@ function Hero({
         </div>
         <div className="wrap-wide relative grid items-center gap-x-14 gap-y-8 py-8 lg:min-h-[calc(100svh-11rem)] lg:grid-cols-[minmax(0,1fr)_26.5rem] lg:py-10 short:py-5 xl:gap-x-20">
           <div className="text-center lg:text-left">
-            <p className="inline-flex items-center gap-2 rounded-full bg-mist px-4 py-1.5 text-xs font-bold tracking-wider uppercase text-teal-deep">
+            <p className="inline-flex items-center gap-2 rounded-full bg-mist px-4 py-1.5 text-sm font-semibold text-teal-deep">
               <MonitorIcon className="size-4" />
               {hero.eyebrow}
             </p>
-            <h1 className="mt-4 font-display text-[2.2rem] leading-[1.1] font-bold tracking-tight text-balance uppercase sm:text-4xl xl:text-[3.25rem] short:mt-3 short:text-[2.4rem]">
+            <h1 className="mt-4 font-display text-[2.4rem] leading-[1.08] font-bold tracking-tight text-balance sm:text-5xl xl:text-[3.5rem] short:mt-3 short:text-[2.6rem]">
               {hero.title}
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-ink lg:mx-0 lg:text-xl short:mt-3 short:text-lg">
@@ -141,7 +140,7 @@ function Hero({
   );
 }
 
-/* ─── 2. THE HEART OF OUTPACE (Clean, Justified, Balanced Design) ─── */
+/* ─── 2. THE HEART OF OUTPACE (Big Prominent Video Player + Narrative) ─── */
 function Heart() {
   return (
     <section
@@ -150,83 +149,66 @@ function Heart() {
     >
       <Ring className="-right-32 -bottom-32 size-[28rem] border-[3rem] border-white/5" />
       <div className="wrap relative">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-          {/* Left Column: Clean, Structured Text */}
-          <div className="flex flex-col justify-center space-y-6">
-            <div>
-              <Kicker light>{heart.kicker}</Kicker>
-              <h2 className="reveal font-display text-3xl leading-[1.12] font-bold tracking-tight text-balance uppercase md:text-4xl lg:text-[2.65rem]">
-                {heart.title}
-              </h2>
-            </div>
-
-            {/* 3 key needs */}
-            <div className="reveal space-y-2.5 rounded-2xl bg-white/10 p-4 backdrop-blur-sm ring-1 ring-white/15">
-              {heart.lines.map((line, i) => (
-                <div
-                  key={line}
-                  className="flex items-center gap-3 text-sm leading-snug text-white/95 md:text-base"
-                >
-                  <span
-                    aria-hidden
-                    className="grid size-6 shrink-0 place-items-center rounded-full bg-peach font-display text-xs font-bold text-ember"
-                  >
-                    {i + 1}
-                  </span>
-                  <span>{line}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Narrative description */}
-            <p className="reveal text-base leading-relaxed text-white/90 md:text-lg">
-              {heart.body}
-            </p>
-
-            {/* Standout promise card */}
-            <div className="reveal rounded-2xl bg-flame px-5 py-4 font-display text-lg leading-snug font-bold text-ink shadow-lg shadow-black/15 md:text-xl">
-              {heart.promise}
-            </div>
-
-            {/* Caring mentor note */}
-            <div className="reveal flex items-center gap-3.5 rounded-2xl bg-white/10 p-3.5 backdrop-blur-sm ring-1 ring-white/10">
-              <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-peach text-2xl text-ember">
-                <Piece type="q" className="text-ember" />
+        <div className="mx-auto max-w-3xl text-center">
+          <Kicker light>{heart.kicker}</Kicker>
+          <h2 className="reveal font-display text-3xl leading-[1.15] font-bold tracking-tight text-balance md:text-4xl lg:text-[2.75rem]">
+            {heart.title}
+          </h2>
+          <div className="reveal mt-5 flex flex-wrap justify-center gap-2 text-sm sm:gap-3">
+            {heart.lines.map((line) => (
+              <span
+                key={line}
+                className="rounded-full bg-white/10 px-4 py-1.5 font-medium text-white/95 ring-1 ring-white/15"
+              >
+                {line}
               </span>
-              <div>
-                <p className="font-display text-sm font-bold text-peach">
-                  Your Child Growth Mentor
-                </p>
-                <p className="text-xs leading-snug text-white/85">
-                  A caring presence who listens, understands and helps your child grow with confidence.
-                </p>
-              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* BIG Video Player Card */}
+        <div className="reveal mx-auto mt-10 max-w-4xl">
+          <div className="overflow-hidden rounded-3xl bg-black/40 p-3 shadow-2xl ring-1 ring-white/20 backdrop-blur-md sm:p-4">
+            <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-black/60 shadow-inner">
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                poster="/hero/online-chess-coaching-warmth.jpg"
+                className="size-full object-cover"
+              >
+                <source src="/video/intro.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div className="mt-3 flex items-center justify-between px-2 text-xs text-white/80">
+              <span className="flex items-center gap-2">
+                <span className="size-2 rounded-full bg-flame" />
+                <span className="font-semibold text-peach">Live Session Preview</span>
+              </span>
+              <span>Online Chess Coaching &amp; Mentoring</span>
             </div>
           </div>
+        </div>
 
-          {/* Right Column: Clean, Crisp Video Player Card */}
-          <div className="reveal flex flex-col justify-center">
-            <div className="overflow-hidden rounded-3xl bg-black/30 p-3.5 shadow-2xl ring-1 ring-white/20 backdrop-blur-md sm:p-4">
-              <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-black/60 shadow-inner">
-                {/* Video element: place video at public/video/intro.mp4 */}
-                <video
-                  controls
-                  playsInline
-                  preload="metadata"
-                  poster="/hero/online-chess-coaching-warmth.jpg"
-                  className="size-full object-cover"
-                >
-                  <source src="/video/intro.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-              <div className="mt-3.5 flex items-center justify-between px-2 text-xs text-white/80">
-                <span className="flex items-center gap-2">
-                  <span className="size-2 rounded-full bg-flame" />
-                  <span className="font-semibold text-peach">Live Online Session</span>
-                </span>
-                <span>Coach &amp; Mentor in action</span>
-              </div>
+        {/* Narrative & Reassurance Cards Below Video */}
+        <div className="reveal mx-auto mt-8 grid max-w-4xl gap-4 md:grid-cols-2">
+          <div className="flex flex-col justify-center rounded-3xl bg-white/10 p-6 backdrop-blur-sm ring-1 ring-white/15">
+            <p className="text-base leading-relaxed text-white/90 md:text-lg">
+              {heart.body}
+            </p>
+          </div>
+          <div className="flex flex-col justify-between gap-4 rounded-3xl bg-flame p-6 text-ink shadow-lg shadow-black/15">
+            <p className="font-display text-xl leading-snug font-bold md:text-2xl">
+              {heart.promise}
+            </p>
+            <div className="flex items-center gap-3 border-t border-ink/15 pt-3">
+              <span className="grid size-9 shrink-0 place-items-center rounded-full bg-white text-xl">
+                <Piece type="q" className="text-ember" />
+              </span>
+              <p className="text-xs font-semibold leading-snug text-ink/80">
+                Supported by a dedicated Child Growth Mentor in every batch
+              </p>
             </div>
           </div>
         </div>
@@ -371,7 +353,7 @@ function Program() {
         </div>
 
         <div className="reveal mt-4 rounded-3xl bg-white p-5 ring-1 ring-line md:p-7">
-          <h3 className="font-display text-xl font-bold uppercase md:text-2xl">{program.numbersTitle}</h3>
+          <h3 className="font-display text-xl font-bold md:text-2xl">{program.numbersTitle}</h3>
           <dl className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
             {program.numbers.map((item) => (
               <div
@@ -386,7 +368,7 @@ function Program() {
             ))}
           </dl>
 
-          <h3 className="mt-6 font-display text-lg font-bold uppercase">{program.listTitle}</h3>
+          <h3 className="mt-6 font-display text-lg font-bold">{program.listTitle}</h3>
           <ul className="mt-3 grid gap-x-6 gap-y-2 sm:grid-cols-2">
             {program.list.map((item) => (
               <li key={item} className="flex items-start gap-2 text-sm leading-snug font-medium">
@@ -447,7 +429,7 @@ function Outcomes() {
               <span className="grid size-14 place-items-center rounded-2xl bg-peach text-3xl text-flame-deep">
                 <Piece type={item.piece} className="text-3xl" />
               </span>
-              <h3 className="mt-5 font-display text-xl leading-snug font-bold uppercase text-ink">
+              <h3 className="mt-5 font-display text-xl leading-snug font-bold text-ink">
                 {item.title}
               </h3>
               <p className="mt-2 text-base leading-relaxed text-muted">
@@ -470,7 +452,7 @@ function WhyOutpace() {
         <Heading>{approach.title}</Heading>
 
         <div className="mt-8 overflow-hidden rounded-3xl ring-1 ring-line">
-          <div className="hidden grid-cols-2 bg-teal-deep px-6 py-3.5 text-sm font-semibold uppercase text-white md:grid">
+          <div className="hidden grid-cols-2 bg-teal-deep px-6 py-3.5 text-sm font-semibold text-white md:grid">
             <span>What your child needs</span>
             <span>How Outpace supports them</span>
           </div>
@@ -494,33 +476,32 @@ function WhyOutpace() {
 
 /* ─── 13. OUR MISSION & VISION (1 Section, 2 Side-by-Side Cards) ─── */
 function MissionVision() {
-  const { mission, vision } = missionVision;
+  const { vision } = belief;
   return (
     <section id="mission" className="bg-cream py-16 md:py-24">
       <div className="wrap">
         <div className="text-center">
-          <Kicker>{missionVision.kicker}</Kicker>
-          <Heading>{missionVision.title}</Heading>
+          <Kicker>{belief.kicker}</Kicker>
+          <Heading>Our Mission &amp; Vision</Heading>
         </div>
 
-        {/* 2 equal-height cards: Mission & Vision */}
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:gap-8">
           {/* Card 1: Our Mission */}
           <article className="reveal flex flex-col justify-between rounded-3xl bg-teal-deep p-8 text-white shadow-xl ring-1 ring-white/10 md:p-10">
             <div>
-              <span className="inline-block rounded-full bg-white/15 px-3 py-1 text-xs font-bold tracking-wider uppercase text-peach">
-                {mission.title}
+              <span className="inline-block rounded-full bg-white/15 px-3.5 py-1 text-xs font-bold tracking-wider uppercase text-peach">
+                Our Mission
               </span>
               <h3 className="mt-4 font-display text-2xl leading-snug font-bold text-balance text-white md:text-3xl">
-                &ldquo;{mission.subtitle}&rdquo;
+                &ldquo;{belief.quote} <span className="text-peach">{belief.quoteAccent}</span>&rdquo;
               </h3>
               <p className="mt-4 text-base leading-relaxed text-white/90 md:text-lg">
-                {mission.body}
+                {belief.missionBody}
               </p>
             </div>
             <div className="mt-6 border-t border-white/15 pt-5">
               <p className="font-display text-base font-bold text-peach">
-                {mission.close}
+                {belief.missionClose}
               </p>
             </div>
           </article>
@@ -528,14 +509,14 @@ function MissionVision() {
           {/* Card 2: Our Vision */}
           <article className="reveal flex flex-col justify-between rounded-3xl bg-peach p-8 text-ink shadow-xl ring-1 ring-line md:p-10">
             <div>
-              <span className="inline-block rounded-full bg-white px-3 py-1 text-xs font-bold tracking-wider uppercase text-ember">
-                {vision.title}
+              <span className="inline-block rounded-full bg-white px-3.5 py-1 text-xs font-bold tracking-wider uppercase text-ember">
+                Our Vision
               </span>
               <h3 className="mt-4 font-display text-2xl leading-snug font-bold text-balance text-ink md:text-3xl">
-                &ldquo;{vision.subtitle}&rdquo;
+                &ldquo;{vision.lead}&rdquo;
               </h3>
               <p className="mt-4 text-base leading-relaxed text-ink/90 md:text-lg">
-                {vision.body}
+                {vision.text}
               </p>
             </div>
             <div className="mt-6 border-t border-line pt-5">
@@ -552,12 +533,13 @@ function MissionVision() {
 
 /* ─── 14. OUR FOUNDER ─── */
 function Founder() {
+  const { founder } = belief;
   return (
     <section id="founder" className="py-16 md:py-24">
       <div className="wrap max-w-4xl">
         <Kicker>{founder.role}</Kicker>
         <Heading>{founder.name}</Heading>
-        <p className="reveal mt-2 font-display text-xl leading-snug font-bold uppercase text-flame-deep md:text-2xl">
+        <p className="reveal mt-2 font-display text-xl leading-snug font-bold text-flame-deep md:text-2xl">
           {founder.tagline}
         </p>
 
@@ -584,7 +566,7 @@ function CareAndSupport() {
     <section id="care" className="bg-teal-deep py-14 text-white md:py-20">
       <div className="wrap">
         <Kicker light>{careAndSupport.title}</Kicker>
-        <h2 className="reveal font-display text-3xl leading-[1.15] font-bold tracking-tight text-balance uppercase md:text-4xl">
+        <h2 className="reveal font-display text-3xl leading-[1.15] font-bold tracking-tight text-balance md:text-4xl">
           {careAndSupport.subtitle}
         </h2>
         <ul className="mt-8 grid gap-5 md:grid-cols-3">
@@ -685,7 +667,7 @@ function Stories() {
           ))}
         </div>
 
-        <h3 className="reveal mt-8 font-display text-xl font-bold uppercase md:text-2xl">
+        <h3 className="reveal mt-8 font-display text-xl font-bold md:text-2xl">
           {stories.winsTitle}
         </h3>
         <ul className="mt-3 grid gap-3 md:grid-cols-3 md:gap-4">
@@ -713,7 +695,7 @@ function Services() {
         <div className="reveal flex flex-col items-start justify-between gap-6 rounded-3xl bg-mist p-6 ring-1 ring-line sm:p-8 md:flex-row md:items-center md:gap-10">
           <div className="max-w-xl">
             <Kicker>{services.kicker}</Kicker>
-            <h3 className="font-display text-2xl font-bold tracking-tight uppercase text-ink md:text-3xl">
+            <h3 className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl">
               {services.title}
             </h3>
             <p className="mt-1 text-sm text-muted md:text-base">
@@ -750,7 +732,7 @@ function Services() {
   );
 }
 
-/* ─── MEET OUR TEAM (Placed right above FAQs) ─── */
+/* ─── MEET OUR TEAM (7 Team Members Directly Above FAQs) ─── */
 function Team() {
   return (
     <section id="team" className="bg-cream py-16 md:py-24">
@@ -763,7 +745,7 @@ function Team() {
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 lg:gap-6">
+        <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 lg:gap-4">
           {team.members.map((member) => (
             <div
               key={member.name}
@@ -774,12 +756,12 @@ function Team() {
                   src={member.image}
                   alt={`${member.name} - ${member.role}`}
                   fill
-                  sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+                  sizes="(min-width: 1280px) 14vw, (min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                   className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
-              <div className="p-4 text-center">
-                <h3 className="font-display text-base font-bold text-ink sm:text-lg">
+              <div className="p-3 text-center">
+                <h3 className="font-display text-sm font-bold text-ink sm:text-base">
                   {member.name}
                 </h3>
                 <p className="mt-0.5 text-xs font-semibold text-teal-deep">
@@ -816,7 +798,7 @@ function Closing() {
       <Ring className="-right-40 -bottom-56 size-[30rem] border-[3.5rem] border-flame/25" />
       <div className="wrap relative">
         <Kicker light>{closing.kicker}</Kicker>
-        <h2 className="mx-auto max-w-2xl font-display text-3xl leading-[1.1] font-bold tracking-tight text-balance uppercase md:text-[3rem]">
+        <h2 className="mx-auto max-w-2xl font-display text-3xl leading-[1.1] font-bold tracking-tight text-balance md:text-[3rem]">
           {closing.title}
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-lg">{closing.body}</p>
@@ -839,7 +821,7 @@ function Closing() {
 
 /* ─── FOOTER ─── */
 function FooterTitle({ children }: { children: ReactNode }) {
-  return <p className="mb-3 font-display text-base font-bold uppercase text-ink">{children}</p>;
+  return <p className="mb-3 font-display text-base font-bold text-ink">{children}</p>;
 }
 
 function Footer() {
@@ -946,10 +928,10 @@ export function Landing({
         {/* 1. Hero */}
         <Hero savedLead={savedLead} onSubmit={onSubmit} />
 
-        {/* 2. The Heart of Outpace */}
+        {/* 2. The Heart of Outpace (Big prominent video + justified narrative) */}
         <Heart />
 
-        {/* 7. What your child develops */}
+        {/* 7. What your child develops (Restored exact design) */}
         <Learn />
 
         {/* Play chess */}
@@ -970,7 +952,7 @@ export function Landing({
         {/* 12. Why Outpace */}
         <WhyOutpace />
 
-        {/* 13. Our Mission & Vision (1 section, 2 cards: Mission & Vision) */}
+        {/* 13. Our Mission & Vision (2-card design: 1 Mission, 1 Vision) */}
         <MissionVision />
 
         {/* 14. Our Founder */}
@@ -988,7 +970,7 @@ export function Landing({
         {/* Beyond chess (Small glimpse card) */}
         <Services />
 
-        {/* Meet our team (Positioned directly above FAQs) */}
+        {/* Meet our team (7 team members directly above FAQs) */}
         <Team />
 
         {/* 17. Questions parents ask (FAQs) */}
