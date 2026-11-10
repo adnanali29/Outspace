@@ -140,83 +140,159 @@ function Hero({
   );
 }
 
-/* ─── 2. THE HEART OF OUTPACE (Video Card + Justifying Text Card) ─── */
+/* ─── 2. THE HEART OF OUTPACE (Text Left, Video Right - Enhanced Design) ─── */
 function Heart() {
   return (
     <section
       id="heart"
-      className="relative overflow-hidden bg-teal-deep py-12 text-white md:py-16"
+      className="relative overflow-hidden bg-gradient-to-br from-teal-deep via-[#06656d] to-[#044c52] py-16 text-white md:py-24"
     >
-      <Ring className="-right-48 -bottom-48 size-[28rem] border-[3.5rem] border-white/5" />
+      {/* Ambient background decoration */}
+      <Ring className="-right-32 -top-32 size-[32rem] border-[3rem] border-white/5 blur-sm" />
+      <Ring className="-left-40 -bottom-40 size-[36rem] border-[4rem] border-flame/15 blur-sm" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(7,156,168,0.25),rgba(255,255,255,0))]"
+      />
+
       <div className="wrap relative">
-        <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
-          {/* Video player card */}
-          <div className="reveal overflow-hidden rounded-3xl bg-black/25 p-4 shadow-2xl ring-1 ring-white/15 backdrop-blur-sm sm:p-5">
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-black/50">
-              {/* HTML5 video element: Place video at public/video/intro.mp4 or embed */}
-              <video
-                controls
-                playsInline
-                preload="metadata"
-                poster="/hero/chess-class-focus.webp"
-                className="size-full object-cover"
-              >
-                <source src="/video/intro.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-4">
-                <p className="text-xs font-semibold tracking-wide text-peach uppercase">
-                  Classroom Experience
-                </p>
-                <p className="mt-0.5 text-xs text-white/90 sm:text-sm">
-                  {heart.videoCaption}
-                </p>
-              </div>
+        <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
+          {/* LEFT: Justifying Text & Caring Promise */}
+          <div className="space-y-6">
+            <div>
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3.5 py-1 text-xs font-semibold tracking-wider text-peach uppercase backdrop-blur-md">
+                <span className="size-1.5 rounded-full bg-flame animate-pulse" />
+                {heart.kicker}
+              </span>
+              <h2 className="reveal mt-3 font-display text-3xl leading-[1.12] font-bold tracking-tight text-balance md:text-[2.65rem]">
+                {heart.title}
+              </h2>
             </div>
-            <div className="mt-3 flex items-center justify-between text-xs text-white/70 px-1">
-              <span>Online Chess &amp; Mentoring in action</span>
-              <span className="font-semibold text-peach">Interactive &amp; Live</span>
-            </div>
-          </div>
 
-          {/* Justifying text card */}
-          <div className="space-y-4">
-            <Kicker light>{heart.kicker}</Kicker>
-            <h2 className="reveal font-display text-3xl leading-[1.15] font-bold tracking-tight text-balance md:text-4xl">
-              {heart.title}
-            </h2>
-
-            <ol className="rounded-2xl bg-white/10 px-5 py-2 backdrop-blur-sm">
+            {/* The 3 needs with warm numbered accent badges */}
+            <ol className="reveal space-y-2.5 rounded-3xl bg-white/[0.08] p-3 backdrop-blur-md ring-1 ring-white/10 sm:p-4">
               {heart.lines.map((line, i) => (
                 <li
                   key={line}
-                  className="reveal flex items-baseline gap-3 border-t border-white/15 py-2.5 leading-snug font-medium first:border-t-0 text-sm md:text-base"
+                  className="flex items-center gap-3.5 rounded-2xl bg-white/[0.06] px-4 py-3 text-sm font-medium leading-snug text-white/95 transition-colors hover:bg-white/10 md:text-base"
                 >
-                  <span aria-hidden className="w-4 shrink-0 font-display font-bold text-peach">
+                  <span
+                    aria-hidden
+                    className="grid size-7 shrink-0 place-items-center rounded-full bg-peach font-display text-xs font-bold text-ember"
+                  >
                     {i + 1}
                   </span>
-                  {line}
+                  <span>{line}</span>
                 </li>
               ))}
             </ol>
 
-            <p className="reveal text-sm leading-relaxed text-white/90 md:text-base">
+            <p className="reveal text-base leading-relaxed text-white/90 md:text-lg">
               {heart.body}
             </p>
 
-            <div className="reveal rounded-2xl bg-flame px-5 py-3 font-display text-lg leading-snug font-bold text-ink md:text-xl">
-              {heart.promise}
+            {/* Standout Promise Quote Card */}
+            <div className="reveal relative overflow-hidden rounded-3xl bg-gradient-to-r from-flame to-flame-deep p-5 text-ink shadow-xl shadow-flame/20 md:p-6">
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -right-2 -bottom-6 font-display text-8xl font-black text-black/10 select-none"
+              >
+                “
+              </span>
+              <p className="text-xs font-bold tracking-wider text-ink/75 uppercase">
+                Our Promise to Your Child
+              </p>
+              <p className="mt-1 font-display text-xl leading-snug font-bold md:text-2xl">
+                {heart.promise}
+              </p>
             </div>
 
-            <div className="reveal flex items-center gap-3.5 rounded-2xl bg-white/10 p-3.5 backdrop-blur-sm">
-              <span className="grid size-12 shrink-0 place-items-center rounded-full bg-peach text-2xl text-ember">
-                <Piece type="q" className="text-ember" />
-              </span>
+            {/* Child Growth Mentor badge */}
+            <div className="reveal flex items-center gap-4 rounded-3xl bg-white/10 p-4 backdrop-blur-md ring-1 ring-white/15 sm:p-5">
+              <div className="relative">
+                <span className="grid size-13 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-peach to-[#ffd8c2] text-3xl shadow-md">
+                  <Piece type="q" className="text-ember" />
+                </span>
+                <span className="absolute -bottom-1 -right-1 grid size-4 place-items-center rounded-full bg-teal ring-2 ring-teal-deep">
+                  <span className="size-1.5 rounded-full bg-white" />
+                </span>
+              </div>
               <div>
-                <p className="font-display text-sm font-bold text-peach">Your Child Growth Mentor</p>
-                <p className="text-xs leading-snug text-white/90">
-                  A caring presence who listens, understands and helps your child grow with confidence.
+                <p className="font-display text-base font-bold text-peach">
+                  Your Child Growth Mentor
                 </p>
+                <p className="mt-0.5 text-xs leading-relaxed text-white/85 sm:text-sm">
+                  A dedicated mentor who listens without judgement, understands your child&rsquo;s learning style, and builds lasting confidence.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT: High-Impact Video Player Card */}
+          <div className="reveal relative">
+            {/* Soft decorative glow behind the player */}
+            <div
+              aria-hidden
+              className="absolute -inset-1 rounded-[2.5rem] bg-gradient-to-br from-flame/40 via-teal/30 to-peach/20 opacity-70 blur-xl"
+            />
+
+            <div className="relative overflow-hidden rounded-[2rem] bg-white/[0.08] p-3.5 shadow-2xl shadow-black/50 ring-1 ring-white/20 backdrop-blur-xl sm:p-4">
+              {/* Card top bar */}
+              <div className="mb-3 flex items-center justify-between px-2 text-xs">
+                <div className="flex items-center gap-2">
+                  <span className="size-2 rounded-full bg-flame animate-ping" />
+                  <span className="size-2 rounded-full bg-flame -ml-4" />
+                  <span className="font-semibold tracking-wide text-peach uppercase">
+                    Session Preview
+                  </span>
+                </div>
+                <span className="rounded-full bg-white/15 px-2.5 py-0.5 text-[11px] font-medium text-white/80">
+                  Online Coaching
+                </span>
+              </div>
+
+              {/* Video wrapper */}
+              <div className="group relative aspect-video w-full overflow-hidden rounded-2xl bg-black/60 ring-1 ring-white/10 shadow-inner">
+                {/* HTML5 video element: replace /video/intro.mp4 with your video file */}
+                <video
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster="/hero/chess-class-focus.webp"
+                  className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                >
+                  <source src="/video/intro.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+
+                {/* Subtle bottom gradient banner */}
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-4 pt-10">
+                  <div className="flex items-center gap-2 text-peach">
+                    <Piece type="n" className="text-xl" />
+                    <p className="text-xs font-bold tracking-wide uppercase">
+                      Warmth, Connection &amp; Encouragement
+                    </p>
+                  </div>
+                  <p className="mt-0.5 text-xs leading-snug text-white/90 sm:text-sm">
+                    {heart.videoCaption}
+                  </p>
+                </div>
+              </div>
+
+              {/* Trust markers beneath video */}
+              <div className="mt-4 grid grid-cols-3 gap-2 border-t border-white/10 pt-3 text-center">
+                <div className="rounded-xl bg-white/[0.05] p-2">
+                  <p className="font-display text-sm font-bold text-peach">4–6</p>
+                  <p className="text-[11px] text-white/70">Small batches</p>
+                </div>
+                <div className="rounded-xl bg-white/[0.05] p-2">
+                  <p className="font-display text-sm font-bold text-peach">100%</p>
+                  <p className="text-[11px] text-white/70">Live &amp; Online</p>
+                </div>
+                <div className="rounded-xl bg-white/[0.05] p-2">
+                  <p className="font-display text-sm font-bold text-peach">2-in-1</p>
+                  <p className="text-[11px] text-white/70">Coach + Mentor</p>
+                </div>
               </div>
             </div>
           </div>
