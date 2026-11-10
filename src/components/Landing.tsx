@@ -33,9 +33,13 @@ import { Piece } from "./Piece";
 const primaryButton =
   "inline-block rounded-full bg-flame px-7 py-3.5 font-semibold text-ink transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-flame/30";
 
-function Heading({ children }: { children: ReactNode }) {
+function Heading({ children, centered = false }: { children: ReactNode; centered?: boolean }) {
   return (
-    <h2 className="reveal max-w-3xl font-display text-3xl leading-[1.12] font-bold tracking-tight text-balance text-ink md:text-[2.75rem]">
+    <h2
+      className={`reveal max-w-3xl font-display text-3xl leading-[1.12] font-bold tracking-tight text-balance text-ink md:text-[2.75rem] ${
+        centered ? "mx-auto text-center" : ""
+      }`}
+    >
       {children}
     </h2>
   );
@@ -472,9 +476,9 @@ function MissionVision() {
   return (
     <section id="mission" className="bg-cream py-8 sm:py-10 md:py-12">
       <div className="wrap">
-        <div className="text-center">
+        <div className="mx-auto max-w-3xl text-center">
           <Kicker>{belief.kicker}</Kicker>
-          <Heading>Our Mission &amp; Vision</Heading>
+          <Heading centered>Our Mission &amp; Vision</Heading>
         </div>
 
         <div className="mt-6 sm:mt-8 grid gap-6 md:grid-cols-2 items-stretch lg:gap-8">
@@ -753,9 +757,9 @@ function Team() {
   return (
     <section id="team" className="bg-cream py-16 md:py-24">
       <div className="wrap">
-        <div className="text-center">
+        <div className="mx-auto max-w-3xl text-center">
           <Kicker>{team.kicker}</Kicker>
-          <Heading>{team.title}</Heading>
+          <Heading centered>{team.title}</Heading>
           <p className="reveal mx-auto mt-3 max-w-2xl text-muted md:text-lg">
             {team.subtitle}
           </p>
