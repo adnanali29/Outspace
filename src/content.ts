@@ -329,6 +329,7 @@ export const belief = {
   founder: {
     name: "Omnath C P",
     role: "Our Founder",
+    image: "/founder/omnath-cp.jpg",
     tagline: "Inspired by his mother. Driven by a belief in every child.",
     bio: [
       "Omnath grew up watching his mother take the time to understand each child she taught and help them bloom in their own way. Her example inspired him to leave banking and devote himself to working with children.",

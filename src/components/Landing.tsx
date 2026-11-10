@@ -535,23 +535,55 @@ function MissionVision() {
 function Founder() {
   const { founder } = belief;
   return (
-    <section id="founder" className="py-16 md:py-24">
-      <div className="wrap max-w-4xl">
-        <Kicker>{founder.role}</Kicker>
-        <Heading>{founder.name}</Heading>
-        <p className="reveal mt-2 font-display text-xl leading-snug font-bold text-flame-deep md:text-2xl">
-          {founder.tagline}
-        </p>
-
-        <div className="reveal mt-8 rounded-3xl bg-teal-deep p-8 text-white shadow-xl shadow-teal-deep/20 md:p-12">
-          <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-10">
-            <div className="grid size-20 shrink-0 place-items-center rounded-full bg-peach font-display text-3xl font-bold text-ember">
-              O
+    <section id="founder" className="py-16 md:py-24 bg-cream/40">
+      <div className="wrap max-w-5xl">
+        <div className="reveal overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-line">
+          <div className="grid md:grid-cols-[20rem_minmax(0,1fr)] lg:grid-cols-[22.5rem_minmax(0,1fr)]">
+            {/* Image Card Container */}
+            <div className="relative min-h-[380px] sm:min-h-[440px] md:min-h-full w-full bg-mist">
+              <Image
+                src={founder.image}
+                alt={`${founder.name} - ${founder.role}`}
+                fill
+                sizes="(min-width: 1024px) 360px, (min-width: 768px) 320px, 100vw"
+                className="object-cover object-top"
+                priority
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/80 via-ink/25 to-transparent p-5 text-white md:hidden">
+                <p className="text-xs font-bold tracking-wider uppercase text-peach">
+                  {founder.role}
+                </p>
+                <h3 className="font-display text-2xl font-bold">
+                  {founder.name}
+                </h3>
+              </div>
             </div>
-            <div className="space-y-4 text-base leading-relaxed opacity-95 md:text-lg">
-              {founder.bio.map((paragraph) => (
-                <p key={paragraph.slice(0, 30)}>{paragraph}</p>
-              ))}
+
+            {/* Content Beside the Image */}
+            <div className="flex flex-col justify-between p-6 sm:p-8 md:p-10 lg:p-12">
+              <div>
+                <span className="hidden md:inline-block rounded-full bg-peach/70 px-3.5 py-1 text-xs font-bold tracking-wider uppercase text-ember">
+                  {founder.role}
+                </span>
+                <h2 className="hidden md:block mt-3 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl">
+                  {founder.name}
+                </h2>
+                <p className="mt-2 font-display text-lg font-bold leading-snug text-flame-deep md:text-xl">
+                  {founder.tagline}
+                </p>
+
+                <div className="mt-6 space-y-4 text-base leading-relaxed text-ink/85 md:text-lg">
+                  {founder.bio.map((paragraph, idx) => (
+                    <p key={idx}>{paragraph}</p>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-8 border-t border-line pt-5">
+                <p className="font-display text-sm font-semibold italic text-teal-deep sm:text-base">
+                  &ldquo;A place where every child feels understood, valued and believed in as they grow at their own pace.&rdquo;
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -732,7 +764,7 @@ function Services() {
   );
 }
 
-/* ─── MEET OUR TEAM (7 Team Members Directly Above FAQs) ─── */
+/* ─── MEET OUR TEAM (Square Cards, 1/2 Alignment on Phone) ─── */
 function Team() {
   return (
     <section id="team" className="bg-cream py-16 md:py-24">
@@ -745,26 +777,25 @@ function Team() {
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 lg:gap-4">
+        {/* Square Cards: 1/2 width on phone (2-col), 3-col on tablet, 4-col centered on desktop */}
+        <div className="mx-auto mt-12 flex max-w-5xl flex-wrap justify-center gap-3.5 sm:gap-5 md:gap-6">
           {team.members.map((member) => (
             <div
               key={member.name}
-              className="group reveal flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-line transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              className="group reveal relative aspect-square w-[calc(50%-0.45rem)] overflow-hidden rounded-2xl bg-mist shadow-sm ring-1 ring-line/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[calc(33.333%-0.85rem)] sm:rounded-3xl md:w-[calc(25%-1.15rem)]"
             >
-              <div className="relative aspect-[3/4] w-full overflow-hidden bg-mist">
-                <Image
-                  src={member.image}
-                  alt={`${member.name} - ${member.role}`}
-                  fill
-                  sizes="(min-width: 1280px) 14vw, (min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-                  className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-3 text-center">
-                <h3 className="font-display text-sm font-bold text-ink sm:text-base">
+              <Image
+                src={member.image}
+                alt={`${member.name} - ${member.role}`}
+                fill
+                sizes="(min-width: 1024px) 240px, (min-width: 640px) 30vw, 45vw"
+                className="object-cover object-[center_18%] transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/95 via-ink/60 to-transparent p-3 pt-10 text-center sm:p-4 sm:pt-12">
+                <h3 className="font-display text-sm font-bold text-white sm:text-base leading-snug">
                   {member.name}
                 </h3>
-                <p className="mt-0.5 text-xs font-semibold text-teal-deep">
+                <p className="mt-0.5 text-xs font-semibold text-peach">
                   {member.role}
                 </p>
               </div>
