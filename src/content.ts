@@ -41,11 +41,12 @@ export const chessLevels = [
 
 export const navLinks = [
   { label: "Play chess", href: "#play" },
-  { label: "Getting started", href: "#start" },
-  { label: "The program", href: "#program" },
-  { label: "Stories", href: "#stories" },
+  { label: "How it works", href: "#start" },
+  { label: "The programme", href: "#program" },
+  { label: "The outcomes", href: "#outcomes" },
+  { label: "Why Outpace", href: "#why-outpace" },
   { label: "Our mission", href: "#mission" },
-  { label: "More programs", href: "#services" },
+  { label: "Care & support", href: "#care" },
   { label: "FAQs", href: "#faqs" },
 ];
 
@@ -54,64 +55,86 @@ export const heroSlideSeconds = 5;
 export const heroImages = [
   {
     src: "/hero/chess-class-focus.webp",
-    alt: "A boy in a red T-shirt, chin on his hand, thinking over his next chess move",
+    alt: "A child and coach sharing a natural moment of encouragement during an online chess session",
   },
   {
     src: "/hero/chess-class-move.webp",
-    alt: "A boy in a striped T-shirt moving a white chess piece while his opponent watches",
+    alt: "A child smiling while learning chess online with their Outpace coach",
   },
   {
     src: "/hero/chess-class-overhead.webp",
-    alt: "Two boys at a table seen from above, playing chess on a black and white board",
+    alt: "A happy child engaged in an online chess learning session",
   },
 ];
 
 export const hero = {
-  eyebrow: "Live online chess classes for ages 5–13",
-  title: "Every child can learn.",
-  titleAccent: "We find the way.",
-  lede: "Chess, taught by patient coaches, with a mentor who truly gets to know your child.",
+  eyebrow: "Outpace Chess Growth Mentorship Program",
+  title: "Help your child build focus, confidence and independent thinking through chess.",
+  titleAccent: "",
+  lede: "Structured online chess coaching and personalised growth mentoring for children aged 5–13.",
+  subLede: "An enjoyable chess journey where your child is understood, encouraged and supported.",
   playLink: "Or play a game of chess with your child",
 };
 
 export const trust = [
   { value: "9000+", label: "children enrolled across Outpace" },
-  { value: "100K+", label: "classes conducted" },
+  { value: "100K+", label: "online classes conducted" },
   { value: "4–6", label: "children in every group" },
   { value: "8 + 2", label: "chess and mentor sessions a month" },
 ];
 
 export const heart = {
   kicker: "The heart of Outpace",
-  title: "Every child is unique. Every child deserves to thrive.",
-  intro: "Not every child learns at the same pace. And they don’t have to.",
+  title: "Every child deserves to be understood.",
+  videoCaption: "A short glimpse of how our coach and Child Growth Mentor connect with each child online.",
   lines: [
-    "Some children think ten moves ahead.",
-    "Some are still learning to make their first move.",
-    "Some need a little more time.",
-    "Some need encouragement.",
-    "Some just need someone who will patiently listen, understand, and believe in them.",
+    "Some children need a challenge.",
+    "Some need more time.",
+    "Others need someone who listens and believes in them.",
   ],
-  promise: "At Outpace, we want to be that someone.",
+  body: "At Outpace, we take time to understand your child. Through enjoyable chess learning and personalised mentoring, we help them discover their strengths, learn from setbacks and grow in confidence.",
+  promise: "We want your child to feel: \u201cI can try. I can learn. I can grow.\u201d",
 };
 
 export const learn = {
-  kicker: "Beyond the board",
-  title: "We don’t teach chess just to win games.",
+  kicker: "What your child develops",
+  title: "Stronger chess skills. Growing confidence. More thoughtful choices.",
   intro:
-    "We use chess to help children discover their strengths, overcome their fears, and realize what they are capable of.",
+    "Through chess coaching and personalised mentoring, we help your child develop these habits:",
   items: [
-    { title: "Focus", text: "Staying with one problem a little longer." },
-    { title: "Patience", text: "Pausing before the next move." },
-    { title: "Confidence", text: "Trying hard things and learning from mistakes." },
-    { title: "Decision-making", text: "Weighing the options before choosing." },
-    { title: "Communication", text: "Explaining ideas and asking for help." },
-    { title: "Handling pressure", text: "Working through nerves and setbacks." },
+    { title: "Focus", text: "Stay with a challenge and return to it when distracted." },
+    { title: "Patience", text: "Pause, take time and think before acting." },
+    { title: "Confidence & Communication", text: "Share ideas, ask questions and try unfamiliar challenges." },
+    { title: "Independent Thinking", text: "Explore options, consider consequences and make their own choices." },
+    { title: "Resilience", text: "Learn from mistakes and find the courage to try again." },
+    { title: "Learning Ownership", text: "Take greater responsibility for practice, effort and improvement." },
   ],
   outcomes: [
-    { label: "At the board", text: "Stronger understanding and practical play." },
-    { label: "Beyond the board", text: "Confidence, thoughtful choices and steady effort." },
-    { label: "For you", text: "A monthly growth snapshot and mentor conversation." },
+    { label: "At the chessboard", text: "Understand the game better, plan ahead and make more thoughtful moves." },
+    { label: "Beyond the chessboard", text: "Build confidence, take responsibility for learning and find the courage to try again after setbacks." },
+    { label: "For you as a parent", text: "Understand your child's progress, strengths and support needs through monthly updates and conversations with the Child Growth Mentor." },
+  ],
+};
+
+export const outcomes = {
+  kicker: "The outcomes",
+  title: "Growth you can recognise.",
+  items: [
+    {
+      title: "At the chessboard",
+      text: "Understand the game better, plan ahead and make more thoughtful moves.",
+      piece: "n" as const,
+    },
+    {
+      title: "Beyond the chessboard",
+      text: "Build confidence, take responsibility for learning and find the courage to try again after setbacks.",
+      piece: "k" as const,
+    },
+    {
+      title: "For you as a parent",
+      text: "Understand your child's progress, strengths and support needs through monthly updates and conversations with the Child Growth Mentor.",
+      piece: "q" as const,
+    },
   ],
 };
 
@@ -127,11 +150,11 @@ export const game = {
   ],
   start: "Your move. Pawns and knights are a good place to start.",
   yourMove: "Your move. Take your time.",
-  thinking: "The computer is thinking…",
+  thinking: "The computer is thinking\u2026",
   check: "Check! Your king is under attack. Protect it.",
   youWon: "Checkmate. You won! That pause before a move is what we teach.",
   computerWon: "Checkmate. The computer won this one. Every game teaches something, so try again.",
-  draw: "It’s a draw. Nobody lost, and that takes patience too.",
+  draw: "It\u2019s a draw. Nobody lost, and that takes patience too.",
   youTook: "You took:",
   computerTook: "Computer took:",
   noneTaken: "nothing yet",
@@ -144,84 +167,97 @@ export const game = {
 } as const;
 
 export const program = {
-  kicker: "The program",
-  title: "Two people in your child’s corner. And you, always in the loop.",
+  kicker: "The programme",
+  title: "What your child receives",
   people: [
     {
       piece: "n",
       role: "The chess coach",
-      text: "Teaches the game in a small group, at your child’s level.",
+      text: "Teaches the game in a small online group, at your child\u2019s level.",
     },
     {
       piece: "q",
-      role: "The Growth Mentor",
-      text: "Supports confidence, resilience and steady effort.",
+      role: "The Child Growth Mentor",
+      text: "Supports confidence, resilience and steady effort through group and individual mentoring.",
     },
     {
       piece: "k",
       role: "You, the parent",
-      text: "A growth update and a mentor call, every month.",
+      text: "A Monthly Growth Snapshot and a parent\u2013mentor call, every month.",
     },
   ],
-  numbersTitle: "The program in numbers",
+  numbersTitle: "The programme includes",
   numbers: [
-    { value: "8", label: "chess classes a month" },
-    { value: "2", label: "mentor sessions a month" },
-    { value: "1", label: "parent call a month" },
-    { value: "4–6", label: "children per group" },
-    { value: "4", label: "months per level" },
-    { value: "6", label: "levels to grow through" },
+    { value: "8", label: "live chess coaching sessions each month" },
+    { value: "2", label: "group sessions with a Child Growth Mentor each month" },
+    { value: "4\u20136", label: "students per batch, matched to learning level" },
+    { value: "1", label: "Class Mentor who observes participation and coordinates support" },
   ],
   listTitle: "Also included",
   list: [
-    "Daily game practice and puzzles",
-    "Tournament guidance, when ready",
-    "Exam and certificate for each course",
-    "Lifetime Outpace Chess Club membership",
+    "Daily game practice opportunities and chess puzzles",
+    "Individual growth mentoring when needed",
+    "A Monthly Growth Snapshot and parent\u2013mentor call",
+    "Tournament opportunities and guidance, based on readiness and interest",
+    "Level-end assessment and progress review, with a parent\u2013coach meeting every four months",
   ],
 } as const;
 
-export const approach = {
-  kicker: "Why Outpace",
-  title: "What your child needs, and how we answer it",
-  rows: [
-    {
-      label: "Connection",
-      need: "A coach who knows the child",
-      answer: "Small groups and personal attention",
-    },
-    {
-      label: "Level",
-      need: "The right learning challenge",
-      answer: "Placement after assessment",
-    },
-    {
-      label: "Progress",
-      need: "Clear feedback and next steps",
-      answer: "Monthly snapshot and mentor call",
-    },
-    {
-      label: "Beyond chess",
-      need: "Support for learning habits",
-      answer: "A Dedicated Growth Mentor",
-    },
+export const insideSession = {
+  kicker: "Take a look inside",
+  title: "See how your child\u2019s first session feels.",
+  items: [
+    "A friendly conversation to help your child feel comfortable.",
+    "Simple chess questions and challenges suited to their current level.",
+    "Your child will explore a new chess idea and take away something useful to practise.",
+    "A chance to experience our teaching and understand the next steps.",
+    "You\u2019re welcome to sit alongside your child and support them during the session.",
   ],
 };
 
-export const safety = {
-  title: "A safe, supervised space",
+export const approach = {
+  kicker: "Why Outpace",
+  title: "We understand the child behind the chessboard.",
+  rows: [
+    {
+      need: "To feel noticed and encouraged",
+      answer: "Small batches, individual attention and a Class Mentor who observes participation.",
+    },
+    {
+      need: "The right level of challenge",
+      answer: "Assessment-based placement and structured learning suited to their current ability.",
+    },
+    {
+      need: "Support when learning feels difficult",
+      answer: "A Child Growth Mentor who helps them work on confidence, setbacks and learning habits.",
+    },
+    {
+      need: "Guidance that grows with them",
+      answer: "Coach feedback, class observations and parent conversations help us identify the next support step.",
+    },
+    {
+      need: "For you to understand their progress",
+      answer: "A Monthly Growth Snapshot and a parent\u2013mentor conversation.",
+    },
+  ],
+  teamNote: "Your child\u2019s coach, Class Mentor and Child Growth Mentor work together to support their learning journey.",
+};
+
+export const careAndSupport = {
+  title: "Care and support",
+  subtitle: "Support for your child, in class and beyond",
   items: [
     {
-      title: "Class Mentor in every batch",
-      text: "Observes each child and stays connected with parents.",
+      title: "A Class Mentor in every class",
+      text: "The Class Mentor manages access to live classes, pays attention to how your child participates and coordinates with the coach and parents when extra support is needed.",
     },
     {
-      title: "Managed class access",
-      text: "Class access and timely support are coordinated for you.",
+      title: "A dedicated Child Growth Mentor",
+      text: "Your child joins two group mentoring sessions each month to build confidence, develop learning habits and practise handling setbacks. One-to-one support is available when needed.",
     },
     {
-      title: "One-to-one when needed",
-      text: "The Growth Mentor steps in when a child needs more.",
+      title: "A clear picture of your child\u2019s progress",
+      text: "Through a Monthly Growth Snapshot and a call with the Child Growth Mentor, you\u2019ll hear what\u2019s going well, where your child needs support and what you can encourage at home.",
     },
   ],
 };
@@ -232,10 +268,10 @@ export const stories = {
   numbers: [
     { value: "9000+", label: "children enrolled" },
     { value: "7.5K", label: "active students" },
-    { value: "100K+", label: "classes conducted" },
+    { value: "100K+", label: "online classes conducted" },
     { value: "1K+", label: "teachers" },
   ],
-  numbersNote: "Across all Outpace programs.",
+  numbersNote: "Across all Outpace programmes.",
   winsTitle: "Recent wins by our students",
   wins: [
     {
@@ -254,7 +290,7 @@ export const stories = {
       event: "BUDCA Rapid Chess Tournament",
     },
   ],
-  // Quoted word for word. Please don't edit these. The first is shown largest.
+  // Quoted word for word. Please don't edit these.
   quotes: [
     {
       quote:
@@ -284,142 +320,101 @@ export const stories = {
 };
 
 export const belief = {
-  kicker: "What we believe",
-  quote: "When a child struggles to learn, the problem is not always with the child.",
-  quoteAccent: "Sometimes, we simply haven’t found the right way to teach them.",
-  line: "Some are loud, some are quiet. Some learn fast, others take their time. And every child deserves to be understood.",
-  mission: {
-    title: "Our mission",
-    lead: "We don’t want to change who a child is. We want to help them discover who they can become.",
-    text: "Dedicated mentors work alongside experienced chess coaches, so difficulties are understood and solved at their roots.",
-    listTitle: "We nurture",
-    list: ["Confident thinkers", "Independent learners", "Resilient minds", "Kind individuals"],
-  },
+  kicker: "Our mission",
+  quote: "Every child learns differently.",
+  quoteAccent: "Our responsibility is to find the way.",
+  missionBody: "When a child struggles, we begin by understanding them\u2014their strengths, challenges and what helps them learn. Through chess coaching and personalised mentoring, we help children think independently, learn from mistakes and face challenges with confidence and kindness.",
+  missionClose: "We help children discover their potential while staying true to who they are.",
   vision: {
     title: "Our vision",
-    lead: "A world where every child is understood, believed in, and given the chance to become the best version of themselves.",
-    text: "Because a better future begins with children who are given the opportunity to thrive.",
-    listTitle: "Children who shape a world that is",
-    list: ["Smarter", "Stronger", "Better"],
+    lead: "A better tomorrow begins with children who believe in themselves.",
+    text: "We dream of a world where every child is understood, believed in and given the opportunity to thrive. By nurturing confident thinkers, independent learners and compassionate individuals, we want to help today\u2019s children build a better world.",
   },
   founder: {
-    value: "36",
-    label: "years",
-    title: "Where it began",
-    text: "Inspired by his mother, a dedicated teacher for 36 years, founder Omnath CP has infused Outpace with a culture of nurturing and growth.",
+    name: "Omnath C P",
+    role: "Our Founder",
+    tagline: "Inspired by his mother. Driven by a belief in every child.",
+    bio: [
+      "Omnath grew up watching his mother take the time to understand each child she taught and help them bloom in their own way. Her example inspired him to leave banking and devote himself to working with children.",
+      "While volunteering during the pandemic, he saw how chess could reveal how children think and respond to setbacks. Coaching taught him that chess alone wasn\u2019t enough. Children also needed someone to listen without judgement, see their strengths and encourage them to try again.",
+      "Drawing on over 20 years of working with children, Omnath founded Outpace Academy to bring chess coaching and personalised mentoring together. It\u2019s his lifelong dream taking shape: a place where every child feels understood, valued and believed in as they grow at their own pace. For him, that\u2019s where a better world begins.",
+    ],
   },
 };
 
 export const start = {
-  kicker: "Getting started",
-  title: "Four steps to your child’s first class.",
+  kicker: "How it works",
+  title: "Four steps to begin your child\u2019s journey",
   steps: [
-    { title: "Book your session", text: "Pick a slot that suits school timings." },
-    { title: "A quick call from us", text: "We confirm the time and joining details." },
-    { title: "The free session", text: "A short lesson, and a look at your child’s level." },
-    { title: "Join the right batch", text: "We match your child to a suitable group." },
+    { title: "Book your free session", text: "Share your details and preferred time." },
+    { title: "Let\u2019s understand your child", text: "Our team connects with you to understand your child better, discuss your expectations and confirm the session." },
+    { title: "Meet the chess coach", text: "In a friendly Introductory & Assessment Session, your child experiences our teaching approach while the coach understands their current chess level." },
+    { title: "Find the right fit", text: "We discuss our recommendations, explain the programme and help you choose a suitable batch for your child." },
   ],
-  levelsTitle: "Six levels. A place for every child.",
-  levelsIntro: "For ages 5–13, placed by ability and readiness, not by age alone.",
+  levelsTitle: "The Outpace Chess Journey",
+  levelsSubtitle: "Six levels. The right starting point for your child.",
+  levelsIntro: "Whether your child is new to chess or already plays, we recommend a starting level based on their current skills and readiness.",
   levels: [
     {
       piece: "p",
       name: "Chess Foundation",
-      text: "The board, the rules and simple strategies.",
+      text: "Learn the rules, move the pieces confidently and play a full game.",
       duration: "4 months",
     },
     {
       piece: "n",
       name: "Chess Explorers",
-      text: "Openings, tactics and common patterns.",
+      text: "Spot simple tactics and learn to notice threats before moving.",
       duration: "4 months",
     },
     {
       piece: "b",
       name: "Chess Quest",
-      text: "Endgames and better decisions.",
+      text: "Look further ahead and start making plans during games.",
       duration: "4 months",
     },
     {
       piece: "r",
       name: "Chess Challengers",
-      text: "Advanced tactics and a stronger style.",
+      text: "Compare possible moves and build stronger strategies.",
       duration: "4 months",
     },
     {
       piece: "q",
       name: "Chess Champions",
-      text: "Complex strategy against strong opponents.",
+      text: "Refine decisions in complex positions and learn from game analysis.",
       duration: "4 months",
     },
     {
       piece: "k",
       name: "Chess Prodigy",
-      text: "Customised coaching for competitive play.",
+      text: "Deepen advanced skills and prepare for stronger competition.",
       duration: "Continuous",
     },
   ],
-  levelsNote: "A parent-coach review follows every 4 months.",
+  levelsNote: "Each level runs for four months and ends with an assessment and a parent\u2013coach review. Progression is based on assessment and performance.",
 } as const;
 
 const mainSite = "https://outpaceacademy.com";
 
-// Details from outpaceacademy.com, shortened. Chess stays the page's focus, so
-// these links go to the main site rather than the booking form.
 export const services = {
   kicker: "Beyond chess",
-  title: "More ways Outpace helps your child grow",
-  tuition: {
-    name: "Academic Tuition",
-    lead: "Personalised instruction that improves grades and understanding.",
-    facts: [
-      { value: "14+", label: "subjects" },
-      { value: "6", label: "languages" },
-      { value: "4", label: "PhD advisors" },
-    ],
-    groups: [
-      {
-        title: "Languages",
-        items: ["English", "French", "Hindi", "Sanskrit", "Kannada", "Malayalam"],
-      },
-      {
-        title: "Science and maths",
-        items: ["Physics", "Chemistry", "Biology", "Mathematics"],
-      },
-      {
-        title: "Other subjects",
-        items: ["Accountancy", "Economics", "History", "Civics"],
-      },
-    ],
-    note: "Advisory board from IISc, IIT and NIT: Dr Sreeshma D, Dr Vidya Sumathy, Dr Sanjay C P and Dr Revathy B S.",
-    cta: "Explore Academic Tuition",
-    href: `${mainSite}/academic-tuition/`,
-  },
-  programs: {
-    name: "Other Programs",
-    lead: "Classes that help children explore their interests and develop new skills.",
-    facts: [
-      { value: "11", label: "programs" },
-      { value: "3", label: "classical dance forms" },
-    ],
-    groups: [
-      {
-        title: "Music",
-        items: ["Carnatic Music", "Carnatic Flute", "Guitar", "Violin", "Keyboard"],
-      },
-      {
-        title: "Dance and art",
-        items: ["Classical Dance", "Drawing"],
-      },
-      {
-        title: "Mind and body",
-        items: ["Vedic Maths", "Rubik’s Cube", "Yoga", "Personal Development"],
-      },
-    ],
-    note: "Classical dance includes Bharatanatyam, Mohiniyattam and Kuchipudi.",
-    cta: "Explore Other Programs",
-    href: `${mainSite}/courses-outpace-academy/`,
-  },
+  title: "A glimpse beyond chess",
+  lead: "More ways Outpace supports your child’s learning journey.",
+  items: [
+    {
+      name: "Academic Tuition",
+      desc: "Personalised tuition across 14+ subjects & 6 languages.",
+      href: "https://outpaceacademy.com/academic-tuition/",
+    },
+    {
+      name: "Other Programmes",
+      desc: "Music, classical dance, Vedic maths, Rubik’s cube & personal development.",
+      href: "https://outpaceacademy.com/courses-outpace-academy/",
+    },
+  ],
+  cta: "Explore all on outpaceacademy.com →",
+  href: mainSite,
 };
 
 export const faqs = {
@@ -428,57 +423,53 @@ export const faqs = {
   hint: "Tap a square to read the answer.",
   items: [
     {
-      q: "Is the first session really free?",
-      a: "Yes. The Introductory & Assessment Session is free, and no payment is needed.",
+      q: "Is the Introductory & Assessment Session free?",
+      a: "Yes. The session is free, and no payment is required to book.",
     },
     {
-      q: "My child has never played chess. Is that okay?",
-      a: "Yes. Beginner batches start from how the pieces move.",
+      q: "What happens in the introductory session?",
+      a: "Your child meets a chess coach, tries a short lesson and learns a new chess idea to practise. The coach gets to know your child\u2019s current chess skills and recommends a suitable starting level. You\u2019re welcome to sit alongside your child.",
     },
     {
-      q: "What happens in the first session?",
-      a: "A coach explores your child’s level through a few questions, positions and a short lesson. Then we suggest a suitable group.",
+      q: "How do you help my child stay engaged online?",
+      a: "Coaches use small groups, puzzles and guided play to give children plenty of chances to take part. The Class Mentor pays attention to how your child participates and helps coordinate support when needed.",
     },
     {
-      q: "Will my child stay focused online?",
-      a: "Small groups, puzzles and guided play keep children involved. We also watch for when a child needs a little encouragement.",
+      q: "What does the Child Growth Mentor do?",
+      a: "The Child Growth Mentor helps your child build confidence, develop consistent learning habits and learn from setbacks. Your child joins two group mentoring sessions each month, with one-to-one support when needed. Each month, you receive a Growth Snapshot and have a call with the mentor.",
     },
     {
-      q: "What does the Growth Mentor do?",
-      a: "Supports confidence, resilience and consistency through two group sessions a month. One-to-one support is arranged when needed.",
+      q: "Can my child join as a complete beginner?",
+      a: "Yes. Chess Foundation starts with the basics, including how the pieces move. If your child already plays, we recommend a starting level based on their skills and readiness.",
     },
     {
-      q: "Is it safe for children online?",
-      a: "Yes. A Class Mentor manages class access and stays connected with parents.",
-    },
-    {
-      q: "What are the fees?",
-      a: "We explain fees and payment options once we understand your child’s needs.",
-    },
-    {
-      q: "What do we need for class?",
-      a: "A laptop or tablet, stable internet and a quiet space.",
+      q: "What does my child need for an online class?",
+      a: "A laptop or tablet, a stable internet connection and a quiet place to join.",
     },
     {
       q: "What if my child misses a class?",
-      a: "Inform your Relationship Executive, who will explain the available support and applicable policy.",
+      a: "Let your Class Mentor know. They\u2019ll share a recording of the full session your child missed and explain what other support is available to help them catch up.",
     },
     {
-      q: "Can my child join at any time?",
-      a: "Yes. Admissions are open all through the year.",
+      q: "How are online classes supervised?",
+      a: "The chess coach leads the lesson, while the Class Mentor manages access to the live class and helps coordinate communication between families and the team.",
+    },
+    {
+      q: "Can my child join at any time of the year?",
+      a: "Yes. We welcome students throughout the year whenever there\u2019s space in a batch suited to your child\u2019s level.",
     },
   ],
 };
 
 export const closing = {
   kicker: "Every child carries a possibility.",
-  title: "Let’s find your child’s next move.",
-  body: "Book a free session and meet a coach. No payment needed.",
+  title: "Let\u2019s find your child\u2019s next move.",
+  body: "Book a free Introductory & Assessment Session. No payment needed.",
 };
 
 export const footer = {
   tagline: "Touching Hearts, Awakening Wisdom",
-  blurb: "Chess coaching and growth mentoring for children aged 5–13.",
+  blurb: "Online chess coaching and growth mentoring for children aged 5\u201313.",
   address: "#1108, Gopal Reddy Complex, 1st Floor, Sarjapura Village, Bangalore 562125",
   email: "info@outpaceacademy.com",
   phone,
@@ -490,7 +481,7 @@ export const footer = {
     { label: "LinkedIn", href: "https://www.linkedin.com/company/outpace-academy/" },
     { label: "Twitter", href: "https://twitter.com/AcademyOutpace" },
   ],
-  copyright: "© 2026 Outpace Academy LLP. All rights reserved.",
+  copyright: "\u00a9 2026 Outpace Academy LLP. All rights reserved.",
   legal: [
     { label: "Privacy Policy", href: "https://outpaceacademy.com/privacy-policy/" },
     { label: "Terms & Conditions", href: "https://outpaceacademy.com/terms-conditions/" },
@@ -499,12 +490,12 @@ export const footer = {
 };
 
 export const thanks = {
-  title: "Thank you. We can’t wait to meet your child.",
-  body: "Our team will contact you on WhatsApp to confirm the session time and joining details.",
+  title: "Thank you. We can\u2019t wait to meet your child.",
+  body: "Our team will contact you on WhatsApp to understand your child better, discuss your expectations and confirm the session.",
   next: [
     {
-      title: "A quick call from us",
-      text: "We confirm the time and listen to what your child needs.",
+      title: "Let\u2019s understand your child",
+      text: "We connect with you to learn about your child and discuss your expectations.",
     },
     {
       title: "Details on WhatsApp",
@@ -512,7 +503,7 @@ export const thanks = {
     },
     {
       title: "Your child meets a coach",
-      text: "A short, interactive lesson. Then we suggest the right group.",
+      text: "A friendly Introductory & Assessment Session. Then we suggest the right group.",
     },
   ],
   ready: "A laptop or tablet with stable internet, a quiet space, and a pen and notebook.",

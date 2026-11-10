@@ -92,9 +92,9 @@ export function BookingForm({
       className="rounded-[2rem] bg-teal-deep p-6 text-white shadow-2xl shadow-teal-deep/30 lg:p-7 short:p-5"
     >
       <h2 className="font-display text-[1.7rem] leading-tight font-bold">
-        Book a free first session
+        Let&rsquo;s understand your child.
       </h2>
-      <p className="mt-1 text-sm">Meet a chess coach. No payment needed.</p>
+      <p className="mt-1 text-sm">Book a free Introductory &amp; Assessment Session.</p>
 
       <form
         ref={formRef}
@@ -110,7 +110,7 @@ export function BookingForm({
             id="parentName"
             name="parentName"
             autoComplete="name"
-            placeholder="Parent’s name"
+            placeholder="Parent's name"
             value={lead.parentName}
             onChange={(e) => update("parentName", e.target.value)}
             aria-invalid={!!errors.parentName}
