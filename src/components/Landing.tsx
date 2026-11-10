@@ -160,7 +160,7 @@ function Heart() {
         </div>
 
         {/* Video Player Card */}
-        <div className="reveal mx-auto mt-6 max-w-4xl">
+        <div className="reveal mt-6">
           <div className="overflow-hidden rounded-3xl bg-black/40 p-2 shadow-2xl ring-1 ring-white/20 backdrop-blur-md sm:p-3">
             <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-black shadow-inner">
               <video
@@ -184,7 +184,7 @@ function Heart() {
         </div>
 
         {/* Narrative & Reassurance Cards Below Video */}
-        <div className="reveal mx-auto mt-6 grid max-w-4xl gap-4 md:grid-cols-2">
+        <div className="reveal mt-6 grid gap-4 md:grid-cols-2">
           <div className="flex flex-col justify-center rounded-3xl bg-white/10 p-5 backdrop-blur-sm ring-1 ring-white/15 sm:p-6">
             <p className="text-base leading-relaxed text-white/90 md:text-lg">
               {heart.body}
@@ -471,7 +471,7 @@ function MissionVision() {
   const { vision } = belief;
   return (
     <section id="mission" className="bg-cream py-8 sm:py-10 md:py-12">
-      <div className="wrap max-w-5xl">
+      <div className="wrap">
         <div className="text-center">
           <Kicker>{belief.kicker}</Kicker>
           <Heading>Our Mission &amp; Vision</Heading>
@@ -528,9 +528,9 @@ function Founder() {
   const { founder } = belief;
   return (
     <section id="founder" className="py-8 sm:py-10 md:py-12 bg-cream/40">
-      <div className="wrap max-w-5xl">
+      <div className="wrap">
         <div className="reveal rounded-3xl bg-white p-6 sm:p-8 md:p-9 shadow-xl ring-1 ring-line">
-          <div className="grid md:grid-cols-[19rem_minmax(0,1fr)] lg:grid-cols-[21rem_minmax(0,1fr)] items-stretch gap-6 sm:gap-8 lg:gap-10">
+          <div className="grid md:grid-cols-[22rem_minmax(0,1fr)] lg:grid-cols-[26rem_minmax(0,1fr)] items-stretch gap-6 sm:gap-8 lg:gap-10">
             {/* Image Container: Stretches to the exact full height of the text column beside it */}
             <div className="relative min-h-[340px] md:min-h-full w-full overflow-hidden rounded-2xl md:rounded-3xl shadow-sm ring-1 ring-line/80 bg-mist">
               <Image
@@ -762,7 +762,7 @@ function Team() {
         </div>
 
         {/* Square Cards: 1/2 width on phone (2-col), 3-col on tablet, 4-col centered on desktop */}
-        <div className="mx-auto mt-12 flex max-w-5xl flex-wrap justify-center gap-3.5 sm:gap-5 md:gap-6">
+        <div className="mt-12 flex flex-wrap justify-center gap-3.5 sm:gap-5 md:gap-6">
           {team.members.map((member) => (
             <div
               key={member.name}
