@@ -312,7 +312,7 @@ export const stories = {
 };
 
 export const belief = {
-  kicker: "Our mission",
+  kicker: "Our purpose",
   quote: "Every child learns differently.",
   quoteAccent: "Our responsibility is to find the way.",
   missionBody: "When a child struggles, we begin by understanding them\u2014their strengths, challenges and what helps them learn. Through chess coaching and personalised mentoring, we help children think independently, learn from mistakes and face challenges with confidence and kindness.",

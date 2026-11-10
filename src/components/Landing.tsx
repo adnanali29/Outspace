@@ -466,53 +466,53 @@ function WhyOutpace() {
   );
 }
 
-/* ─── 13. OUR MISSION & VISION (1 Section, 2 Side-by-Side Cards) ─── */
+/* ─── 13. OUR MISSION & VISION (Aligned, Equal Height Cards, Tight Padding) ─── */
 function MissionVision() {
   const { vision } = belief;
   return (
-    <section id="mission" className="bg-cream py-16 md:py-24">
-      <div className="wrap">
+    <section id="mission" className="bg-cream py-8 sm:py-10 md:py-12">
+      <div className="wrap max-w-5xl">
         <div className="text-center">
           <Kicker>{belief.kicker}</Kicker>
           <Heading>Our Mission &amp; Vision</Heading>
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:gap-8">
+        <div className="mt-6 sm:mt-8 grid gap-6 md:grid-cols-2 items-stretch lg:gap-8">
           {/* Card 1: Our Mission */}
-          <article className="reveal flex flex-col justify-between rounded-3xl bg-teal-deep p-8 text-white shadow-xl ring-1 ring-white/10 md:p-10">
+          <article className="reveal flex flex-col justify-between rounded-3xl bg-teal-deep p-6 sm:p-8 text-white shadow-xl ring-1 ring-white/10 md:p-9 h-full">
             <div>
               <span className="inline-block rounded-full bg-white/15 px-3.5 py-1 text-xs font-bold tracking-wider uppercase text-peach">
                 Our Mission
               </span>
-              <h3 className="mt-4 font-display text-2xl leading-snug font-bold text-balance text-white md:text-3xl">
+              <h3 className="mt-3 font-display text-xl sm:text-2xl lg:text-[1.65rem] leading-snug font-bold text-balance text-white">
                 &ldquo;{belief.quote} <span className="text-peach">{belief.quoteAccent}</span>&rdquo;
               </h3>
-              <p className="mt-4 text-base leading-relaxed text-white/90 md:text-lg">
+              <p className="mt-3.5 text-sm sm:text-base leading-relaxed text-white/90 lg:text-[1.05rem]">
                 {belief.missionBody}
               </p>
             </div>
-            <div className="mt-6 border-t border-white/15 pt-5">
-              <p className="font-display text-base font-bold text-peach">
+            <div className="mt-6 border-t border-white/15 pt-4 mt-auto">
+              <p className="font-display text-sm sm:text-base font-bold text-peach">
                 {belief.missionClose}
               </p>
             </div>
           </article>
 
           {/* Card 2: Our Vision */}
-          <article className="reveal flex flex-col justify-between rounded-3xl bg-peach p-8 text-ink shadow-xl ring-1 ring-line md:p-10">
+          <article className="reveal flex flex-col justify-between rounded-3xl bg-peach p-6 sm:p-8 text-ink shadow-xl ring-1 ring-line md:p-9 h-full">
             <div>
-              <span className="inline-block rounded-full bg-white px-3.5 py-1 text-xs font-bold tracking-wider uppercase text-ember">
+              <span className="inline-block rounded-full bg-ember/15 px-3.5 py-1 text-xs font-bold tracking-wider uppercase text-ember">
                 Our Vision
               </span>
-              <h3 className="mt-4 font-display text-2xl leading-snug font-bold text-balance text-ink md:text-3xl">
+              <h3 className="mt-3 font-display text-xl sm:text-2xl lg:text-[1.65rem] leading-snug font-bold text-balance text-ink">
                 &ldquo;{vision.lead}&rdquo;
               </h3>
-              <p className="mt-4 text-base leading-relaxed text-ink/90 md:text-lg">
+              <p className="mt-3.5 text-sm sm:text-base leading-relaxed text-ink/90 lg:text-[1.05rem]">
                 {vision.text}
               </p>
             </div>
-            <div className="mt-6 border-t border-line pt-5">
-              <p className="font-display text-base font-bold text-flame-deep">
+            <div className="mt-6 border-t border-line pt-4 mt-auto">
+              <p className="font-display text-sm sm:text-base font-bold text-flame-deep">
                 A world where every child is understood and given the opportunity to thrive.
               </p>
             </div>
@@ -523,40 +523,40 @@ function MissionVision() {
   );
 }
 
-/* ─── 14. OUR FOUNDER (Square Photo with Rounded Corners on Left) ─── */
+/* ─── 14. OUR FOUNDER (Image Stretches to Match Text Height, Perfectly Aligned) ─── */
 function Founder() {
   const { founder } = belief;
   return (
-    <section id="founder" className="py-12 md:py-20 bg-cream/40">
+    <section id="founder" className="py-8 sm:py-10 md:py-12 bg-cream/40">
       <div className="wrap max-w-5xl">
-        <div className="reveal rounded-3xl bg-white p-6 sm:p-8 md:p-10 shadow-xl ring-1 ring-line">
-          <div className="flex flex-col md:flex-row md:items-start gap-6 sm:gap-8 lg:gap-10">
-            {/* Square Photo with Rounded Corners on the Left */}
-            <div className="relative aspect-square w-full sm:w-72 md:w-80 lg:w-96 shrink-0 overflow-hidden rounded-2xl md:rounded-3xl shadow-md ring-1 ring-line/80 bg-mist">
+        <div className="reveal rounded-3xl bg-white p-6 sm:p-8 md:p-9 shadow-xl ring-1 ring-line">
+          <div className="grid md:grid-cols-[19rem_minmax(0,1fr)] lg:grid-cols-[21rem_minmax(0,1fr)] items-stretch gap-6 sm:gap-8 lg:gap-10">
+            {/* Image Container: Stretches to the exact full height of the text column beside it */}
+            <div className="relative min-h-[340px] md:min-h-full w-full overflow-hidden rounded-2xl md:rounded-3xl shadow-sm ring-1 ring-line/80 bg-mist">
               <Image
                 src={founder.image}
                 alt={`${founder.name} - ${founder.role}`}
                 fill
-                sizes="(min-width: 1024px) 384px, (min-width: 768px) 320px, 100vw"
-                className="object-cover object-[center_20%]"
+                sizes="(min-width: 1024px) 336px, (min-width: 768px) 304px, 100vw"
+                className="object-cover object-[center_15%]"
                 priority
               />
             </div>
 
-            {/* Content Beside the Square Photo */}
-            <div className="flex flex-col justify-between flex-1">
+            {/* Content Beside the Image */}
+            <div className="flex flex-col justify-between py-1">
               <div>
                 <span className="inline-block rounded-full bg-peach/70 px-3.5 py-1 text-xs font-bold tracking-wider uppercase text-ember">
                   {founder.role}
                 </span>
-                <h2 className="mt-2 font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-ink">
+                <h2 className="mt-2 font-display text-2xl sm:text-3xl font-bold tracking-tight text-ink md:text-4xl">
                   {founder.name}
                 </h2>
-                <p className="mt-1.5 font-display text-base sm:text-lg lg:text-xl font-bold leading-snug text-flame-deep">
+                <p className="mt-1 font-display text-base sm:text-lg font-bold leading-snug text-flame-deep md:text-xl">
                   {founder.tagline}
                 </p>
 
-                <div className="mt-4 space-y-3.5 text-base leading-relaxed text-ink/85 lg:text-lg">
+                <div className="mt-4 space-y-3 text-sm sm:text-base leading-relaxed text-ink/85 lg:text-[1.05rem]">
                   {founder.bio.map((paragraph, idx) => (
                     <p key={idx}>{paragraph}</p>
                   ))}
@@ -564,7 +564,7 @@ function Founder() {
               </div>
 
               <div className="mt-6 border-t border-line pt-4">
-                <p className="font-display text-sm font-semibold italic text-teal-deep sm:text-base">
+                <p className="font-display text-xs sm:text-sm font-semibold italic text-teal-deep md:text-base">
                   &ldquo;A place where every child feels understood, valued and believed in as they grow at their own pace. For him, that’s where a better world begins.&rdquo;
                 </p>
               </div>
