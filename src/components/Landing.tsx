@@ -1,15 +1,17 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 import {
   approach,
-  belief,
   careAndSupport,
   closing,
   faqs,
   footer,
+  founder,
   heart,
   hero,
   insideSession,
   learn,
+  missionVision,
   navLinks,
   outcomes,
   program,
@@ -17,6 +19,7 @@ import {
   start,
   stories,
   talkToUs,
+  team,
   trust,
 } from "@/content";
 import { BookingForm, type Lead } from "./BookingForm";
@@ -33,7 +36,7 @@ const primaryButton =
 
 function Heading({ children }: { children: ReactNode }) {
   return (
-    <h2 className="reveal max-w-3xl font-display text-3xl leading-[1.12] font-bold tracking-tight text-balance text-ink md:text-[2.75rem]">
+    <h2 className="reveal max-w-3xl font-display text-3xl leading-[1.12] font-bold tracking-tight text-balance uppercase text-ink md:text-[2.65rem]">
       {children}
     </h2>
   );
@@ -41,7 +44,7 @@ function Heading({ children }: { children: ReactNode }) {
 
 function Kicker({ children, light = false }: { children: ReactNode; light?: boolean }) {
   return (
-    <p className={`mb-3 text-sm font-semibold uppercase tracking-wide ${light ? "text-peach" : "text-ember"}`}>
+    <p className={`mb-3 text-xs font-bold tracking-widest uppercase ${light ? "text-peach" : "text-ember"}`}>
       {children}
     </p>
   );
@@ -59,14 +62,12 @@ function CheckMark({ className = "" }: { className?: string }) {
   );
 }
 
-// The ring from the "O" in the logo, used as a large background shape.
 function Ring({ className }: { className: string }) {
   return (
     <span aria-hidden className={`pointer-events-none absolute rounded-full ${className}`} />
   );
 }
 
-/* ─── Monitor icon for "online" feel ─── */
 function MonitorIcon({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden className={`fill-none stroke-current stroke-[1.5] ${className}`}>
@@ -96,11 +97,11 @@ function Hero({
         </div>
         <div className="wrap-wide relative grid items-center gap-x-14 gap-y-8 py-8 lg:min-h-[calc(100svh-11rem)] lg:grid-cols-[minmax(0,1fr)_26.5rem] lg:py-10 short:py-5 xl:gap-x-20">
           <div className="text-center lg:text-left">
-            <p className="inline-flex items-center gap-2 rounded-full bg-mist px-4 py-1.5 text-sm font-semibold text-teal-deep">
+            <p className="inline-flex items-center gap-2 rounded-full bg-mist px-4 py-1.5 text-xs font-bold tracking-wider uppercase text-teal-deep">
               <MonitorIcon className="size-4" />
               {hero.eyebrow}
             </p>
-            <h1 className="mt-4 font-display text-[2.4rem] leading-[1.08] font-bold tracking-tight text-balance sm:text-5xl xl:text-[3.5rem] short:mt-3 short:text-[2.6rem]">
+            <h1 className="mt-4 font-display text-[2.2rem] leading-[1.1] font-bold tracking-tight text-balance uppercase sm:text-4xl xl:text-[3.25rem] short:mt-3 short:text-[2.4rem]">
               {hero.title}
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-ink lg:mx-0 lg:text-xl short:mt-3 short:text-lg">
@@ -140,159 +141,91 @@ function Hero({
   );
 }
 
-/* ─── 2. THE HEART OF OUTPACE (Text Left, Video Right - Enhanced Design) ─── */
+/* ─── 2. THE HEART OF OUTPACE (Clean, Justified, Balanced Design) ─── */
 function Heart() {
   return (
     <section
       id="heart"
-      className="relative overflow-hidden bg-gradient-to-br from-teal-deep via-[#06656d] to-[#044c52] py-16 text-white md:py-24"
+      className="relative overflow-hidden bg-teal-deep py-16 text-white md:py-24"
     >
-      {/* Ambient background decoration */}
-      <Ring className="-right-32 -top-32 size-[32rem] border-[3rem] border-white/5 blur-sm" />
-      <Ring className="-left-40 -bottom-40 size-[36rem] border-[4rem] border-flame/15 blur-sm" />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(7,156,168,0.25),rgba(255,255,255,0))]"
-      />
-
+      <Ring className="-right-32 -bottom-32 size-[28rem] border-[3rem] border-white/5" />
       <div className="wrap relative">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
-          {/* LEFT: Justifying Text & Caring Promise */}
-          <div className="space-y-6">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          {/* Left Column: Clean, Structured Text */}
+          <div className="flex flex-col justify-center space-y-6">
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3.5 py-1 text-xs font-semibold tracking-wider text-peach uppercase backdrop-blur-md">
-                <span className="size-1.5 rounded-full bg-flame animate-pulse" />
-                {heart.kicker}
-              </span>
-              <h2 className="reveal mt-3 font-display text-3xl leading-[1.12] font-bold tracking-tight text-balance md:text-[2.65rem]">
+              <Kicker light>{heart.kicker}</Kicker>
+              <h2 className="reveal font-display text-3xl leading-[1.12] font-bold tracking-tight text-balance uppercase md:text-4xl lg:text-[2.65rem]">
                 {heart.title}
               </h2>
             </div>
 
-            {/* The 3 needs with warm numbered accent badges */}
-            <ol className="reveal space-y-2.5 rounded-3xl bg-white/[0.08] p-3 backdrop-blur-md ring-1 ring-white/10 sm:p-4">
+            {/* 3 key needs */}
+            <div className="reveal space-y-2.5 rounded-2xl bg-white/10 p-4 backdrop-blur-sm ring-1 ring-white/15">
               {heart.lines.map((line, i) => (
-                <li
+                <div
                   key={line}
-                  className="flex items-center gap-3.5 rounded-2xl bg-white/[0.06] px-4 py-3 text-sm font-medium leading-snug text-white/95 transition-colors hover:bg-white/10 md:text-base"
+                  className="flex items-center gap-3 text-sm leading-snug text-white/95 md:text-base"
                 >
                   <span
                     aria-hidden
-                    className="grid size-7 shrink-0 place-items-center rounded-full bg-peach font-display text-xs font-bold text-ember"
+                    className="grid size-6 shrink-0 place-items-center rounded-full bg-peach font-display text-xs font-bold text-ember"
                   >
                     {i + 1}
                   </span>
                   <span>{line}</span>
-                </li>
+                </div>
               ))}
-            </ol>
+            </div>
 
+            {/* Narrative description */}
             <p className="reveal text-base leading-relaxed text-white/90 md:text-lg">
               {heart.body}
             </p>
 
-            {/* Standout Promise Quote Card */}
-            <div className="reveal relative overflow-hidden rounded-3xl bg-gradient-to-r from-flame to-flame-deep p-5 text-ink shadow-xl shadow-flame/20 md:p-6">
-              <span
-                aria-hidden
-                className="pointer-events-none absolute -right-2 -bottom-6 font-display text-8xl font-black text-black/10 select-none"
-              >
-                “
-              </span>
-              <p className="text-xs font-bold tracking-wider text-ink/75 uppercase">
-                Our Promise to Your Child
-              </p>
-              <p className="mt-1 font-display text-xl leading-snug font-bold md:text-2xl">
-                {heart.promise}
-              </p>
+            {/* Standout promise card */}
+            <div className="reveal rounded-2xl bg-flame px-5 py-4 font-display text-lg leading-snug font-bold text-ink shadow-lg shadow-black/15 md:text-xl">
+              {heart.promise}
             </div>
 
-            {/* Child Growth Mentor badge */}
-            <div className="reveal flex items-center gap-4 rounded-3xl bg-white/10 p-4 backdrop-blur-md ring-1 ring-white/15 sm:p-5">
-              <div className="relative">
-                <span className="grid size-13 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-peach to-[#ffd8c2] text-3xl shadow-md">
-                  <Piece type="q" className="text-ember" />
-                </span>
-                <span className="absolute -bottom-1 -right-1 grid size-4 place-items-center rounded-full bg-teal ring-2 ring-teal-deep">
-                  <span className="size-1.5 rounded-full bg-white" />
-                </span>
-              </div>
+            {/* Caring mentor note */}
+            <div className="reveal flex items-center gap-3.5 rounded-2xl bg-white/10 p-3.5 backdrop-blur-sm ring-1 ring-white/10">
+              <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-peach text-2xl text-ember">
+                <Piece type="q" className="text-ember" />
+              </span>
               <div>
-                <p className="font-display text-base font-bold text-peach">
+                <p className="font-display text-sm font-bold text-peach">
                   Your Child Growth Mentor
                 </p>
-                <p className="mt-0.5 text-xs leading-relaxed text-white/85 sm:text-sm">
-                  A dedicated mentor who listens without judgement, understands your child&rsquo;s learning style, and builds lasting confidence.
+                <p className="text-xs leading-snug text-white/85">
+                  A caring presence who listens, understands and helps your child grow with confidence.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* RIGHT: High-Impact Video Player Card */}
-          <div className="reveal relative">
-            {/* Soft decorative glow behind the player */}
-            <div
-              aria-hidden
-              className="absolute -inset-1 rounded-[2.5rem] bg-gradient-to-br from-flame/40 via-teal/30 to-peach/20 opacity-70 blur-xl"
-            />
-
-            <div className="relative overflow-hidden rounded-[2rem] bg-white/[0.08] p-3.5 shadow-2xl shadow-black/50 ring-1 ring-white/20 backdrop-blur-xl sm:p-4">
-              {/* Card top bar */}
-              <div className="mb-3 flex items-center justify-between px-2 text-xs">
-                <div className="flex items-center gap-2">
-                  <span className="size-2 rounded-full bg-flame animate-ping" />
-                  <span className="size-2 rounded-full bg-flame -ml-4" />
-                  <span className="font-semibold tracking-wide text-peach uppercase">
-                    Session Preview
-                  </span>
-                </div>
-                <span className="rounded-full bg-white/15 px-2.5 py-0.5 text-[11px] font-medium text-white/80">
-                  Online Coaching
-                </span>
-              </div>
-
-              {/* Video wrapper */}
-              <div className="group relative aspect-video w-full overflow-hidden rounded-2xl bg-black/60 ring-1 ring-white/10 shadow-inner">
-                {/* HTML5 video element: replace /video/intro.mp4 with your video file */}
+          {/* Right Column: Clean, Crisp Video Player Card */}
+          <div className="reveal flex flex-col justify-center">
+            <div className="overflow-hidden rounded-3xl bg-black/30 p-3.5 shadow-2xl ring-1 ring-white/20 backdrop-blur-md sm:p-4">
+              <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-black/60 shadow-inner">
+                {/* Video element: place video at public/video/intro.mp4 */}
                 <video
                   controls
                   playsInline
                   preload="metadata"
-                  poster="/hero/chess-class-focus.webp"
-                  className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  poster="/hero/online-chess-coaching-warmth.jpg"
+                  className="size-full object-cover"
                 >
                   <source src="/video/intro.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
-
-                {/* Subtle bottom gradient banner */}
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-4 pt-10">
-                  <div className="flex items-center gap-2 text-peach">
-                    <Piece type="n" className="text-xl" />
-                    <p className="text-xs font-bold tracking-wide uppercase">
-                      Warmth, Connection &amp; Encouragement
-                    </p>
-                  </div>
-                  <p className="mt-0.5 text-xs leading-snug text-white/90 sm:text-sm">
-                    {heart.videoCaption}
-                  </p>
-                </div>
               </div>
-
-              {/* Trust markers beneath video */}
-              <div className="mt-4 grid grid-cols-3 gap-2 border-t border-white/10 pt-3 text-center">
-                <div className="rounded-xl bg-white/[0.05] p-2">
-                  <p className="font-display text-sm font-bold text-peach">4–6</p>
-                  <p className="text-[11px] text-white/70">Small batches</p>
-                </div>
-                <div className="rounded-xl bg-white/[0.05] p-2">
-                  <p className="font-display text-sm font-bold text-peach">100%</p>
-                  <p className="text-[11px] text-white/70">Live &amp; Online</p>
-                </div>
-                <div className="rounded-xl bg-white/[0.05] p-2">
-                  <p className="font-display text-sm font-bold text-peach">2-in-1</p>
-                  <p className="text-[11px] text-white/70">Coach + Mentor</p>
-                </div>
+              <div className="mt-3.5 flex items-center justify-between px-2 text-xs text-white/80">
+                <span className="flex items-center gap-2">
+                  <span className="size-2 rounded-full bg-flame" />
+                  <span className="font-semibold text-peach">Live Online Session</span>
+                </span>
+                <span>Coach &amp; Mentor in action</span>
               </div>
             </div>
           </div>
@@ -438,7 +371,7 @@ function Program() {
         </div>
 
         <div className="reveal mt-4 rounded-3xl bg-white p-5 ring-1 ring-line md:p-7">
-          <h3 className="font-display text-xl font-bold md:text-2xl">{program.numbersTitle}</h3>
+          <h3 className="font-display text-xl font-bold uppercase md:text-2xl">{program.numbersTitle}</h3>
           <dl className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
             {program.numbers.map((item) => (
               <div
@@ -453,7 +386,7 @@ function Program() {
             ))}
           </dl>
 
-          <h3 className="mt-6 font-display text-lg font-bold">{program.listTitle}</h3>
+          <h3 className="mt-6 font-display text-lg font-bold uppercase">{program.listTitle}</h3>
           <ul className="mt-3 grid gap-x-6 gap-y-2 sm:grid-cols-2">
             {program.list.map((item) => (
               <li key={item} className="flex items-start gap-2 text-sm leading-snug font-medium">
@@ -514,7 +447,7 @@ function Outcomes() {
               <span className="grid size-14 place-items-center rounded-2xl bg-peach text-3xl text-flame-deep">
                 <Piece type={item.piece} className="text-3xl" />
               </span>
-              <h3 className="mt-5 font-display text-xl leading-snug font-bold text-ink">
+              <h3 className="mt-5 font-display text-xl leading-snug font-bold uppercase text-ink">
                 {item.title}
               </h3>
               <p className="mt-2 text-base leading-relaxed text-muted">
@@ -537,7 +470,7 @@ function WhyOutpace() {
         <Heading>{approach.title}</Heading>
 
         <div className="mt-8 overflow-hidden rounded-3xl ring-1 ring-line">
-          <div className="hidden grid-cols-2 bg-teal-deep px-6 py-3.5 text-sm font-semibold text-white md:grid">
+          <div className="hidden grid-cols-2 bg-teal-deep px-6 py-3.5 text-sm font-semibold uppercase text-white md:grid">
             <span>What your child needs</span>
             <span>How Outpace supports them</span>
           </div>
@@ -559,38 +492,59 @@ function WhyOutpace() {
   );
 }
 
-/* ─── 13. OUR MISSION AND VISION ─── */
+/* ─── 13. OUR MISSION & VISION (1 Section, 2 Side-by-Side Cards) ─── */
 function MissionVision() {
-  const { vision } = belief;
+  const { mission, vision } = missionVision;
   return (
     <section id="mission" className="bg-cream py-16 md:py-24">
       <div className="wrap">
-        <div className="mx-auto max-w-4xl text-center">
-          <Kicker>{belief.kicker}</Kicker>
-          <h2 className="reveal font-display text-3xl leading-[1.15] font-bold tracking-tight text-balance text-ink md:text-5xl">
-            {belief.quote} <span className="text-flame-deep">{belief.quoteAccent}</span>
-          </h2>
-          <p className="reveal mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-            {belief.missionBody}
-          </p>
-          <p className="reveal mx-auto mt-4 max-w-2xl font-display text-xl leading-snug font-bold text-teal-deep md:text-2xl">
-            {belief.missionClose}
-          </p>
+        <div className="text-center">
+          <Kicker>{missionVision.kicker}</Kicker>
+          <Heading>{missionVision.title}</Heading>
         </div>
 
-        <article className="reveal mt-12 relative flex flex-col overflow-hidden rounded-3xl bg-peach p-8 md:p-10">
-          <Piece
-            type="k"
-            className="absolute -right-3 -bottom-8 text-[11rem] text-flame opacity-20"
-          />
-          <h3 className="relative text-sm font-semibold tracking-wide text-ember uppercase">
-            {vision.title}
-          </h3>
-          <p className="relative mt-4 font-display text-2xl leading-snug font-bold text-balance md:text-3xl text-ink">
-            {vision.lead}
-          </p>
-          <p className="relative mt-4 leading-relaxed text-ink/90 md:text-lg">{vision.text}</p>
-        </article>
+        {/* 2 equal-height cards: Mission & Vision */}
+        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:gap-8">
+          {/* Card 1: Our Mission */}
+          <article className="reveal flex flex-col justify-between rounded-3xl bg-teal-deep p-8 text-white shadow-xl ring-1 ring-white/10 md:p-10">
+            <div>
+              <span className="inline-block rounded-full bg-white/15 px-3 py-1 text-xs font-bold tracking-wider uppercase text-peach">
+                {mission.title}
+              </span>
+              <h3 className="mt-4 font-display text-2xl leading-snug font-bold text-balance text-white md:text-3xl">
+                &ldquo;{mission.subtitle}&rdquo;
+              </h3>
+              <p className="mt-4 text-base leading-relaxed text-white/90 md:text-lg">
+                {mission.body}
+              </p>
+            </div>
+            <div className="mt-6 border-t border-white/15 pt-5">
+              <p className="font-display text-base font-bold text-peach">
+                {mission.close}
+              </p>
+            </div>
+          </article>
+
+          {/* Card 2: Our Vision */}
+          <article className="reveal flex flex-col justify-between rounded-3xl bg-peach p-8 text-ink shadow-xl ring-1 ring-line md:p-10">
+            <div>
+              <span className="inline-block rounded-full bg-white px-3 py-1 text-xs font-bold tracking-wider uppercase text-ember">
+                {vision.title}
+              </span>
+              <h3 className="mt-4 font-display text-2xl leading-snug font-bold text-balance text-ink md:text-3xl">
+                &ldquo;{vision.subtitle}&rdquo;
+              </h3>
+              <p className="mt-4 text-base leading-relaxed text-ink/90 md:text-lg">
+                {vision.body}
+              </p>
+            </div>
+            <div className="mt-6 border-t border-line pt-5">
+              <p className="font-display text-base font-bold text-flame-deep">
+                A world where every child is understood and given the opportunity to thrive.
+              </p>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
   );
@@ -598,13 +552,12 @@ function MissionVision() {
 
 /* ─── 14. OUR FOUNDER ─── */
 function Founder() {
-  const { founder } = belief;
   return (
     <section id="founder" className="py-16 md:py-24">
       <div className="wrap max-w-4xl">
         <Kicker>{founder.role}</Kicker>
         <Heading>{founder.name}</Heading>
-        <p className="reveal mt-2 font-display text-xl leading-snug font-bold text-flame-deep md:text-2xl">
+        <p className="reveal mt-2 font-display text-xl leading-snug font-bold uppercase text-flame-deep md:text-2xl">
           {founder.tagline}
         </p>
 
@@ -631,7 +584,7 @@ function CareAndSupport() {
     <section id="care" className="bg-teal-deep py-14 text-white md:py-20">
       <div className="wrap">
         <Kicker light>{careAndSupport.title}</Kicker>
-        <h2 className="reveal font-display text-3xl leading-[1.15] font-bold tracking-tight text-balance md:text-4xl">
+        <h2 className="reveal font-display text-3xl leading-[1.15] font-bold tracking-tight text-balance uppercase md:text-4xl">
           {careAndSupport.subtitle}
         </h2>
         <ul className="mt-8 grid gap-5 md:grid-cols-3">
@@ -680,7 +633,7 @@ function Journey() {
   );
 }
 
-/* ─── STORIES ─── */
+/* ─── STORIES FROM OUR FAMILIES ─── */
 function Stories() {
   return (
     <section id="stories" className="bg-cream py-12 md:py-20">
@@ -732,7 +685,7 @@ function Stories() {
           ))}
         </div>
 
-        <h3 className="reveal mt-8 font-display text-xl font-bold md:text-2xl">
+        <h3 className="reveal mt-8 font-display text-xl font-bold uppercase md:text-2xl">
           {stories.winsTitle}
         </h3>
         <ul className="mt-3 grid gap-3 md:grid-cols-3 md:gap-4">
@@ -760,7 +713,7 @@ function Services() {
         <div className="reveal flex flex-col items-start justify-between gap-6 rounded-3xl bg-mist p-6 ring-1 ring-line sm:p-8 md:flex-row md:items-center md:gap-10">
           <div className="max-w-xl">
             <Kicker>{services.kicker}</Kicker>
-            <h3 className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl">
+            <h3 className="font-display text-2xl font-bold tracking-tight uppercase text-ink md:text-3xl">
               {services.title}
             </h3>
             <p className="mt-1 text-sm text-muted md:text-base">
@@ -797,10 +750,54 @@ function Services() {
   );
 }
 
+/* ─── MEET OUR TEAM (Placed right above FAQs) ─── */
+function Team() {
+  return (
+    <section id="team" className="bg-cream py-16 md:py-24">
+      <div className="wrap">
+        <div className="text-center">
+          <Kicker>{team.kicker}</Kicker>
+          <Heading>{team.title}</Heading>
+          <p className="reveal mx-auto mt-3 max-w-2xl text-muted md:text-lg">
+            {team.subtitle}
+          </p>
+        </div>
+
+        <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 lg:gap-6">
+          {team.members.map((member) => (
+            <div
+              key={member.name}
+              className="group reveal flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-line transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+            >
+              <div className="relative aspect-[3/4] w-full overflow-hidden bg-mist">
+                <Image
+                  src={member.image}
+                  alt={`${member.name} - ${member.role}`}
+                  fill
+                  sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+                  className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <div className="p-4 text-center">
+                <h3 className="font-display text-base font-bold text-ink sm:text-lg">
+                  {member.name}
+                </h3>
+                <p className="mt-0.5 text-xs font-semibold text-teal-deep">
+                  {member.role}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── 17. FAQs ─── */
 function Faqs() {
   return (
-    <section id="faqs" className="bg-cream py-12 md:py-20">
+    <section id="faqs" className="py-12 md:py-20">
       <div className="wrap">
         <Kicker>{faqs.kicker}</Kicker>
         <Heading>{faqs.title}</Heading>
@@ -819,7 +816,7 @@ function Closing() {
       <Ring className="-right-40 -bottom-56 size-[30rem] border-[3.5rem] border-flame/25" />
       <div className="wrap relative">
         <Kicker light>{closing.kicker}</Kicker>
-        <h2 className="mx-auto max-w-2xl font-display text-4xl leading-[1.1] font-bold tracking-tight text-balance md:text-[3.25rem]">
+        <h2 className="mx-auto max-w-2xl font-display text-3xl leading-[1.1] font-bold tracking-tight text-balance uppercase md:text-[3rem]">
           {closing.title}
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-lg">{closing.body}</p>
@@ -842,7 +839,7 @@ function Closing() {
 
 /* ─── FOOTER ─── */
 function FooterTitle({ children }: { children: ReactNode }) {
-  return <p className="mb-3 font-display text-base font-bold text-ink">{children}</p>;
+  return <p className="mb-3 font-display text-base font-bold uppercase text-ink">{children}</p>;
 }
 
 function Footer() {
@@ -949,7 +946,7 @@ export function Landing({
         {/* 1. Hero */}
         <Hero savedLead={savedLead} onSubmit={onSubmit} />
 
-        {/* 2. The Heart of Outpace (Video Card + Justifying Text Card) */}
+        {/* 2. The Heart of Outpace */}
         <Heart />
 
         {/* 7. What your child develops */}
@@ -973,7 +970,7 @@ export function Landing({
         {/* 12. Why Outpace */}
         <WhyOutpace />
 
-        {/* 13. Our mission & vision */}
+        {/* 13. Our Mission & Vision (1 section, 2 cards: Mission & Vision) */}
         <MissionVision />
 
         {/* 14. Our Founder */}
@@ -990,6 +987,9 @@ export function Landing({
 
         {/* Beyond chess (Small glimpse card) */}
         <Services />
+
+        {/* Meet our team (Positioned directly above FAQs) */}
+        <Team />
 
         {/* 17. Questions parents ask (FAQs) */}
         <Faqs />
