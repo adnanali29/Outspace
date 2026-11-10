@@ -50,16 +50,16 @@ export const heroSlideSeconds = 5;
 
 export const heroImages = [
   {
-    src: "/hero/chess-class-focus.webp",
+    src: "/hero/online-chess-coaching-warmth.jpg",
     alt: "A child and coach sharing a natural moment of encouragement during an online chess session",
   },
   {
-    src: "/hero/chess-class-move.webp",
+    src: "/hero/chess-class-focus.webp",
     alt: "A child smiling while learning chess online with their Outpace coach",
   },
   {
-    src: "/hero/chess-class-overhead.webp",
-    alt: "A happy child engaged in an online chess learning session",
+    src: "/hero/chess-class-move.webp",
+    alt: "A child learning chess online with an encouraging Outpace mentor",
   },
 ];
 

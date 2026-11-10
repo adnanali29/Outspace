@@ -171,7 +171,7 @@ function Heart() {
                 controls
                 playsInline
                 preload="metadata"
-                className="size-full object-contain bg-black"
+                className="size-full object-cover"
               >
                 <source src={heart.videoUrl} type="video/mp4" />
                 Your browser does not support the video tag.
