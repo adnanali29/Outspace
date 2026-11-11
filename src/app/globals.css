@@ -107,3 +107,9 @@ body {
     scroll-behavior: auto;
   }
 }
+
+/* One size for every section heading, scaled so the longest still fits on one
+   line at laptop widths (headings only stay on one line from 1024px up). */
+:root {
+  --heading-size: clamp(1.6rem, 2.45vw, 2.5rem);
+}

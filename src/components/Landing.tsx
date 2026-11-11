@@ -33,21 +33,34 @@ import { Piece } from "./Piece";
 const primaryButton =
   "inline-block rounded-full bg-flame px-7 py-3.5 font-semibold text-ink transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-flame/30";
 
-function Heading({ children, centered = false }: { children: ReactNode; centered?: boolean }) {
+// Section headings: centred, and kept on one line from laptop width up.
+const headingSize = "text-3xl md:text-[2.5rem] lg:text-[length:var(--heading-size)] lg:whitespace-nowrap";
+
+function Heading({ children }: { children: ReactNode }) {
   return (
     <h2
-      className={`reveal max-w-3xl font-display text-3xl leading-[1.12] font-bold tracking-tight text-balance text-ink md:text-[2.75rem] ${
-        centered ? "mx-auto text-center" : ""
-      }`}
+      className={`reveal mx-auto text-center font-display leading-[1.12] font-bold tracking-tight text-balance text-ink ${headingSize}`}
     >
       {children}
     </h2>
   );
 }
 
-function Kicker({ children, light = false }: { children: ReactNode; light?: boolean }) {
+function Kicker({
+  children,
+  light = false,
+  centered = false,
+}: {
+  children: ReactNode;
+  light?: boolean;
+  centered?: boolean;
+}) {
   return (
-    <p className={`mb-3 text-sm font-semibold uppercase tracking-wide ${light ? "text-peach" : "text-ember"}`}>
+    <p
+      className={`mb-3 text-sm font-semibold uppercase tracking-wide ${light ? "text-peach" : "text-ember"} ${
+        centered ? "text-center" : ""
+      }`}
+    >
       {children}
     </p>
   );
@@ -151,9 +164,9 @@ function Heart() {
     >
       <Ring className="-right-32 -bottom-32 size-[28rem] border-[3rem] border-white/5" />
       <div className="wrap relative">
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="text-center">
           <Kicker light>{heart.kicker}</Kicker>
-          <h2 className="reveal font-display text-3xl leading-[1.15] font-bold tracking-tight text-balance md:text-4xl lg:text-[2.75rem]">
+          <h2 className={`reveal font-display leading-[1.15] font-bold tracking-tight text-balance ${headingSize}`}>
             {heart.title}
           </h2>
           <p className="reveal mx-auto mt-2.5 max-w-2xl font-display text-base font-medium leading-relaxed text-white/90 sm:text-lg md:text-xl">
@@ -243,13 +256,13 @@ function MiniBoard({ lit }: { lit: number[] }) {
 function Learn() {
   return (
     <section id="learn" className="py-12 md:py-20">
-      <div className="wrap grid gap-x-12 gap-y-8 lg:grid-cols-[21rem_1fr]">
-        <div>
+      <div className="wrap">
+        <div className="text-center">
           <Kicker>{learn.kicker}</Kicker>
           <Heading>{learn.title}</Heading>
-          <p className="reveal mt-4 leading-relaxed text-muted md:text-lg">{learn.intro}</p>
+          <p className="reveal mx-auto mt-4 max-w-2xl leading-relaxed text-muted md:text-lg">{learn.intro}</p>
         </div>
-        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4">
+        <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4">
           {learn.items.map((item, i) => (
             <li
               key={item.title}
@@ -282,7 +295,7 @@ function Start() {
   return (
     <section id="start" className="py-12 md:py-20">
       <div className="wrap">
-        <Kicker>{start.kicker}</Kicker>
+        <Kicker centered>{start.kicker}</Kicker>
         <Heading>{start.title}</Heading>
         <ol className="mt-8 grid gap-6 lg:grid-cols-4">
           {start.steps.map((step, i) => (
@@ -324,7 +337,7 @@ function Program() {
   return (
     <section id="program" className="bg-cream py-12 md:py-20">
       <div className="wrap">
-        <Kicker>{program.kicker}</Kicker>
+        <Kicker centered>{program.kicker}</Kicker>
         <Heading>{program.title}</Heading>
 
         <div className="mt-8 grid gap-3 md:grid-cols-3 md:gap-4">
@@ -384,7 +397,7 @@ function InsideSession() {
   return (
     <section id="inside" className="py-12 md:py-20">
       <div className="wrap">
-        <Kicker>{insideSession.kicker}</Kicker>
+        <Kicker centered>{insideSession.kicker}</Kicker>
         <Heading>{insideSession.title}</Heading>
         <ul className="mt-8 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {insideSession.items.map((item) => (
@@ -411,7 +424,7 @@ function Outcomes() {
   return (
     <section id="outcomes" className="bg-mist py-12 md:py-20">
       <div className="wrap">
-        <Kicker>{outcomes.kicker}</Kicker>
+        <Kicker centered>{outcomes.kicker}</Kicker>
         <Heading>{outcomes.title}</Heading>
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -442,7 +455,7 @@ function WhyOutpace() {
   return (
     <section id="why-outpace" className="py-16 md:py-24">
       <div className="wrap">
-        <Kicker>{approach.kicker}</Kicker>
+        <Kicker centered>{approach.kicker}</Kicker>
         <Heading>{approach.title}</Heading>
 
         <div className="mt-8 overflow-hidden rounded-3xl ring-1 ring-line">
@@ -476,7 +489,7 @@ function MissionVision() {
       <div className="wrap">
         <div className="mx-auto max-w-3xl text-center">
           <Kicker>{belief.kicker}</Kicker>
-          <Heading centered>Our Mission &amp; Vision</Heading>
+          <Heading>Our Mission &amp; Vision</Heading>
         </div>
 
         <div className="mt-6 sm:mt-8 grid gap-6 md:grid-cols-2 items-stretch lg:gap-8">
@@ -583,8 +596,8 @@ function CareAndSupport() {
   return (
     <section id="care" className="bg-teal-deep py-14 text-white md:py-20">
       <div className="wrap">
-        <Kicker light>{careAndSupport.title}</Kicker>
-        <h2 className="reveal font-display text-3xl leading-[1.15] font-bold tracking-tight text-balance md:text-4xl">
+        <Kicker light centered>{careAndSupport.title}</Kicker>
+        <h2 className={`reveal text-center font-display leading-[1.15] font-bold tracking-tight text-balance ${headingSize}`}>
           {careAndSupport.subtitle}
         </h2>
         <ul className="mt-8 grid gap-5 md:grid-cols-3">
@@ -605,9 +618,9 @@ function Journey() {
   return (
     <section id="journey" className="bg-mist py-12 md:py-20">
       <div className="wrap">
-        <Kicker>{start.levelsTitle}</Kicker>
+        <Kicker centered>{start.levelsTitle}</Kicker>
         <Heading>{start.levelsSubtitle}</Heading>
-        <p className="mt-2 text-muted md:text-lg">{start.levelsIntro}</p>
+        <p className="mx-auto mt-2 max-w-2xl text-center text-muted md:text-lg">{start.levelsIntro}</p>
 
         <ol className="mt-6 grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-3">
           {start.levels.map((level, i) => (
@@ -638,7 +651,7 @@ function Stories() {
   return (
     <section id="stories" className="bg-cream py-12 md:py-20">
       <div className="wrap">
-        <Kicker>{stories.kicker}</Kicker>
+        <Kicker centered>{stories.kicker}</Kicker>
         <Heading>{stories.title}</Heading>
 
         <div className="reveal mt-8 rounded-3xl bg-teal-deep p-5 text-white md:p-7">
@@ -757,7 +770,7 @@ function Team() {
       <div className="wrap">
         <div className="mx-auto max-w-3xl text-center">
           <Kicker>{team.kicker}</Kicker>
-          <Heading centered>{team.title}</Heading>
+          <Heading>{team.title}</Heading>
           <p className="reveal mx-auto mt-3 max-w-2xl text-muted md:text-lg">
             {team.subtitle}
           </p>
@@ -798,9 +811,9 @@ function Faqs() {
   return (
     <section id="faqs" className="py-12 md:py-20">
       <div className="wrap">
-        <Kicker>{faqs.kicker}</Kicker>
+        <Kicker centered>{faqs.kicker}</Kicker>
         <Heading>{faqs.title}</Heading>
-        <p className="mt-2 mb-6 text-muted">{faqs.hint}</p>
+        <p className="mx-auto mt-2 mb-6 max-w-2xl text-center text-muted">{faqs.hint}</p>
         <FaqBoard />
       </div>
     </section>
@@ -815,7 +828,7 @@ function Closing() {
       <Ring className="-right-40 -bottom-56 size-[30rem] border-[3.5rem] border-flame/25" />
       <div className="wrap relative">
         <Kicker light>{closing.kicker}</Kicker>
-        <h2 className="mx-auto max-w-2xl font-display text-3xl leading-[1.1] font-bold tracking-tight text-balance md:text-[3rem]">
+        <h2 className={`mx-auto font-display leading-[1.1] font-bold tracking-tight text-balance ${headingSize}`}>
           {closing.title}
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-lg">{closing.body}</p>

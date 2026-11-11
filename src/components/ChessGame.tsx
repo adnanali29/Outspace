@@ -149,14 +149,16 @@ export function ChessGame() {
 
   return (
     <div className="grid items-start gap-x-14 gap-y-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,31rem)]">
-      <div className="lg:col-start-1">
+      <div className="text-center lg:col-span-2">
         <p className="mb-3 text-sm font-semibold text-ember">{copy.kicker}</p>
-        <h2 className="font-display text-3xl leading-[1.12] font-bold tracking-tight text-balance md:text-[2.75rem]">
+        <h2 className="font-display text-3xl leading-[1.12] font-bold tracking-tight text-balance md:text-[2.5rem] lg:text-[length:var(--heading-size)] lg:whitespace-nowrap">
           {copy.title}
         </h2>
-        <p className="mt-3 text-lg leading-relaxed text-muted">{copy.intro}</p>
+        <p className="mx-auto mt-3 max-w-2xl text-lg leading-relaxed text-muted">{copy.intro}</p>
+      </div>
 
-        <div className="mt-5" role="group" aria-label={copy.levelLabel}>
+      <div className="lg:col-start-1 lg:row-start-2">
+        <div role="group" aria-label={copy.levelLabel}>
           <p className="text-sm font-semibold">{copy.levelLabel}</p>
           <div className="mt-2 inline-flex rounded-full bg-white p-1">
             {copy.levels.map((option) => (
@@ -176,7 +178,7 @@ export function ChessGame() {
         </div>
       </div>
 
-      <div className="lg:col-start-1 lg:row-start-2">
+      <div className="lg:col-start-1 lg:row-start-3">
         <div
           aria-live="polite"
           className={`rounded-2xl p-4 font-semibold ${
@@ -191,7 +193,7 @@ export function ChessGame() {
         </div>
       </div>
 
-      <div className="@container mx-auto w-full max-w-lg lg:col-start-2 lg:row-span-3 lg:row-start-1 lg:max-w-none">
+      <div className="@container mx-auto w-full max-w-lg lg:col-start-2 lg:row-span-3 lg:row-start-2 lg:max-w-none">
         <div className="relative overflow-hidden rounded-2xl shadow-xl shadow-teal-deep/25 ring-4 ring-white">
           <div className="grid grid-cols-8">
             {SQUARES.map((square, i) => {
@@ -284,7 +286,7 @@ export function ChessGame() {
         </div>
       </div>
 
-      <div className="lg:col-start-1 lg:row-start-3">
+      <div className="lg:col-start-1 lg:row-start-4">
         <div className="mb-3 grid gap-1 lg:hidden">
           <Taken label={copy.youTook} pieces={taken.w} />
           <Taken label={copy.computerTook} pieces={taken.b} />
