@@ -6,12 +6,6 @@ const nextConfig: NextConfig = {
   turbopack: {
     // The home folder has its own package.json and lockfile; keep the root here.
     root: __dirname,
-    rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
-      },
-    },
   },
 };
 
