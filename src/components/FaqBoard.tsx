@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { faqs } from "@/content";
+import { faqs, whatsappHref } from "@/content";
 import { Piece, type PieceType } from "./Piece";
+import { WhatsAppIcon } from "./WhatsAppButton";
 
 const PIECES: PieceType[] = ["p", "n", "b", "r", "q", "k"];
 
@@ -64,6 +65,23 @@ export function FaqBoard() {
           </button>
         );
       })}
+      {/* Fills the board's last empty square, so it ends on a dark square. */}
+      {whatsappHref && faqs.items.length % 2 === 1 && faqs.items.length % 5 !== 0 && (
+        <a
+          href={whatsappHref}
+          target="_blank"
+          rel="noreferrer"
+          className="flex aspect-square flex-col bg-ink p-3 text-white transition-colors hover:bg-teal-deep sm:aspect-[2/1] sm:p-5 lg:aspect-square lg:p-4"
+        >
+          <span className="font-display text-[0.95rem] leading-snug font-bold sm:text-lg lg:text-base">
+            {faqs.more.q}
+          </span>
+          <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-peach">
+            <WhatsAppIcon className="size-5 text-[#25D366]" />
+            {faqs.more.cta}
+          </span>
+        </a>
+      )}
     </div>
   );
 }

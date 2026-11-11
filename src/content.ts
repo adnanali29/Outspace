@@ -1,11 +1,10 @@
 // All page copy lives here. Keep it short: one idea per line, written the way
 // you would say it to a parent.
 
-// Digits only, with country code, e.g. "919876543210". Until this is set, the
-// page offers a phone call instead of WhatsApp chat.
-export const whatsappNumber = "";
+// Digits only, with country code. WhatsApp messages from the page go here.
+export const whatsappNumber = "918296014487";
 
-const whatsappHref = whatsappNumber
+export const whatsappHref = whatsappNumber
   ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
       "Hi Outpace Academy, I'd like to know more about your chess classes.",
     )}`
@@ -42,7 +41,7 @@ export const chessLevels = [
 export const navLinks = [
   { label: "The programme", href: "#program" },
   { label: "How it works", href: "#start" },
-  { label: "Our team", href: "#team" },
+  { label: "Our coaches", href: "#team" },
   { label: "FAQs", href: "#faqs" },
 ];
 
@@ -114,8 +113,11 @@ export const trust = [
 export const heart = {
   kicker: "The heart of Outpace",
   title: "Every child deserves to be understood.",
-  subtitle: "Some children need a challenge. Some need more time. Others need someone who listens and believes in them.",
-  videoUrl: "/videos/heart-of-outpace.mp4",
+  needs: [
+    "Some children need a challenge.",
+    "Some need more time.",
+    "Others need someone who listens and believes in them.",
+  ],
   body: "At Outpace, we take time to understand your child. Through enjoyable chess learning and personalised mentoring, we help them discover their strengths, learn from setbacks and grow in confidence.",
   promise: "We want your child to feel: \u201cI can try. I can learn. I can grow.\u201d",
 };
@@ -230,6 +232,9 @@ export const program = {
 export const insideSession = {
   kicker: "Take a look inside",
   title: "See how your child\u2019s first session feels.",
+  videoUrl: "/videos/heart-of-outpace.mp4",
+  videoCaption: "Online Chess Coaching & Child Growth Mentorship",
+  listTitle: "In the first session",
   items: [
     "A friendly conversation to help your child feel comfortable.",
     "Simple chess questions and challenges suited to their current level.",
@@ -443,7 +448,7 @@ export const services = {
 };
 
 export const team = {
-  kicker: "Meet our team",
+  kicker: "Our Senior Coaches",
   title: "The people behind your child’s journey",
   subtitle: "Dedicated chess coaches and Child Growth Mentors working together to understand, encourage and support your child.",
   members: [
@@ -469,7 +474,7 @@ export const team = {
     },
     {
       name: "Sandra Benny",
-      role: "Child Growth Mentor",
+      role: "Senior Chess Coach",
       image: "/team/sandra-benny.jpg",
     },
     {
@@ -489,6 +494,7 @@ export const faqs = {
   kicker: "FAQs",
   title: "Questions parents ask",
   hint: "Tap a square to read the answer.",
+  more: { q: "Still have a question?", cta: "Message us on WhatsApp" },
   items: [
     {
       q: "Is the Introductory & Assessment Session free?",
@@ -542,6 +548,7 @@ export const footer = {
   email: "info@outpaceacademy.com",
   phone,
   phoneHref,
+  whatsapp: "WhatsApp +91 82960 14487",
   website: "www.outpaceacademy.com",
   socials: [
     { label: "Instagram", href: "https://www.instagram.com/outpaceacademy/" },

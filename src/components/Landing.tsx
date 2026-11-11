@@ -18,6 +18,7 @@ import {
   start,
   stories,
   talkToUs,
+  whatsappHref,
   team,
   trust,
 } from "@/content";
@@ -28,7 +29,8 @@ import { Header } from "./Header";
 import { HeroSlideshow } from "./HeroSlideshow";
 import { Logo } from "./Logo";
 import { MobileBar } from "./MobileBar";
-import { Piece } from "./Piece";
+import { Piece, type PieceType } from "./Piece";
+import { WhatsAppButton, WhatsAppIcon } from "./WhatsAppButton";
 
 const primaryButton =
   "inline-block rounded-full bg-flame px-7 py-3.5 font-semibold text-ink transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-flame/30";
@@ -155,7 +157,10 @@ function Hero({
   );
 }
 
-/* ─── 2. THE HEART OF OUTPACE (Video Player + Clean Sub-Heading + Tight Padding) ─── */
+/* ─── 2. THE HEART OF OUTPACE ─── */
+// A piece for each kind of child: the pawn's steady step, the knight's leap, the king.
+const heartPieces: PieceType[] = ["p", "n", "k"];
+
 function Heart() {
   return (
     <section
@@ -169,34 +174,22 @@ function Heart() {
           <h2 className={`reveal font-display leading-[1.15] font-bold tracking-tight text-balance ${headingSize}`}>
             {heart.title}
           </h2>
-          <p className="reveal mx-auto mt-2.5 max-w-2xl font-display text-base font-medium leading-relaxed text-white/90 sm:text-lg md:text-xl">
-            {heart.subtitle}
-          </p>
         </div>
 
-        {/* Video Player Card */}
-        <div className="reveal mt-6">
-          <div className="overflow-hidden rounded-3xl bg-black/40 p-2 shadow-2xl ring-1 ring-white/20 backdrop-blur-md sm:p-3">
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-black shadow-inner">
-              <video
-                controls
-                playsInline
-                preload="metadata"
-                className="size-full object-cover"
-              >
-                <source src={heart.videoUrl} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-            <div className="mt-2.5 flex items-center justify-between px-2 text-xs text-white/80">
-              <span className="flex items-center gap-2">
-                <span className="size-2 rounded-full bg-flame animate-pulse" />
-                <span className="font-semibold text-peach">Inside Outpace</span>
+        {/* Every child is different: three kinds of need, one per card. */}
+        <ul className="mt-8 grid gap-4 md:grid-cols-3">
+          {heart.needs.map((need, i) => (
+            <li
+              key={need}
+              className="reveal flex items-center gap-4 rounded-3xl bg-white/10 p-5 ring-1 ring-white/15 backdrop-blur-sm md:flex-col md:items-start md:p-6"
+            >
+              <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-white text-3xl text-teal-deep">
+                <Piece type={heartPieces[i % heartPieces.length]} />
               </span>
-              <span>Online Chess Coaching &amp; Child Growth Mentorship</span>
-            </div>
-          </div>
-        </div>
+              <p className="font-display text-lg leading-snug font-semibold md:text-xl">{need}</p>
+            </li>
+          ))}
+        </ul>
 
         {/* Narrative & Reassurance Cards Below Video */}
         <div className="reveal mt-6 grid gap-4 md:grid-cols-2">
@@ -399,20 +392,39 @@ function InsideSession() {
       <div className="wrap">
         <Kicker centered>{insideSession.kicker}</Kicker>
         <Heading>{insideSession.title}</Heading>
-        <ul className="mt-8 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-          {insideSession.items.map((item) => (
-            <li key={item} className="reveal flex items-start gap-3 rounded-2xl bg-mist p-5 ring-1 ring-line">
-              <span className="grid size-6 shrink-0 place-items-center rounded-full bg-teal-deep text-white">
-                <CheckMark className="size-3.5" />
-              </span>
-              <p className="text-sm leading-relaxed md:text-base">{item}</p>
-            </li>
-          ))}
-        </ul>
-        <div className="mt-8 text-center">
-          <a href="#book" className={primaryButton}>
-            Book a Free Introductory &amp; Assessment Session
-          </a>
+
+        <div className="mt-8 grid items-center gap-6 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:gap-10">
+          <figure className="reveal overflow-hidden rounded-3xl bg-teal-deep p-2 shadow-2xl shadow-teal-deep/25 sm:p-3">
+            <div className="aspect-video overflow-hidden rounded-2xl bg-black">
+              <video controls playsInline preload="metadata" className="size-full object-cover">
+                <source src={insideSession.videoUrl} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <figcaption className="flex items-center gap-2 px-2 pt-2.5 pb-1 text-xs text-white/85">
+              <span className="size-2 animate-pulse rounded-full bg-flame" />
+              <span className="font-semibold text-peach">Inside Outpace</span>
+              <span aria-hidden>·</span>
+              <span>{insideSession.videoCaption}</span>
+            </figcaption>
+          </figure>
+
+          <div>
+            <h3 className="font-display text-xl font-bold text-ink">{insideSession.listTitle}</h3>
+            <ul className="mt-4 space-y-3">
+              {insideSession.items.map((item) => (
+                <li key={item} className="reveal flex items-start gap-3">
+                  <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-teal-deep text-white">
+                    <CheckMark className="size-3.5" />
+                  </span>
+                  <p className="leading-relaxed text-ink/90">{item}</p>
+                </li>
+              ))}
+            </ul>
+            <a href="#book" className={`mt-6 ${primaryButton}`}>
+              Book a Free Introductory &amp; Assessment Session
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -885,6 +897,19 @@ function Footer() {
                 {footer.phone}
               </a>
             </li>
+            {whatsappHref && (
+              <li>
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 transition-colors hover:text-teal-deep"
+                >
+                  <WhatsAppIcon className="size-4 text-[#25D366]" />
+                  {footer.whatsapp}
+                </a>
+              </li>
+            )}
             <li>
               <a
                 href={`mailto:${footer.email}`}
@@ -1010,6 +1035,7 @@ export function Landing({
         <Closing />
       </main>
       <Footer />
+      <WhatsAppButton />
       <MobileBar />
     </div>
   );
