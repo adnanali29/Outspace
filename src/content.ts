@@ -454,22 +454,22 @@ export const team = {
   members: [
     {
       name: "Syam Peter",
-      role: "Chess Coach & Mentor",
+      role: "Senior Chess Coach",
       image: "/team/syam-peter.jpg",
     },
     {
       name: "Sreedil Lal",
-      role: "Chess Coach & Mentor",
+      role: "Senior Chess Coach",
       image: "/team/sreedil-lal.jpg",
     },
     {
       name: "Deepak K S",
-      role: "Chess Coach & Mentor",
+      role: "Senior Chess Coach",
       image: "/team/deepak-ks.jpg",
     },
     {
       name: "Sibin Paul",
-      role: "Chess Coach & Mentor",
+      role: "Senior Chess Coach",
       image: "/team/sibin-paul.jpg",
     },
     {
@@ -479,12 +479,12 @@ export const team = {
     },
     {
       name: "Mervin K Dennis",
-      role: "Chess Coach & Mentor",
+      role: "Senior Chess Coach",
       image: "/team/mervin-k-dennis.jpg",
     },
     {
       name: "Shubham Raj",
-      role: "Chess Coach & Mentor",
+      role: "Senior Chess Coach",
       image: "/team/shubham-raj.jpg",
     },
   ],

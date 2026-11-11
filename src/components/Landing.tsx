@@ -165,7 +165,7 @@ function Heart() {
   return (
     <section
       id="heart"
-      className="relative overflow-hidden bg-teal-deep py-8 text-white sm:py-10 md:py-12"
+      className="relative overflow-hidden bg-teal-deep py-10 text-white md:py-14"
     >
       <Ring className="-right-32 -bottom-32 size-[28rem] border-[3rem] border-white/5" />
       <div className="wrap relative">
@@ -248,7 +248,7 @@ function MiniBoard({ lit }: { lit: number[] }) {
 
 function Learn() {
   return (
-    <section id="learn" className="py-12 md:py-20">
+    <section id="learn" className="py-10 md:py-14">
       <div className="wrap">
         <div className="text-center">
           <Kicker>{learn.kicker}</Kicker>
@@ -275,7 +275,7 @@ function Learn() {
 /* ─── PLAY CHESS ─── */
 function Play() {
   return (
-    <section id="play" className="bg-mist py-12 md:py-20">
+    <section id="play" className="bg-mist py-10 md:py-14">
       <div className="wrap">
         <ChessGame />
       </div>
@@ -286,7 +286,7 @@ function Play() {
 /* ─── 8. HOW IT WORKS ─── */
 function Start() {
   return (
-    <section id="start" className="bg-cream py-12 md:py-20">
+    <section id="start" className="bg-cream py-10 md:py-14">
       <div className="wrap">
         <Kicker centered>{start.kicker}</Kicker>
         <Heading>{start.title}</Heading>
@@ -328,7 +328,7 @@ const personStyles = [
 
 function Program() {
   return (
-    <section id="program" className="bg-cream py-12 md:py-20">
+    <section id="program" className="bg-cream py-10 md:py-14">
       <div className="wrap">
         <Kicker centered>{program.kicker}</Kicker>
         <Heading>{program.title}</Heading>
@@ -388,7 +388,7 @@ function Program() {
 /* ─── 10. TAKE A LOOK INSIDE ─── */
 function InsideSession() {
   return (
-    <section id="inside" className="py-12 md:py-20">
+    <section id="inside" className="py-10 md:py-14">
       <div className="wrap">
         <Kicker centered>{insideSession.kicker}</Kicker>
         <Heading>{insideSession.title}</Heading>
@@ -434,7 +434,7 @@ function InsideSession() {
 /* ─── 11. THE OUTCOMES ─── */
 function Outcomes() {
   return (
-    <section id="outcomes" className="bg-mist py-12 md:py-20">
+    <section id="outcomes" className="bg-mist py-10 md:py-14">
       <div className="wrap">
         <Kicker centered>{outcomes.kicker}</Kicker>
         <Heading>{outcomes.title}</Heading>
@@ -465,7 +465,7 @@ function Outcomes() {
 /* ─── 12. WHY OUTPACE ─── */
 function WhyOutpace() {
   return (
-    <section id="why-outpace" className="py-16 md:py-24">
+    <section id="why-outpace" className="py-10 md:py-14">
       <div className="wrap">
         <Kicker centered>{approach.kicker}</Kicker>
         <Heading>{approach.title}</Heading>
@@ -497,7 +497,7 @@ function WhyOutpace() {
 function MissionVision() {
   const { vision } = belief;
   return (
-    <section id="mission" className="bg-cream py-8 sm:py-10 md:py-12">
+    <section id="mission" className="bg-cream py-10 md:py-14">
       <div className="wrap">
         <div className="mx-auto max-w-3xl text-center">
           <Kicker>{belief.kicker}</Kicker>
@@ -554,7 +554,7 @@ function MissionVision() {
 function Founder() {
   const { founder } = belief;
   return (
-    <section id="founder" className="py-8 sm:py-10 md:py-12 bg-cream/40">
+    <section id="founder" className="py-10 md:py-14 bg-cream/40">
       <div className="wrap">
         <div className="reveal rounded-3xl bg-white p-6 sm:p-8 md:p-9 shadow-xl ring-1 ring-line">
           <div className="grid md:grid-cols-[22rem_minmax(0,1fr)] lg:grid-cols-[26rem_minmax(0,1fr)] items-stretch gap-6 sm:gap-8 lg:gap-10">
@@ -606,7 +606,7 @@ function Founder() {
 /* ─── 15. CARE AND SUPPORT ─── */
 function CareAndSupport() {
   return (
-    <section id="care" className="bg-teal-deep py-14 text-white md:py-20">
+    <section id="care" className="bg-teal-deep py-10 text-white md:py-14">
       <div className="wrap">
         <Kicker light centered>{careAndSupport.title}</Kicker>
         <h2 className={`reveal text-center font-display leading-[1.15] font-bold tracking-tight text-balance ${headingSize}`}>
@@ -628,7 +628,7 @@ function CareAndSupport() {
 /* ─── 16. THE OUTPACE CHESS JOURNEY ─── */
 function Journey() {
   return (
-    <section id="journey" className="bg-mist py-12 md:py-20">
+    <section id="journey" className="bg-mist py-10 md:py-14">
       <div className="wrap">
         <Kicker centered>{start.levelsTitle}</Kicker>
         <Heading>{start.levelsSubtitle}</Heading>
@@ -661,7 +661,7 @@ function Journey() {
 /* ─── STORIES FROM OUR FAMILIES ─── */
 function Stories() {
   return (
-    <section id="stories" className="bg-cream py-12 md:py-20">
+    <section id="stories" className="bg-cream py-10 md:py-14">
       <div className="wrap">
         <Kicker centered>{stories.kicker}</Kicker>
         <Heading>{stories.title}</Heading>
@@ -733,7 +733,7 @@ function Stories() {
 /* ─── BEYOND CHESS (Small Glimpse Card) ─── */
 function Services() {
   return (
-    <section id="services" className="py-10 md:py-16">
+    <section id="services" className="py-10 md:py-14">
       <div className="wrap">
         <div className="reveal flex flex-col items-start justify-between gap-6 rounded-3xl bg-mist p-6 ring-1 ring-line sm:p-8 md:flex-row md:items-center md:gap-10">
           <div className="max-w-xl">
@@ -778,7 +778,7 @@ function Services() {
 /* ─── MEET OUR TEAM (Square Cards, 1/2 Alignment on Phone) ─── */
 function Team() {
   return (
-    <section id="team" className="bg-cream py-16 md:py-24">
+    <section id="team" className="bg-cream py-10 md:py-14">
       <div className="wrap">
         <div className="mx-auto max-w-3xl text-center">
           <Kicker>{team.kicker}</Kicker>
@@ -821,7 +821,7 @@ function Team() {
 /* ─── 17. FAQs ─── */
 function Faqs() {
   return (
-    <section id="faqs" className="py-12 md:py-20">
+    <section id="faqs" className="py-10 md:py-14">
       <div className="wrap">
         <Kicker centered>{faqs.kicker}</Kicker>
         <Heading>{faqs.title}</Heading>
@@ -835,7 +835,7 @@ function Faqs() {
 /* ─── CLOSING CTA ─── */
 function Closing() {
   return (
-    <section className="relative overflow-hidden bg-teal-deep py-16 text-center text-white md:py-24">
+    <section className="relative overflow-hidden bg-teal-deep py-12 text-center text-white md:py-16">
       <Ring className="-top-48 -left-48 size-[30rem] border-[3.5rem] border-white/5" />
       <Ring className="-right-40 -bottom-56 size-[30rem] border-[3.5rem] border-flame/25" />
       <div className="wrap relative">
