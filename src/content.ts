@@ -46,12 +46,52 @@ export const navLinks = [
   { label: "FAQs", href: "#faqs" },
 ];
 
-export const heroSlideSeconds = 5;
+export const heroSlideSeconds = 2;
 
 export const heroImages = [
   {
-    src: "/hero/online-chess-coaching-warmth.jpg",
-    alt: "A child and coach sharing a natural moment of encouragement during an online chess session",
+    src: "/hero/hero-01.jpg",
+    alt: "A girl talking with her mentor on a video call at home",
+  },
+  {
+    src: "/hero/hero-02.jpg",
+    alt: "A smiling girl thinking over her next move at a wooden chessboard",
+  },
+  {
+    src: "/hero/hero-03.jpg",
+    alt: "A boy moving a chess piece as his father watches, with an Outpace coach on the laptop",
+  },
+  {
+    src: "/hero/hero-04.jpg",
+    alt: "A young girl showing her father a chess move at home",
+  },
+  {
+    src: "/hero/hero-05.jpg",
+    alt: "A mother and daughter watching an online chess lesson together",
+  },
+  {
+    src: "/hero/hero-06.jpg",
+    alt: "A boy in an Outpace shirt taking notes during an online group chess class",
+  },
+  {
+    src: "/hero/hero-07.jpg",
+    alt: "A boy concentrating on a chess position",
+  },
+  {
+    src: "/hero/hero-08.jpg",
+    alt: "A mother and son smiling at an online chess lesson on a laptop",
+  },
+  {
+    src: "/hero/hero-09.jpg",
+    alt: "A father and son following an online chess session together",
+  },
+  {
+    src: "/hero/hero-10.jpg",
+    alt: "An Outpace mentor talking with a boy and his parents",
+  },
+  {
+    src: "/hero/hero-11.jpg",
+    alt: "Two children laughing over a game of chess",
   },
 ];
 

@@ -4,8 +4,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { heroImages, heroSlideSeconds } from "@/content";
 
-// Real class photos filling the hero, behind a cream layer set in Landing.tsx.
-// Crossfades slowly, and not at all for reduced-motion visitors.
+// Photos filling the hero, behind a cream layer set in Landing.tsx.
+// Crossfades every few seconds, and not at all for reduced-motion visitors.
 export function HeroSlideshow() {
   const [current, setCurrent] = useState(0);
 
@@ -30,7 +30,7 @@ export function HeroSlideshow() {
           sizes="100vw"
           priority={i === 0}
           loading={i === 0 ? undefined : "eager"}
-          className={`object-cover object-[center_40%] transition-opacity duration-1000 ${
+          className={`object-cover object-[center_40%] transition-opacity duration-700 ${
             i === current ? "opacity-100" : "opacity-0"
           }`}
         />
