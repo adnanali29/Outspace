@@ -91,33 +91,31 @@ function Hero({
   return (
     <section id="top" className="bg-cream">
       <div className="relative overflow-hidden">
-        <div className="absolute inset-x-0 top-0 h-[23rem] lg:inset-y-0 lg:h-auto">
+        <div className="absolute inset-0">
           <HeroSlideshow />
-          <div
-            aria-hidden
-            className="absolute inset-x-0 top-0 -bottom-px bg-gradient-to-b from-cream/70 via-cream/85 to-cream to-90% lg:bg-gradient-to-r lg:from-cream/95 lg:via-cream/80 lg:to-cream/40 lg:to-100%"
-          />
+          {/* An even black layer, so the photos stay visible and the white text reads clearly. */}
+          <div aria-hidden className="absolute inset-0 bg-black/55" />
         </div>
         <div className="wrap-wide relative grid items-center gap-x-14 gap-y-8 py-8 lg:min-h-[calc(100svh-11rem)] lg:grid-cols-[minmax(0,1fr)_26.5rem] lg:py-10 short:py-5 xl:gap-x-20">
-          <div className="text-center lg:text-left">
-            <p className="inline-flex items-center gap-2 rounded-full bg-mist px-4 py-1.5 text-sm font-semibold text-teal-deep">
+          <div className="text-center text-white [text-shadow:0_1px_14px_rgb(0_0_0/0.35)] lg:text-left">
+            <p className="inline-flex items-center gap-2 rounded-full bg-mist px-4 py-1.5 text-sm font-semibold text-teal-deep [text-shadow:none]">
               <MonitorIcon className="size-4" />
               {hero.eyebrow}
             </p>
             <h1 className="mt-4 font-display text-[2.4rem] leading-[1.08] font-bold tracking-tight text-balance sm:text-5xl xl:text-[3.5rem] short:mt-3 short:text-[2.6rem]">
               {hero.title}
             </h1>
-            <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-ink lg:mx-0 lg:text-xl short:mt-3 short:text-lg">
+            <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white lg:mx-0 lg:text-xl short:mt-3 short:text-lg">
               {hero.lede}
             </p>
             {hero.subLede && (
-              <p className="mx-auto mt-2 max-w-xl text-base leading-relaxed text-muted lg:mx-0 lg:text-lg">
+              <p className="mx-auto mt-2 max-w-xl text-base leading-relaxed text-white/90 lg:mx-0 lg:text-lg">
                 {hero.subLede}
               </p>
             )}
             <a
               href="#play"
-              className="mt-4 inline-flex items-center gap-2 font-semibold text-teal-deep underline decoration-flame decoration-2 underline-offset-4 hover:text-ember"
+              className="mt-4 inline-flex items-center gap-2 font-semibold text-white underline decoration-flame decoration-2 underline-offset-4 hover:text-flame"
             >
               <Piece type="n" className="text-2xl" />
               {hero.playLink}
