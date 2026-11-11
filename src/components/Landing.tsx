@@ -286,7 +286,7 @@ function Play() {
 /* ─── 8. HOW IT WORKS ─── */
 function Start() {
   return (
-    <section id="start" className="py-12 md:py-20">
+    <section id="start" className="bg-cream py-12 md:py-20">
       <div className="wrap">
         <Kicker centered>{start.kicker}</Kicker>
         <Heading>{start.title}</Heading>
@@ -983,23 +983,23 @@ export function Landing({
         {/* 1. Hero */}
         <Hero savedLead={savedLead} onSubmit={onSubmit} />
 
-        {/* 2. The Heart of Outpace (Big prominent video + justified narrative) */}
+        {/* The Heart of Outpace */}
         <Heart />
 
-        {/* 7. What your child develops (Restored exact design) */}
+        {/* What your child develops */}
         <Learn />
+
+        {/* How it works */}
+        <Start />
+
+        {/* Take a look inside */}
+        <InsideSession />
 
         {/* Play chess */}
         <Play />
 
-        {/* 8. How it works */}
-        <Start />
-
-        {/* 9. The programme */}
+        {/* The programme */}
         <Program />
-
-        {/* 10. Take a look inside */}
-        <InsideSession />
 
         {/* 11. The outcomes */}
         <Outcomes />
