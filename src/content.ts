@@ -41,7 +41,7 @@ export const chessLevels = [
 export const navLinks = [
   { label: "The programme", href: "#program" },
   { label: "How it works", href: "#start" },
-  { label: "Our coaches", href: "#team" },
+  { label: "Our team", href: "#team" },
   { label: "FAQs", href: "#faqs" },
 ];
 
@@ -448,44 +448,40 @@ export const services = {
 };
 
 export const team = {
-  kicker: "Our Senior Coaches",
+  kicker: "Meet Our Team",
   title: "The people behind your child’s journey",
   subtitle: "Dedicated chess coaches and Child Growth Mentors working together to understand, encourage and support your child.",
-  members: [
+  // Each group shows photos and names; the group title says what they do.
+  groups: [
     {
-      name: "Syam Peter",
+      title: "Our Senior Chess Coaches",
       role: "Senior Chess Coach",
-      image: "/team/syam-peter.jpg",
+      members: [
+        { name: "Syam Peter", image: "/team/syam-peter.jpg" },
+        { name: "Sreedil Lal", image: "/team/sreedil-lal.jpg" },
+        { name: "Deepak K S", image: "/team/deepak-ks.jpg" },
+        { name: "Sibin Paul", image: "/team/sibin-paul.jpg" },
+        { name: "Sandra Benny", image: "/team/sandra-benny.jpg" },
+        { name: "Mervin K Dennis", image: "/team/mervin-k-dennis.jpg" },
+        { name: "Shubham Raj", image: "/team/shubham-raj.jpg" },
+      ],
     },
     {
-      name: "Sreedil Lal",
-      role: "Senior Chess Coach",
-      image: "/team/sreedil-lal.jpg",
+      title: "Our Child Growth Mentors",
+      role: "Child Growth Mentor",
+      members: [
+        { name: "Anna Thomas", image: "/team/anna-thomas.jpg" },
+        { name: "Manoj Warrier", image: "/team/manoj-warrier.jpg" },
+      ],
     },
     {
-      name: "Deepak K S",
-      role: "Senior Chess Coach",
-      image: "/team/deepak-ks.jpg",
-    },
-    {
-      name: "Sibin Paul",
-      role: "Senior Chess Coach",
-      image: "/team/sibin-paul.jpg",
-    },
-    {
-      name: "Sandra Benny",
-      role: "Senior Chess Coach",
-      image: "/team/sandra-benny.jpg",
-    },
-    {
-      name: "Mervin K Dennis",
-      role: "Senior Chess Coach",
-      image: "/team/mervin-k-dennis.jpg",
-    },
-    {
-      name: "Shubham Raj",
-      role: "Senior Chess Coach",
-      image: "/team/shubham-raj.jpg",
+      title: "Our Class Mentors",
+      role: "Class Mentor",
+      members: [
+        { name: "Vismaya U", image: "/team/vismaya-u.jpg" },
+        { name: "Lakshmi Priya", image: "/team/lakshmi-priya.jpg" },
+        { name: "Ayswarya S M", image: "/team/ayswarya-sm.jpg" },
+      ],
     },
   ],
 };

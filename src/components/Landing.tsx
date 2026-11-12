@@ -775,42 +775,80 @@ function Services() {
   );
 }
 
-/* ─── MEET OUR TEAM (Square Cards, 1/2 Alignment on Phone) ─── */
+/* ─── MEET OUR TEAM: coaches in one row, then the two mentor groups ─── */
+type TeamGroup = (typeof team.groups)[number];
+
+// Mentor cards match the width of a coach card in the 7-across row on laptops.
+const mentorWidth = "lg:w-[calc((min(100vw,1320px)-12rem)/7)]";
+
+function TeamGroupTitle({ children }: { children: ReactNode }) {
+  return (
+    <h3 className="reveal mb-5 flex items-center justify-center gap-3 font-display text-lg font-bold whitespace-nowrap text-ink sm:text-xl md:text-2xl">
+      <span aria-hidden className="h-0.5 w-5 rounded-full bg-flame sm:w-8" />
+      {children}
+      <span aria-hidden className="h-0.5 w-5 rounded-full bg-flame sm:w-8" />
+    </h3>
+  );
+}
+
+function TeamCard({ name, image, role, width }: { name: string; image: string; role: string; width: string }) {
+  return (
+    <div
+      className={`group reveal relative aspect-square overflow-hidden rounded-2xl bg-mist shadow-sm ring-1 ring-line/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${width}`}
+    >
+      <Image
+        src={image}
+        alt={`${name}, ${role}`}
+        fill
+        sizes="(min-width: 1024px) 180px, (min-width: 640px) 24vw, 45vw"
+        className="object-cover object-[center_18%] transition-transform duration-500 group-hover:scale-105"
+      />
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/95 via-ink/55 to-transparent p-3 pt-10 text-center">
+        <p className="font-display text-sm leading-snug font-bold text-white sm:text-base">{name}</p>
+      </div>
+    </div>
+  );
+}
+
+function TeamGroupBlock({ group, width, className = "" }: { group: TeamGroup; width: string; className?: string }) {
+  return (
+    <div className={className}>
+      <TeamGroupTitle>{group.title}</TeamGroupTitle>
+      <div className="flex flex-wrap justify-center gap-4">
+        {group.members.map((member) => (
+          <TeamCard key={member.name} {...member} role={group.role} width={width} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function Team() {
+  const [coaches, ...mentors] = team.groups;
+  const cardWidth = "w-[calc(50%-0.5rem)] sm:w-[calc(25%-0.75rem)]";
   return (
     <section id="team" className="bg-cream py-10 md:py-14">
       <div className="wrap">
         <div className="mx-auto max-w-3xl text-center">
           <Kicker>{team.kicker}</Kicker>
           <Heading>{team.title}</Heading>
-          <p className="reveal mx-auto mt-3 max-w-2xl text-muted md:text-lg">
-            {team.subtitle}
-          </p>
+          <p className="reveal mx-auto mt-3 max-w-2xl text-muted md:text-lg">{team.subtitle}</p>
         </div>
 
-        {/* Square Cards: 1/2 width on phone (2-col), 3-col on tablet, 4-col centered on desktop */}
-        <div className="mt-12 flex flex-wrap justify-center gap-3.5 sm:gap-5 md:gap-6">
-          {team.members.map((member) => (
-            <div
-              key={member.name}
-              className="group reveal relative aspect-square w-[calc(50%-0.45rem)] overflow-hidden rounded-2xl bg-mist shadow-sm ring-1 ring-line/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[calc(33.333%-0.85rem)] sm:rounded-3xl md:w-[calc(25%-1.15rem)]"
-            >
-              <Image
-                src={member.image}
-                alt={`${member.name} - ${member.role}`}
-                fill
-                sizes="(min-width: 1024px) 240px, (min-width: 640px) 30vw, 45vw"
-                className="object-cover object-[center_18%] transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/95 via-ink/60 to-transparent p-3 pt-10 text-center sm:p-4 sm:pt-12">
-                <h3 className="font-display text-sm font-bold text-white sm:text-base leading-snug">
-                  {member.name}
-                </h3>
-                <p className="mt-0.5 text-xs font-semibold text-peach">
-                  {member.role}
-                </p>
-              </div>
-            </div>
+        <TeamGroupBlock
+          group={coaches}
+          width={`${cardWidth} lg:w-[calc((100%-6rem)/7)]`}
+          className="mt-10"
+        />
+
+        <div className="mt-12 grid gap-12 lg:flex lg:justify-center lg:gap-0">
+          {mentors.map((group, i) => (
+            <TeamGroupBlock
+              key={group.title}
+              group={group}
+              width={`${cardWidth} ${mentorWidth}`}
+              className={i > 0 ? "lg:ml-10 lg:border-l lg:border-line lg:pl-10" : ""}
+            />
           ))}
         </div>
       </div>
