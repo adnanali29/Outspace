@@ -4,7 +4,7 @@ import { bookingRef, formatIST, STATUSES, statusLabel, type Consultation } from 
 import { query } from "@/lib/db";
 import { primaryButtonClass } from "../../ui";
 import { PanelLoading } from "../Loading";
-import { RowActions, StatusPicker } from "./BookingActions";
+import { RefreshButton, RowActions, StatusPicker } from "./BookingActions";
 
 const SHOWN = 500;
 
@@ -39,11 +39,14 @@ async function Consultations() {
               : `Newest first.${total > SHOWN ? ` Showing the latest ${SHOWN}; the CSV has them all.` : ""}`}
           </p>
         </div>
-        {total > 0 && (
-          <a href="/admin/consultations/export" className={primaryButtonClass}>
-            Download CSV
-          </a>
-        )}
+        <div className="flex flex-wrap gap-2">
+          <RefreshButton />
+          {total > 0 && (
+            <a href="/admin/consultations/export" className={primaryButtonClass}>
+              Download CSV
+            </a>
+          )}
+        </div>
       </div>
 
       {total > 0 && (

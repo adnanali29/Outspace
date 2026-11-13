@@ -103,3 +103,26 @@ export function RowActions({ whatsapp, summary, bookingRef }: { whatsapp: string
     </div>
   );
 }
+
+// Reloads the list from the database to show new bookings.
+export function RefreshButton() {
+  const router = useRouter();
+  const [pending, startTransition] = useTransition();
+  return (
+    <button
+      type="button"
+      disabled={pending}
+      onClick={() => startTransition(() => router.refresh())}
+      className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-5 py-2.5 font-semibold text-teal-deep ring-2 ring-teal-deep transition-colors hover:bg-teal-deep hover:text-white disabled:cursor-wait disabled:opacity-70"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        aria-hidden
+        className={`size-4 fill-none stroke-current stroke-[2.5] ${pending ? "animate-spin" : ""}`}
+      >
+        <path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7" />
+      </svg>
+      {pending ? "Refreshing…" : "Refresh"}
+    </button>
+  );
+}
