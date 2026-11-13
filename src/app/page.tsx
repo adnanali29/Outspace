@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContentProvider } from "@/components/ContentProvider";
+import { MetaPixel } from "@/components/MetaPixel";
 import { Site } from "@/components/Site";
 import { getSiteContent } from "@/lib/siteContent";
 
@@ -12,6 +13,7 @@ export default async function Home() {
   const content = await getSiteContent();
   return (
     <ContentProvider content={content}>
+      <MetaPixel />
       <Site />
     </ContentProvider>
   );

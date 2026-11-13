@@ -4,6 +4,7 @@ import { randomBytes } from "node:crypto";
 import { updateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { endSession, requireAdmin, startSession, updateLogin, verifyLogin } from "@/lib/auth";
+import { STATUSES } from "@/lib/consultations";
 import { query } from "@/lib/db";
 import { CONTENT_TAG, writeContent } from "@/lib/siteContent";
 
@@ -59,9 +60,10 @@ export async function uploadImage(formData: FormData): Promise<{ url?: string; e
   return { url: `/media/${id}` };
 }
 
-export async function deleteConsultation(id: number) {
+export async function setConsultationStatus(id: number, status: string) {
   await requireAdmin();
-  await query("delete from consultations where id = $1", [id]);
+  if (!Number.isInteger(id) || !STATUSES.some((option) => option.value === status)) return;
+  await query("update consultations set status = $1 where id = $2", [status, id]);
 }
 
 export async function changeLogin(_: FormState, formData: FormData): Promise<FormState> {

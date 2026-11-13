@@ -1,8 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { useContent } from "./ContentProvider";
-import type { Lead } from "./BookingForm";
 import { Logo } from "./Logo";
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -52,14 +52,13 @@ function downloadCalendarFile(
 const secondaryButton =
   "cursor-pointer rounded-full px-6 py-3.5 font-semibold text-teal-deep ring-2 ring-teal-deep transition-colors hover:bg-mist";
 
-export function ThankYou({
-  lead,
-  onReschedule,
-}: {
-  lead: Lead;
-  onReschedule: () => void;
-}) {
-  const { sessionMinutes, sessionSlots, talkToUs, thanks } = useContent();
+export function ThankYou({ bookingRef, slot }: { bookingRef: string; slot: string }) {
+  const { contact, sessionMinutes, sessionSlots, talkToUs, thanks, whatsappHref } = useContent();
+  // Changing the time goes through WhatsApp, so it doesn't create a second booking.
+  const digits = contact.whatsappNumber.replace(/\D/g, "");
+  const changeTimeHref = digits
+    ? `https://wa.me/${digits}?text=${encodeURIComponent(`Hi Outpace Academy, I'd like to change the time for my booking ${bookingRef}.`)}`
+    : talkToUs.href;
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -94,8 +93,13 @@ export function ThankYou({
             {thanks.title}
           </h1>
           <p className="mt-3 text-lg leading-relaxed text-muted">{thanks.body}</p>
-          <p className="mt-2 text-sm text-muted">
-            Requested time: <strong className="text-ink">{lead.slot}</strong>
+          <p className="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-sm text-muted">
+            <span>
+              Booking code: <strong className="text-ink">{bookingRef}</strong>
+            </span>
+            <span>
+              Requested time: <strong className="text-ink">{slot}</strong>
+            </span>
           </p>
 
           <section className="mt-10">
@@ -125,21 +129,21 @@ export function ThankYou({
           <div className="mt-8 flex flex-wrap gap-3">
             <button
               type="button"
-              onClick={() => downloadCalendarFile(lead.slot, sessionSlots, sessionMinutes)}
+              onClick={() => downloadCalendarFile(slot, sessionSlots, sessionMinutes)}
               className="cursor-pointer rounded-full bg-flame px-6 py-3.5 font-semibold text-ink transition-shadow hover:shadow-lg hover:shadow-flame/30"
             >
               Add to calendar
             </button>
-            <button type="button" onClick={onReschedule} className={secondaryButton}>
-              Change time
-            </button>
             <a
-              href={talkToUs.href}
-              {...(talkToUs.external && { target: "_blank", rel: "noreferrer" })}
+              href={changeTimeHref}
+              {...((whatsappHref || talkToUs.external) && { target: "_blank", rel: "noreferrer" })}
               className={secondaryButton}
             >
-              {talkToUs.label}
+              Change time
             </a>
+            <Link href="/" className={secondaryButton}>
+              Back to the website
+            </Link>
           </div>
         </div>
       </main>

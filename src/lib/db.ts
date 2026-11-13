@@ -38,6 +38,7 @@ const SCHEMA = `
     level text not null,
     slot text not null
   );
+  alter table consultations add column if not exists status text not null default 'pending';
   create table if not exists admin_account (
     id int primary key default 1 check (id = 1),
     username text not null,

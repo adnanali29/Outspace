@@ -1,6 +1,6 @@
 import { isAdmin } from "@/lib/auth";
 import { query } from "@/lib/db";
-import { formatIST, type Consultation } from "@/lib/consultations";
+import { bookingRef, formatIST, statusLabel, type Consultation } from "@/lib/consultations";
 
 // Excel treats cells starting with these as formulas, so they're neutralised.
 function cell(value: string | number) {
@@ -13,13 +13,13 @@ export async function GET() {
   if (!(await isAdmin())) return new Response("Please log in.", { status: 401 });
 
   const rows = await query<Consultation>(
-    "select id, created_at, parent_name, whatsapp, child_age, level, slot from consultations order by created_at desc",
+    "select id, created_at, parent_name, whatsapp, child_age, level, slot, status from consultations order by id desc",
   );
-  const header = ["ID", "Submitted (IST)", "Parent name", "WhatsApp", "Child age", "Chess level", "Preferred time"];
+  const header = ["Booking ref", "Submitted (IST)", "Parent name", "WhatsApp (+91)", "Child age", "Chess level", "Preferred time", "Status"];
   const lines = [
     header.map(cell).join(","),
     ...rows.map((row) =>
-      [row.id, formatIST(row.created_at), row.parent_name, row.whatsapp, row.child_age, row.level, row.slot]
+      [bookingRef(row.id), formatIST(row.created_at), row.parent_name, row.whatsapp, row.child_age, row.level, row.slot, statusLabel(row.status)]
         .map(cell)
         .join(","),
     ),

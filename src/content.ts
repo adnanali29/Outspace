@@ -10,6 +10,11 @@ const seo = {
     "Every child can learn. We find the way. Chess taught by patient coaches, with a mentor who truly gets to know your child. Book a free first session.",
 };
 
+// Ad tracking. Paste the Meta Pixel ID (numbers only) in the admin panel.
+const tracking = {
+  metaPixelId: "",
+};
+
 const contact = {
   // Digits only, with country code. WhatsApp messages from the page go here.
   whatsappNumber: "918296014487",
@@ -578,6 +583,7 @@ const thanks = {
 
 export const defaultContent = {
   seo,
+  tracking,
   contact,
   sessionSlots,
   sessionMinutes,

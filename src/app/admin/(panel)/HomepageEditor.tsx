@@ -47,6 +47,12 @@ const SECTIONS: { id: string; label: string; keys: string[]; note?: string }[] =
     note: "Every WhatsApp button on the page uses this number and message.",
   },
   { id: "seo", label: "Google & sharing", keys: ["seo"], note: "The page title and description shown on Google." },
+  {
+    id: "tracking",
+    label: "Tracking (Meta Pixel)",
+    keys: ["tracking"],
+    note: "Paste your Meta Pixel ID from Meta Events Manager (numbers only). Every page view is tracked, and each booking's thank-you page (like /thank-you/OPA05) also sends a Lead event. Leave it empty to turn tracking off.",
+  },
 ];
 
 const LABELS: Record<string, string> = {
@@ -88,6 +94,7 @@ const LABELS: Record<string, string> = {
   levelsNote: "Note under the levels",
   noteLink: "Note link text",
   cta: "Button text",
+  metaPixelId: "Meta Pixel ID",
 };
 
 const LONG_FIELDS = new Set(["text", "body", "a", "quote", "bio", "desc", "answer", "description", "intro", "missionBody", "lede"]);

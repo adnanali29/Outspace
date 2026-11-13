@@ -86,8 +86,11 @@ export function BookingForm({
     setSending(true);
     setSendError(null);
     const problem = await onSubmit({ ...lead, whatsapp: lead.whatsapp.replace(/\s/g, "") });
-    setSending(false);
-    setSendError(problem);
+    // On success the thank-you page opens, so the button stays disabled.
+    if (problem) {
+      setSending(false);
+      setSendError(problem);
+    }
   }
 
   const border = (key: keyof Lead) =>
