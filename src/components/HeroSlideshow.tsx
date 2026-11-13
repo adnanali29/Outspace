@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { heroImages, heroSlideSeconds } from "@/content";
+import { useContent } from "./ContentProvider";
 
 // Photos filling the hero, behind a cream layer set in Landing.tsx.
 // Crossfades every few seconds, and not at all for reduced-motion visitors.
 export function HeroSlideshow() {
+  const { heroImages, heroSlideSeconds } = useContent();
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -14,16 +15,16 @@ export function HeroSlideshow() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const timer = setInterval(
       () => setCurrent((index) => (index + 1) % heroImages.length),
-      heroSlideSeconds * 1000,
+      Math.max(1, heroSlideSeconds) * 1000,
     );
     return () => clearInterval(timer);
-  }, []);
+  }, [heroImages.length, heroSlideSeconds]);
 
   return (
     <div className="absolute inset-0 bg-mist">
       {heroImages.map((image, i) => (
         <Image
-          key={image.src}
+          key={`${i}-${image.src}`}
           src={image.src}
           alt={i === current ? image.alt : ""}
           fill

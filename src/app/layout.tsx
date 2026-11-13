@@ -24,6 +24,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${maven.variable} ${poppins.variable} antialiased`}
     >
       <body>{children}</body>

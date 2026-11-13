@@ -1,27 +1,7 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
-import {
-  approach,
-  belief,
-  careAndSupport,
-  closing,
-  faqs,
-  footer,
-  heart,
-  hero,
-  insideSession,
-  learn,
-  navLinks,
-  outcomes,
-  program,
-  services,
-  start,
-  stories,
-  talkToUs,
-  whatsappHref,
-  team,
-  trust,
-} from "@/content";
+import type { SiteContent } from "@/content";
+import { useContent } from "./ContentProvider";
 import { BookingForm, type Lead } from "./BookingForm";
 import { ChessGame } from "./ChessGame";
 import { FaqBoard } from "./FaqBoard";
@@ -101,8 +81,9 @@ function Hero({
   onSubmit,
 }: {
   savedLead: Lead | null;
-  onSubmit: (lead: Lead) => void;
+  onSubmit: (lead: Lead) => Promise<string | null>;
 }) {
+  const { hero, trust } = useContent();
   return (
     <section id="top" className="bg-cream">
       <div className="relative overflow-hidden">
@@ -162,6 +143,7 @@ function Hero({
 const heartPieces: PieceType[] = ["p", "n", "k"];
 
 function Heart() {
+  const { heart } = useContent();
   return (
     <section
       id="heart"
@@ -247,6 +229,7 @@ function MiniBoard({ lit }: { lit: number[] }) {
 }
 
 function Learn() {
+  const { learn } = useContent();
   return (
     <section id="learn" className="py-10 md:py-14">
       <div className="wrap">
@@ -285,6 +268,7 @@ function Play() {
 
 /* ─── 8. HOW IT WORKS ─── */
 function Start() {
+  const { start } = useContent();
   return (
     <section id="start" className="bg-cream py-10 md:py-14">
       <div className="wrap">
@@ -327,6 +311,7 @@ const personStyles = [
 ];
 
 function Program() {
+  const { program } = useContent();
   return (
     <section id="program" className="bg-cream py-10 md:py-14">
       <div className="wrap">
@@ -387,6 +372,7 @@ function Program() {
 
 /* ─── 10. TAKE A LOOK INSIDE ─── */
 function InsideSession() {
+  const { insideSession } = useContent();
   return (
     <section id="inside" className="py-10 md:py-14">
       <div className="wrap">
@@ -433,6 +419,7 @@ function InsideSession() {
 
 /* ─── 11. THE OUTCOMES ─── */
 function Outcomes() {
+  const { outcomes } = useContent();
   return (
     <section id="outcomes" className="bg-mist py-10 md:py-14">
       <div className="wrap">
@@ -464,6 +451,7 @@ function Outcomes() {
 
 /* ─── 12. WHY OUTPACE ─── */
 function WhyOutpace() {
+  const { approach } = useContent();
   return (
     <section id="why-outpace" className="py-10 md:py-14">
       <div className="wrap">
@@ -495,6 +483,7 @@ function WhyOutpace() {
 
 /* ─── 13. OUR MISSION & VISION (Aligned, Equal Height Cards, Tight Padding) ─── */
 function MissionVision() {
+  const { belief } = useContent();
   const { vision } = belief;
   return (
     <section id="mission" className="bg-cream py-10 md:py-14">
@@ -552,6 +541,7 @@ function MissionVision() {
 
 /* ─── 14. OUR FOUNDER (Image Stretches to Match Text Height, Perfectly Aligned) ─── */
 function Founder() {
+  const { belief } = useContent();
   const { founder } = belief;
   return (
     <section id="founder" className="py-10 md:py-14 bg-cream/40">
@@ -605,6 +595,7 @@ function Founder() {
 
 /* ─── 15. CARE AND SUPPORT ─── */
 function CareAndSupport() {
+  const { careAndSupport } = useContent();
   return (
     <section id="care" className="bg-teal-deep py-10 text-white md:py-14">
       <div className="wrap">
@@ -627,6 +618,7 @@ function CareAndSupport() {
 
 /* ─── 16. THE OUTPACE CHESS JOURNEY ─── */
 function Journey() {
+  const { start } = useContent();
   return (
     <section id="journey" className="bg-mist py-10 md:py-14">
       <div className="wrap">
@@ -660,6 +652,7 @@ function Journey() {
 
 /* ─── STORIES FROM OUR FAMILIES ─── */
 function Stories() {
+  const { stories } = useContent();
   return (
     <section id="stories" className="bg-cream py-10 md:py-14">
       <div className="wrap">
@@ -732,6 +725,7 @@ function Stories() {
 
 /* ─── BEYOND CHESS (Small Glimpse Card) ─── */
 function Services() {
+  const { services } = useContent();
   return (
     <section id="services" className="py-10 md:py-14">
       <div className="wrap">
@@ -776,7 +770,7 @@ function Services() {
 }
 
 /* ─── MEET OUR TEAM: coaches in one row, then the two mentor groups ─── */
-type TeamGroup = (typeof team.groups)[number];
+type TeamGroup = SiteContent["team"]["groups"][number];
 
 // Mentor cards match the width of a coach card in the 7-across row on laptops.
 const mentorWidth = "lg:w-[calc((min(100vw,1320px)-12rem)/7)]";
@@ -824,6 +818,7 @@ function TeamGroupBlock({ group, width, className = "" }: { group: TeamGroup; wi
 }
 
 function Team() {
+  const { team } = useContent();
   const [coaches, ...mentors] = team.groups;
   const cardWidth = "w-[calc(50%-0.5rem)] sm:w-[calc(25%-0.75rem)]";
   return (
@@ -858,6 +853,7 @@ function Team() {
 
 /* ─── 17. FAQs ─── */
 function Faqs() {
+  const { faqs } = useContent();
   return (
     <section id="faqs" className="py-10 md:py-14">
       <div className="wrap">
@@ -872,6 +868,7 @@ function Faqs() {
 
 /* ─── CLOSING CTA ─── */
 function Closing() {
+  const { closing, talkToUs } = useContent();
   return (
     <section className="relative overflow-hidden bg-teal-deep py-12 text-center text-white md:py-16">
       <Ring className="-top-48 -left-48 size-[30rem] border-[3.5rem] border-white/5" />
@@ -905,6 +902,7 @@ function FooterTitle({ children }: { children: ReactNode }) {
 }
 
 function Footer() {
+  const { contact, footer, navLinks, whatsappHref } = useContent();
   return (
     <footer className="bg-white text-sm text-muted">
       <div aria-hidden className="chess-strip h-8" />
@@ -931,8 +929,8 @@ function Footer() {
           <ul className="space-y-2.5">
             <li className="leading-snug">{footer.address}</li>
             <li>
-              <a href={footer.phoneHref} className="transition-colors hover:text-teal-deep">
-                {footer.phone}
+              <a href={contact.phoneHref} className="transition-colors hover:text-teal-deep">
+                {contact.phone}
               </a>
             </li>
             {whatsappHref && (
@@ -1012,7 +1010,7 @@ export function Landing({
   onSubmit,
 }: {
   savedLead: Lead | null;
-  onSubmit: (lead: Lead) => void;
+  onSubmit: (lead: Lead) => Promise<string | null>;
 }) {
   return (
     <div className="pb-[4.5rem] lg:pb-0">

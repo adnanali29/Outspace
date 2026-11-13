@@ -1,4 +1,4 @@
-import { whatsappHref } from "@/content";
+import { useContent } from "./ContentProvider";
 
 // The WhatsApp glyph (Simple Icons, CC0), drawn in the current text colour.
 export function WhatsAppIcon({ className = "" }: { className?: string }) {
@@ -11,6 +11,7 @@ export function WhatsAppIcon({ className = "" }: { className?: string }) {
 
 // Floating chat button. On phones it sits above the booking bar at the bottom.
 export function WhatsAppButton() {
+  const { whatsappHref } = useContent();
   if (!whatsappHref) return null;
   return (
     <a

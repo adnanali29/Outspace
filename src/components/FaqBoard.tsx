@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { faqs, whatsappHref } from "@/content";
+import { useContent } from "./ContentProvider";
 import { Piece, type PieceType } from "./Piece";
 import { WhatsAppIcon } from "./WhatsAppButton";
 
@@ -20,6 +20,7 @@ function squareColours(i: number) {
 }
 
 export function FaqBoard() {
+  const { faqs, whatsappHref } = useContent();
   const [open, setOpen] = useState<number | null>(null);
 
   return (

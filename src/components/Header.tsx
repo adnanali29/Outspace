@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { navLinks } from "@/content";
+import { useContent } from "./ContentProvider";
 import { Logo } from "./Logo";
 
 export function Header() {
+  const { navLinks } = useContent();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
 
@@ -23,7 +24,7 @@ export function Header() {
       if (section) observer.observe(section);
     }
     return () => observer.disconnect();
-  }, []);
+  }, [navLinks]);
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-white">

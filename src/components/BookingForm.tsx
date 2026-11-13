@@ -1,7 +1,7 @@
 "use client";
 
 import { type FormEvent, useEffect, useRef, useState } from "react";
-import { childAges, chessLevels, sessionSlots, talkToUs } from "@/content";
+import { useContent } from "./ContentProvider";
 
 export type Lead = {
   parentName: string;
@@ -52,10 +52,13 @@ export function BookingForm({
   onSubmit,
 }: {
   savedLead: Lead | null;
-  onSubmit: (lead: Lead) => void;
+  onSubmit: (lead: Lead) => Promise<string | null>;
 }) {
+  const { childAges, chessLevels, sessionSlots, talkToUs } = useContent();
   const [lead, setLead] = useState<Lead>(savedLead ?? emptyLead);
   const [errors, setErrors] = useState<Errors>({});
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   // Coming back from "Reschedule" lands on the form rather than the page top.
@@ -71,7 +74,7 @@ export function BookingForm({
     setErrors((current) => ({ ...current, [key]: undefined }));
   }
 
-  function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     const found = validate(lead);
     setErrors(found);
@@ -80,7 +83,11 @@ export function BookingForm({
       formRef.current?.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
       return;
     }
-    onSubmit({ ...lead, whatsapp: lead.whatsapp.replace(/\s/g, "") });
+    setSending(true);
+    setSendError(null);
+    const problem = await onSubmit({ ...lead, whatsapp: lead.whatsapp.replace(/\s/g, "") });
+    setSending(false);
+    setSendError(problem);
   }
 
   const border = (key: keyof Lead) =>
@@ -213,10 +220,16 @@ export function BookingForm({
 
         <button
           type="submit"
-          className="w-full cursor-pointer rounded-full bg-flame px-4 py-3.5 font-semibold text-ink transition-all hover:shadow-lg hover:shadow-black/20 active:scale-[0.99] lg:py-3"
+          disabled={sending}
+          className="w-full cursor-pointer rounded-full bg-flame px-4 py-3.5 font-semibold text-ink transition-all hover:shadow-lg hover:shadow-black/20 active:scale-[0.99] disabled:cursor-wait disabled:opacity-70 lg:py-3"
         >
-          Book my free session
+          {sending ? "Sending\u2026" : "Book my free session"}
         </button>
+        {sendError && (
+          <p role="alert" className="rounded-xl bg-white px-3 py-2 text-center text-sm font-semibold text-ember">
+            {sendError}
+          </p>
+        )}
 
         <p className="text-center text-xs">
           We&rsquo;ll confirm the time on WhatsApp.{" "}

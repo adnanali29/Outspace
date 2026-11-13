@@ -1,25 +1,25 @@
 // All page copy lives here. Keep it short: one idea per line, written the way
 // you would say it to a parent.
+//
+// These are the defaults. The admin panel (/admin) saves edits to the
+// database, and those override what is written here.
 
-// Digits only, with country code. WhatsApp messages from the page go here.
-export const whatsappNumber = "918296014487";
+const seo = {
+  title: "Outpace Academy | Live Online Chess Classes for Ages 5\u201313",
+  description:
+    "Every child can learn. We find the way. Chess taught by patient coaches, with a mentor who truly gets to know your child. Book a free first session.",
+};
 
-export const whatsappHref = whatsappNumber
-  ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-      "Hi Outpace Academy, I'd like to know more about your chess classes.",
-    )}`
-  : undefined;
-
-const phone = "+91 94296 92587";
-const phoneHref = "tel:+919429692587";
-
-// The quickest way to reach a person: WhatsApp when set up, otherwise a call.
-export const talkToUs = whatsappHref
-  ? { label: "Chat on WhatsApp", short: "Chat", href: whatsappHref, external: true }
-  : { label: `Call ${phone}`, short: "Call", href: phoneHref, external: false };
+const contact = {
+  // Digits only, with country code. WhatsApp messages from the page go here.
+  whatsappNumber: "918296014487",
+  whatsappMessage: "Hi Outpace Academy, I'd like to know more about your chess classes.",
+  phone: "+91 94296 92587",
+  phoneHref: "tel:+919429692587",
+};
 
 // SAMPLE slots: replace with real availability. weekday: 0 = Sunday.
-export const sessionSlots = [
+const sessionSlots = [
   { label: "Sat, 11:00 AM", weekday: 6, hour: 11, minute: 0 },
   { label: "Sat, 5:00 PM", weekday: 6, hour: 17, minute: 0 },
   { label: "Sun, 11:00 AM", weekday: 0, hour: 11, minute: 0 },
@@ -27,27 +27,27 @@ export const sessionSlots = [
 ];
 
 // SAMPLE length, used only for the "Add to calendar" entry.
-export const sessionMinutes = 30;
+const sessionMinutes = 30;
 
-export const childAges = ["5", "6", "7", "8", "9", "10", "11", "12", "13"];
+const childAges = ["5", "6", "7", "8", "9", "10", "11", "12", "13"];
 
-export const chessLevels = [
+const chessLevels = [
   "Complete beginner",
   "Knows the basics",
   "Plays regularly",
   "Tournament player",
 ];
 
-export const navLinks = [
+const navLinks = [
   { label: "The programme", href: "#program" },
   { label: "How it works", href: "#start" },
   { label: "Our team", href: "#team" },
   { label: "FAQs", href: "#faqs" },
 ];
 
-export const heroSlideSeconds = 2;
+const heroSlideSeconds = 2;
 
-export const heroImages = [
+const heroImages = [
   {
     src: "/hero/hero-01.jpg",
     alt: "A girl talking with her mentor on a video call at home",
@@ -94,7 +94,7 @@ export const heroImages = [
   },
 ];
 
-export const hero = {
+const hero = {
   eyebrow: "Outpace Chess Growth Mentorship Program",
   title: "Help your child build focus, confidence and independent thinking through chess.",
   titleAccent: "",
@@ -103,14 +103,14 @@ export const hero = {
   playLink: "Or play a game of chess with your child",
 };
 
-export const trust = [
+const trust = [
   { value: "9000+", label: "children enrolled across Outpace" },
   { value: "100K+", label: "online classes conducted" },
   { value: "4–6", label: "children in every group" },
   { value: "8 + 2", label: "chess and mentor sessions a month" },
 ];
 
-export const heart = {
+const heart = {
   kicker: "The heart of Outpace",
   title: "Every child deserves to be understood.",
   needs: [
@@ -122,7 +122,7 @@ export const heart = {
   promise: "We want your child to feel: \u201cI can try. I can learn. I can grow.\u201d",
 };
 
-export const learn = {
+const learn = {
   kicker: "What your child develops",
   title: "Stronger chess skills. Growing confidence. More thoughtful choices.",
   intro:
@@ -142,7 +142,7 @@ export const learn = {
   ],
 };
 
-export const outcomes = {
+const outcomes = {
   kicker: "The outcomes",
   title: "Growth you can recognise.",
   items: [
@@ -164,7 +164,7 @@ export const outcomes = {
   ],
 };
 
-export const game = {
+const game = {
   kicker: "Try it with your child",
   title: "Play a game of chess, right here.",
   intro: "You play white. Tap a piece, then tap where it should go.",
@@ -192,7 +192,7 @@ export const game = {
   noteLink: "Book a free session",
 } as const;
 
-export const program = {
+const program = {
   kicker: "The programme",
   title: "What your child receives",
   people: [
@@ -229,7 +229,7 @@ export const program = {
   ],
 } as const;
 
-export const insideSession = {
+const insideSession = {
   kicker: "Take a look inside",
   title: "See how your child\u2019s first session feels.",
   videoUrl: "/videos/heart-of-outpace.mp4",
@@ -244,7 +244,7 @@ export const insideSession = {
   ],
 };
 
-export const approach = {
+const approach = {
   kicker: "Why Outpace",
   title: "We understand the child behind the chessboard.",
   rows: [
@@ -272,7 +272,7 @@ export const approach = {
   teamNote: "Your child\u2019s coach, Class Mentor and Child Growth Mentor work together to support their learning journey.",
 };
 
-export const careAndSupport = {
+const careAndSupport = {
   title: "Care and support",
   subtitle: "Support for your child, in class and beyond",
   items: [
@@ -291,7 +291,7 @@ export const careAndSupport = {
   ],
 };
 
-export const stories = {
+const stories = {
   kicker: "Family stories",
   title: "The quiet progress, and the proud moments.",
   numbers: [
@@ -348,7 +348,7 @@ export const stories = {
   ],
 };
 
-export const belief = {
+const belief = {
   kicker: "Our purpose",
   quote: "Every child learns differently.",
   quoteAccent: "Our responsibility is to find the way.",
@@ -372,7 +372,7 @@ export const belief = {
   },
 };
 
-export const start = {
+const start = {
   kicker: "How it works",
   title: "Four steps to begin your child\u2019s journey",
   steps: [
@@ -425,9 +425,7 @@ export const start = {
   levelsNote: "Each level runs for four months and ends with an assessment and a parent\u2013coach review. Progression is based on assessment and performance.",
 } as const;
 
-const mainSite = "https://outpaceacademy.com";
-
-export const services = {
+const services = {
   kicker: "Beyond chess",
   title: "A glimpse beyond chess",
   lead: "More ways Outpace supports your child’s learning journey.",
@@ -444,10 +442,10 @@ export const services = {
     },
   ],
   cta: "Explore all on outpaceacademy.com →",
-  href: mainSite,
+  href: "https://outpaceacademy.com",
 };
 
-export const team = {
+const team = {
   kicker: "Meet Our Team",
   title: "The people behind your child’s journey",
   subtitle: "Dedicated chess coaches and Child Growth Mentors working together to understand, encourage and support your child.",
@@ -486,7 +484,7 @@ export const team = {
   ],
 };
 
-export const faqs = {
+const faqs = {
   kicker: "FAQs",
   title: "Questions parents ask",
   hint: "Tap a square to read the answer.",
@@ -531,19 +529,17 @@ export const faqs = {
   ],
 };
 
-export const closing = {
+const closing = {
   kicker: "Every child carries a possibility.",
   title: "Let\u2019s find your child\u2019s next move.",
   body: "Book a free Introductory & Assessment Session. No payment needed.",
 };
 
-export const footer = {
+const footer = {
   tagline: "Touching Hearts, Awakening Wisdom",
   blurb: "Online chess coaching and growth mentoring for children aged 5\u201313.",
   address: "#1108, Gopal Reddy Complex, 1st Floor, Sarjapura Village, Bangalore 562125",
   email: "info@outpaceacademy.com",
-  phone,
-  phoneHref,
   whatsapp: "WhatsApp +91 82960 14487",
   website: "www.outpaceacademy.com",
   socials: [
@@ -560,7 +556,7 @@ export const footer = {
   ],
 };
 
-export const thanks = {
+const thanks = {
   title: "Thank you. We can\u2019t wait to meet your child.",
   body: "Our team will contact you on WhatsApp to understand your child better, discuss your expectations and confirm the session.",
   next: [
@@ -579,3 +575,52 @@ export const thanks = {
   ],
   ready: "A laptop or tablet with stable internet, a quiet space, and a pen and notebook.",
 };
+
+export const defaultContent = {
+  seo,
+  contact,
+  sessionSlots,
+  sessionMinutes,
+  childAges,
+  chessLevels,
+  navLinks,
+  heroSlideSeconds,
+  heroImages,
+  hero,
+  trust,
+  heart,
+  learn,
+  outcomes,
+  game,
+  program,
+  insideSession,
+  approach,
+  careAndSupport,
+  stories,
+  belief,
+  start,
+  services,
+  team,
+  faqs,
+  closing,
+  footer,
+  thanks,
+};
+
+export type SiteContent = typeof defaultContent;
+
+// Links worked out from the contact details.
+export function withLinks(content: SiteContent) {
+  const { whatsappNumber, whatsappMessage, phone, phoneHref } = content.contact;
+  const digits = whatsappNumber.replace(/\D/g, "");
+  const whatsappHref = digits
+    ? `https://wa.me/${digits}?text=${encodeURIComponent(whatsappMessage)}`
+    : undefined;
+  // The quickest way to reach a person: WhatsApp when set up, otherwise a call.
+  const talkToUs = whatsappHref
+    ? { label: "Chat on WhatsApp", short: "Chat", href: whatsappHref, external: true }
+    : { label: `Call ${phone}`, short: "Call", href: phoneHref, external: false };
+  return { ...content, whatsappHref, talkToUs };
+}
+
+export type Content = ReturnType<typeof withLinks>;

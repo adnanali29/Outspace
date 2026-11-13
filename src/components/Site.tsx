@@ -1,20 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import { saveConsultation } from "@/app/actions";
 import type { Lead } from "./BookingForm";
 import { Landing } from "./Landing";
 import { ThankYou } from "./ThankYou";
 
-// The site is one page: submitting the form swaps the landing content for the
-// confirmation view. Leads are only held in this state for now, so connect
-// handleSubmit to a CRM, sheet or API before going live.
+// The site is one page: submitting the form saves the booking (it shows in
+// /admin under Consultations) and swaps the landing content for the
+// confirmation view.
 export function Site() {
   const [lead, setLead] = useState<Lead | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
-  function handleSubmit(next: Lead) {
+  async function handleSubmit(next: Lead) {
+    const problem = await saveConsultation(next);
+    if (problem) return problem;
     setLead(next);
     setSubmitted(true);
+    return null;
   }
 
   if (submitted && lead) {

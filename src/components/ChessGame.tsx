@@ -2,7 +2,7 @@
 
 import { Chess, type Move, type Square } from "chess.js";
 import { useEffect, useMemo, useState } from "react";
-import { game as copy } from "@/content";
+import { useContent } from "./ContentProvider";
 import { pickMove, type Level } from "./chessEngine";
 import { Piece, type PieceType } from "./Piece";
 
@@ -58,6 +58,7 @@ function replay(history: string[]) {
 }
 
 function Taken({ label, pieces }: { label: string; pieces: PieceType[] }) {
+  const { game: copy } = useContent();
   return (
     <div className="flex min-h-7 items-center gap-2 text-sm">
       <span className="shrink-0 font-semibold">{label}</span>
@@ -73,6 +74,7 @@ function Taken({ label, pieces }: { label: string; pieces: PieceType[] }) {
 }
 
 export function ChessGame() {
+  const { game: copy } = useContent();
   const [history, setHistory] = useState<string[]>([]);
   const [level, setLevel] = useState<Level>("easy");
   const [selected, setSelected] = useState<Square | null>(null);

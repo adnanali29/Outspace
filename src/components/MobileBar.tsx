@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { talkToUs } from "@/content";
+import { useContent } from "./ContentProvider";
 
 // Stays out of the way while the booking form is on screen, so it never covers
 // the form's fields and never points parents at a form they can already see.
 export function MobileBar() {
+  const { talkToUs } = useContent();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {

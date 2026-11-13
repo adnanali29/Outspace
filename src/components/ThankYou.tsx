@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { sessionMinutes, sessionSlots, talkToUs, thanks } from "@/content";
+import { useContent } from "./ContentProvider";
 import type { Lead } from "./BookingForm";
 import { Logo } from "./Logo";
 
@@ -12,7 +12,11 @@ const icsDate = (d: Date) =>
 
 // Saves the requested slot's next occurrence as a calendar file. The time is
 // marked unconfirmed because the Relationship Team finalises it on WhatsApp.
-function downloadCalendarFile(slotLabel: string) {
+function downloadCalendarFile(
+  slotLabel: string,
+  sessionSlots: { label: string; weekday: number; hour: number; minute: number }[],
+  sessionMinutes: number,
+) {
   const slot = sessionSlots.find((s) => s.label === slotLabel);
   if (!slot) return;
 
@@ -55,6 +59,7 @@ export function ThankYou({
   lead: Lead;
   onReschedule: () => void;
 }) {
+  const { sessionMinutes, sessionSlots, talkToUs, thanks } = useContent();
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -120,7 +125,7 @@ export function ThankYou({
           <div className="mt-8 flex flex-wrap gap-3">
             <button
               type="button"
-              onClick={() => downloadCalendarFile(lead.slot)}
+              onClick={() => downloadCalendarFile(lead.slot, sessionSlots, sessionMinutes)}
               className="cursor-pointer rounded-full bg-flame px-6 py-3.5 font-semibold text-ink transition-shadow hover:shadow-lg hover:shadow-flame/30"
             >
               Add to calendar
