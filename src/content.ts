@@ -10,9 +10,10 @@ const seo = {
     "Every child can learn. We find the way. Chess taught by patient coaches, with a mentor who truly gets to know your child. Book a free first session.",
 };
 
-// Ad tracking. Paste the Meta Pixel ID (numbers only) in the admin panel.
+// Ad tracking: the Meta Pixel ID (numbers only). It can also be changed in the
+// admin panel under Homepage > Tracking.
 const tracking = {
-  metaPixelId: "",
+  metaPixelId: "795666916240356",
 };
 
 const contact = {

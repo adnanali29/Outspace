@@ -34,8 +34,21 @@ export function MetaPixel({ lead }: { lead?: string }) {
   `;
 
   return (
-    <Script id={leadRef ? `meta-pixel-${leadRef}` : "meta-pixel"} strategy="afterInteractive">
-      {code}
-    </Script>
+    <>
+      <Script id={leadRef ? `meta-pixel-${leadRef}` : "meta-pixel"} strategy="afterInteractive">
+        {code}
+      </Script>
+      {/* Counts the visit for browsers with JavaScript turned off. */}
+      <noscript>
+        {/* eslint-disable-next-line @next/next/no-img-element -- Meta's tracking pixel */}
+        <img
+          height="1"
+          width="1"
+          style={{ display: "none" }}
+          alt=""
+          src={`https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1`}
+        />
+      </noscript>
+    </>
   );
 }
