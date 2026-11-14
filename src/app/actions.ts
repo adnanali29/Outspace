@@ -1,7 +1,9 @@
 "use server";
 
+import { after } from "next/server";
 import type { Lead } from "@/components/BookingForm";
 import { bookingRef } from "@/lib/consultations";
+import { sendLeadToCrm } from "@/lib/crm";
 import { query } from "@/lib/db";
 
 const clip = (value: unknown, max: number) => (typeof value === "string" ? value.trim().slice(0, max) : "");
@@ -24,7 +26,10 @@ export async function saveConsultation(lead: Lead): Promise<{ ref: string } | { 
       "insert into consultations (parent_name, whatsapp, child_age, level, slot) values ($1, $2, $3, $4, $5) returning id",
       [parentName, whatsapp, childAge, level, slot],
     );
-    return { ref: bookingRef(rows[0].id) };
+    const ref = bookingRef(rows[0].id);
+    // Sent after the reply, so the family reaches the thank-you page without waiting.
+    after(() => sendLeadToCrm({ ref, parentName, whatsapp, childAge, level, slot }));
+    return { ref };
   } catch (error) {
     console.error("Could not save consultation", error);
     return { error: "Sorry, we couldn't send that. Please try again, or message us on WhatsApp." };
