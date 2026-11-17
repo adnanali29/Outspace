@@ -69,6 +69,20 @@ export function BookingForm({
     }
   }, []);
 
+  // After a booking the thank-you page opens. Next.js keeps this page's state
+  // for the Back button, so the button is reset when the page is left, and
+  // again if the browser restores the page from its own back/forward cache.
+  useEffect(() => {
+    const onShow = (event: PageTransitionEvent) => {
+      if (event.persisted) setSending(false);
+    };
+    window.addEventListener("pageshow", onShow);
+    return () => {
+      window.removeEventListener("pageshow", onShow);
+      setSending(false);
+    };
+  }, []);
+
   function update<K extends keyof Lead>(key: K, value: string) {
     setLead((current) => ({ ...current, [key]: value }));
     setErrors((current) => ({ ...current, [key]: undefined }));
