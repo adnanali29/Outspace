@@ -50,6 +50,18 @@ const labelClass = "mb-0.5 block text-sm font-medium";
 const optionClass =
   "rounded-xl border-2 bg-white text-center font-medium text-ink transition-colors hover:border-flame peer-checked:border-flame peer-checked:bg-peach peer-checked:font-semibold peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-white";
 
+// A small "*" while a choice is still needed, or "(optional)" once the other
+// choice has been made.
+function Need({ optional }: { optional: boolean }) {
+  return optional ? (
+    <span className="text-xs font-normal opacity-80">(optional)</span>
+  ) : (
+    <span aria-hidden className="font-bold text-flame">
+      *
+    </span>
+  );
+}
+
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
@@ -90,16 +102,28 @@ export function BookingForm({
   }, []);
 
   // After a booking the thank-you page opens. Next.js keeps this page's state
-  // for the Back button, so the button is reset when the page is left, and
-  // again if the browser restores the page from its own back/forward cache.
+  // for the Back button, so the form is cleared when the page is left (and
+  // again if the browser restores it from its own back/forward cache). Coming
+  // back then shows an empty form, with no time picked, ready for a new booking.
+  const booked = useRef(false);
   useEffect(() => {
+    const clear = () => {
+      setSending(false);
+      if (!booked.current) return;
+      booked.current = false;
+      setLead(emptyLead);
+      setCustomDate("");
+      setCustomTime("");
+      setErrors({});
+      setSendError(null);
+    };
     const onShow = (event: PageTransitionEvent) => {
-      if (event.persisted) setSending(false);
+      if (event.persisted) clear();
     };
     window.addEventListener("pageshow", onShow);
     return () => {
       window.removeEventListener("pageshow", onShow);
-      setSending(false);
+      clear();
     };
   }, []);
 
@@ -147,6 +171,7 @@ export function BookingForm({
     setSendError(null);
     const problem = await onSubmit({ ...lead, slot, whatsapp: lead.whatsapp.replace(/\s/g, "") });
     // On success the thank-you page opens, so the button stays disabled.
+    if (!problem) booked.current = true;
     if (problem) {
       setSending(false);
       setSendError(problem);
@@ -173,6 +198,7 @@ export function BookingForm({
         ref={formRef}
         onSubmit={handleSubmit}
         noValidate
+        autoComplete="off"
         className="mt-3 space-y-2.5 short:mt-2 short:space-y-2"
       >
         <div>
@@ -261,7 +287,12 @@ export function BookingForm({
         </div>
 
         <fieldset aria-describedby="slot-error">
-          <legend className={labelClass}>Preferred time</legend>
+          {/* One of the two is needed: a set slot, or the parent's own date and
+              time. Both read as required until one is picked; then the other
+              reads as optional. */}
+          <legend className={labelClass}>
+            Preferred time <Need optional={custom} />
+          </legend>
           <div className="grid grid-cols-3 gap-2">
             {sessionSlots.map((slot) => {
               const [day, ...time] = slot.label.split(", ");
@@ -286,9 +317,12 @@ export function BookingForm({
             })}
           </div>
 
-          <div className="mt-2 grid grid-cols-2 gap-2">
+          <p className="mt-2 mb-0.5 text-sm font-medium">
+            Choose your date and time <Need optional={!custom && !!lead.slot} />
+          </p>
+          <div className="grid grid-cols-2 gap-2">
               <div>
-                <label htmlFor="customDate" className="mb-0.5 block text-xs font-medium">
+                <label htmlFor="customDate" className="sr-only">
                   Date
                 </label>
                 <input
@@ -306,7 +340,7 @@ export function BookingForm({
                 />
               </div>
               <div>
-                <label htmlFor="customTime" className="mb-0.5 block text-xs font-medium">
+                <label htmlFor="customTime" className="sr-only">
                   Time
                 </label>
                 <input
