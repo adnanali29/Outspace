@@ -92,7 +92,7 @@ function Hero({
           {/* An even black layer, so the photos stay visible and the white text reads clearly. */}
           <div aria-hidden className="absolute inset-0 bg-black/55" />
         </div>
-        <div className="wrap-wide relative grid items-center gap-x-14 gap-y-8 py-8 lg:min-h-[calc(100svh-11rem)] lg:grid-cols-[minmax(0,1fr)_26.5rem] lg:py-10 short:py-5 xl:gap-x-20">
+        <div className="wrap-wide relative grid items-center gap-x-14 gap-y-8 py-8 lg:min-h-[calc(100svh-11rem)] lg:grid-cols-[minmax(0,1fr)_24rem] lg:py-10 short:py-5 xl:gap-x-20">
           <div className="text-center text-white [text-shadow:0_1px_14px_rgb(0_0_0/0.35)] lg:text-left">
             <p className="inline-flex items-center gap-2 rounded-full bg-mist px-4 py-1.5 text-sm font-semibold text-teal-deep [text-shadow:none]">
               <MonitorIcon className="size-4" />

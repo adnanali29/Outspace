@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { parseCustomSlot } from "@/lib/customSlot";
 import { useContent } from "./ContentProvider";
 import { Logo } from "./Logo";
 
@@ -17,13 +18,15 @@ function downloadCalendarFile(
   sessionSlots: { label: string; weekday: number; hour: number; minute: number }[],
   sessionMinutes: number,
 ) {
-  const slot = sessionSlots.find((s) => s.label === slotLabel);
-  if (!slot) return;
-
-  const start = new Date();
-  start.setHours(slot.hour, slot.minute, 0, 0);
-  const daysAhead = (slot.weekday - start.getDay() + 7) % 7;
-  start.setDate(start.getDate() + (daysAhead === 0 ? 7 : daysAhead));
+  let start = parseCustomSlot(slotLabel);
+  if (!start) {
+    const slot = sessionSlots.find((s) => s.label === slotLabel);
+    if (!slot) return;
+    start = new Date();
+    start.setHours(slot.hour, slot.minute, 0, 0);
+    const daysAhead = (slot.weekday - start.getDay() + 7) % 7;
+    start.setDate(start.getDate() + (daysAhead === 0 ? 7 : daysAhead));
+  }
   const end = new Date(start.getTime() + sessionMinutes * 60_000);
 
   const ics = [

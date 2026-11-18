@@ -28,7 +28,6 @@ const contact = {
 const sessionSlots = [
   { label: "Sat, 11:00 AM", weekday: 6, hour: 11, minute: 0 },
   { label: "Sat, 5:00 PM", weekday: 6, hour: 17, minute: 0 },
-  { label: "Sun, 11:00 AM", weekday: 0, hour: 11, minute: 0 },
   { label: "Wed, 6:00 PM", weekday: 3, hour: 18, minute: 0 },
 ];
 

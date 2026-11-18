@@ -1,6 +1,14 @@
 "use client";
 
 import { type FormEvent, useEffect, useRef, useState } from "react";
+import {
+  CUSTOM_DAYS_AHEAD,
+  CUSTOM_EARLIEST,
+  CUSTOM_LATEST,
+  checkCustomSlot,
+  formatCustomSlot,
+  toDateValue,
+} from "@/lib/customSlot";
 import { useContent } from "./ContentProvider";
 
 export type Lead = {
@@ -28,20 +36,26 @@ function validate(lead: Lead): Errors {
     errors.whatsapp = "Please enter a 10-digit mobile number.";
   if (!lead.childAge) errors.childAge = "Please select an age.";
   if (!lead.level) errors.level = "Please select a level.";
-  if (!lead.slot) errors.slot = "Please pick a time.";
+  if (!lead.slot) errors.slot = "Please pick a time, or choose a date and time.";
   return errors;
 }
 
 // Stays 16px on phones so iOS does not zoom into the field on focus.
 const fieldClass =
-  "w-full rounded-xl border-2 bg-white px-3 py-2.5 text-base text-ink placeholder:text-muted/80 lg:py-2 lg:text-sm";
+  "w-full rounded-xl border-2 bg-white px-3 py-2 text-base text-ink placeholder:text-muted/80 lg:py-1.5 lg:text-sm";
 
-const labelClass = "mb-1 block text-sm font-medium";
+const labelClass = "mb-0.5 block text-sm font-medium";
+
+// A time option: a white tile that turns peach with an orange border when picked.
+const optionClass =
+  "rounded-xl border-2 bg-white text-center font-medium text-ink transition-colors hover:border-flame peer-checked:border-flame peer-checked:bg-peach peer-checked:font-semibold peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-white";
 
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
-    <p id={id} className="mt-1 text-sm font-medium text-peach">
+    // Kept for screen readers only; on screen the field's orange outline shows
+    // what needs fixing.
+    <p id={id} className="sr-only">
       {message}
     </p>
   );
@@ -59,6 +73,12 @@ export function BookingForm({
   const [errors, setErrors] = useState<Errors>({});
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
+  // A date and time the parent picks instead of a set slot; the slot text is
+  // built from these on submit.
+  const [customDate, setCustomDate] = useState("");
+  const [customTime, setCustomTime] = useState("");
+  const [dateRange, setDateRange] = useState({ min: "", max: "" });
+  const custom = Boolean(customDate || customTime);
   const formRef = useRef<HTMLFormElement>(null);
 
   // Coming back from "Reschedule" lands on the form rather than the page top.
@@ -88,18 +108,44 @@ export function BookingForm({
     setErrors((current) => ({ ...current, [key]: undefined }));
   }
 
+  function chooseSlot(label: string) {
+    setCustomDate("");
+    setCustomTime("");
+    update("slot", label);
+  }
+
+  // Worked out when the date box is used, so it is always the visitor's
+  // current date.
+  function setRangeFromToday() {
+    const today = new Date();
+    const last = new Date(today);
+    last.setDate(today.getDate() + CUSTOM_DAYS_AHEAD);
+    setDateRange({ min: toDateValue(today), max: toDateValue(last) });
+  }
+
+  // Picking a date or time replaces any set slot that was chosen.
+  function updateCustom(date: string, time: string) {
+    setCustomDate(date);
+    setCustomTime(time);
+    update("slot", "");
+  }
+
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    const found = validate(lead);
+    const customProblem = custom ? checkCustomSlot(customDate, customTime) : null;
+    const slot = custom && !customProblem ? formatCustomSlot(customDate, customTime) : lead.slot;
+    const found = validate({ ...lead, slot });
+    if (customProblem) found.slot = customProblem;
     setErrors(found);
     if (Object.keys(found).length > 0) {
       const first = Object.keys(found)[0];
-      formRef.current?.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
+      const target = first === "slot" && custom ? "customDate" : first;
+      formRef.current?.querySelector<HTMLElement>(`[name="${target}"]`)?.focus();
       return;
     }
     setSending(true);
     setSendError(null);
-    const problem = await onSubmit({ ...lead, whatsapp: lead.whatsapp.replace(/\s/g, "") });
+    const problem = await onSubmit({ ...lead, slot, whatsapp: lead.whatsapp.replace(/\s/g, "") });
     // On success the thank-you page opens, so the button stays disabled.
     if (problem) {
       setSending(false);
@@ -109,13 +155,16 @@ export function BookingForm({
 
   const border = (key: keyof Lead) =>
     errors[key] ? "border-flame" : "border-transparent";
+  // A filled date or time box is outlined like a picked slot.
+  const customBorder = (value: string) =>
+    errors.slot || value ? "border-flame" : "border-transparent";
 
   return (
     <div
       id="book"
-      className="rounded-[2rem] bg-teal-deep p-6 text-white shadow-2xl shadow-teal-deep/30 lg:p-7 short:p-5"
+      className="rounded-[1.75rem] bg-teal-deep p-5 text-white shadow-2xl shadow-teal-deep/30 lg:p-6 short:p-4"
     >
-      <h2 className="font-display text-[1.7rem] leading-tight font-bold">
+      <h2 className="font-display text-2xl leading-tight font-bold">
         Let&rsquo;s understand your child.
       </h2>
       <p className="mt-1 text-sm">Book a free Introductory &amp; Assessment Session.</p>
@@ -124,7 +173,7 @@ export function BookingForm({
         ref={formRef}
         onSubmit={handleSubmit}
         noValidate
-        className="mt-4 space-y-3 short:mt-3 short:space-y-2"
+        className="mt-3 space-y-2.5 short:mt-2 short:space-y-2"
       >
         <div>
           <label htmlFor="parentName" className={labelClass}>
@@ -164,7 +213,7 @@ export function BookingForm({
           <FieldError id="whatsapp-error" message={errors.whatsapp} />
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-2.5">
           <div>
             <label htmlFor="childAge" className={labelClass}>
               Child&rsquo;s age
@@ -213,32 +262,74 @@ export function BookingForm({
 
         <fieldset aria-describedby="slot-error">
           <legend className={labelClass}>Preferred time</legend>
-          <div className="grid grid-cols-2 gap-2">
-            {sessionSlots.map((slot) => (
-              <label key={slot.label} className="cursor-pointer">
-                <input
-                  type="radio"
-                  name="slot"
-                  value={slot.label}
-                  checked={lead.slot === slot.label}
-                  onChange={(e) => update("slot", e.target.value)}
-                  className="peer sr-only"
-                />
-                <span
-                  className={`block rounded-xl border-2 bg-white px-2 py-2.5 text-center text-sm font-medium text-ink transition-colors hover:border-flame peer-checked:border-flame peer-checked:bg-peach peer-checked:font-semibold peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-white lg:py-1.5 ${border("slot")}`}
-                >
-                  {slot.label}
-                </span>
-              </label>
-            ))}
+          <div className="grid grid-cols-3 gap-2">
+            {sessionSlots.map((slot) => {
+              const [day, ...time] = slot.label.split(", ");
+              return (
+                <label key={slot.label} className="cursor-pointer">
+                  <input
+                    type="radio"
+                    name="slot"
+                    value={slot.label}
+                    checked={!custom && lead.slot === slot.label}
+                    onChange={() => chooseSlot(slot.label)}
+                    className="peer sr-only"
+                  />
+                  <span
+                    className={`${optionClass} flex flex-col items-center px-1 py-1.5 leading-tight lg:py-1 ${border("slot")}`}
+                  >
+                    <span className="text-xs">{day}</span>
+                    <span className="text-sm whitespace-nowrap">{time.join(", ") || day}</span>
+                  </span>
+                </label>
+              );
+            })}
           </div>
+
+          <div className="mt-2 grid grid-cols-2 gap-2">
+              <div>
+                <label htmlFor="customDate" className="mb-0.5 block text-xs font-medium">
+                  Date
+                </label>
+                <input
+                  id="customDate"
+                  name="customDate"
+                  type="date"
+                  min={dateRange.min}
+                  max={dateRange.max}
+                  onFocus={setRangeFromToday}
+                  onPointerDown={setRangeFromToday}
+                  value={customDate}
+                  onChange={(e) => updateCustom(e.target.value, customTime)}
+                  aria-invalid={!!errors.slot}
+                  className={`${fieldClass} ${customBorder(customDate)} [color-scheme:light]`}
+                />
+              </div>
+              <div>
+                <label htmlFor="customTime" className="mb-0.5 block text-xs font-medium">
+                  Time
+                </label>
+                <input
+                  id="customTime"
+                  name="customTime"
+                  type="time"
+                  min={CUSTOM_EARLIEST}
+                  max={CUSTOM_LATEST}
+                  step={900}
+                  value={customTime}
+                  onChange={(e) => updateCustom(customDate, e.target.value)}
+                  aria-invalid={!!errors.slot}
+                  className={`${fieldClass} ${customBorder(customTime)} [color-scheme:light]`}
+                />
+              </div>
+            </div>
           <FieldError id="slot-error" message={errors.slot} />
         </fieldset>
 
         <button
           type="submit"
           disabled={sending}
-          className="w-full cursor-pointer rounded-full bg-flame px-4 py-3.5 font-semibold text-ink transition-all hover:shadow-lg hover:shadow-black/20 active:scale-[0.99] disabled:cursor-wait disabled:opacity-70 lg:py-3"
+          className="w-full cursor-pointer rounded-full bg-flame px-4 py-3 font-semibold text-ink transition-all hover:shadow-lg hover:shadow-black/20 active:scale-[0.99] disabled:cursor-wait disabled:opacity-70 lg:py-2.5"
         >
           {sending ? "Sending\u2026" : "Book my free session"}
         </button>
